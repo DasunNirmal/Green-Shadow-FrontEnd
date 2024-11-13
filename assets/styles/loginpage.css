@@ -1,13 +1,15 @@
 body {
-    width: 100dvw;
-    height: 900px;
-    background: rgb(255,249,209);
-    background: linear-gradient(71deg, rgba(255,249,209,1) 27%, rgba(255,251,243,1) 67%);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: rgba(237, 218, 184, 0.74);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 #login-section {
     width: 85dvw;
     height: 725px;
-    border: 2px solid black;
+    /*border: 2px solid black;*/
     position: absolute;
     top: 100px;
     left: 0;
@@ -20,7 +22,7 @@ body {
     width: 30dvw;
     height: 700px;
     /*border: 2px solid red;*/
-    background-color: #fffafa;
+    background-color: rgba(233, 208, 169, 0);
     position: absolute;
     margin: 0;
 }
@@ -42,4 +44,26 @@ body {
     margin-left: auto;
     margin-right: auto;
     bottom: 200px;
+}
+#box-login {
+    width: 1220px;
+    height: 1260px;
+    position: absolute;
+    background: rgba(80, 77, 117, 0.75); /* darker - #3E3C5C*/
+    border-radius: 250px 0 0;
+    top: -140px;
+    left: 920px;
+    clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 0% 100%);
+}
+#image-login {
+    width: 730px;
+    height: 610px;
+    position: absolute;
+    top: 310px;
+    left: 110px;
+    right: 0;
+    transform: rotate(30deg);
+}
+.rotate {
+    transform: rotate(-30deg);
 }

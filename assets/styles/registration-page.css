@@ -1,0 +1,36 @@
+body.color {
+    background: rgba(80, 77, 117, 0.75);
+}
+#box-login {
+    width: 1220px;
+    height: 1260px;
+    position: absolute;
+    border-radius: 250px 250px 250px 250px;
+    top: -140px;
+    left: 920px;
+    clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 0% 100%);
+    animation-duration: 1s;
+}
+#box-login.rotate-and-color {
+    transform: rotate(30deg);
+    background-color: rgba(237, 218, 184, 0.74); /* darker - #3E3C5C*/
+}
+#registration-section {
+    width: 85dvw;
+    height: 725px;
+    border: 2px solid rebeccapurple;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+#sign-up-button-2 {
+    width: fit-content;
+    height: fit-content;
+    color: rgba(18, 0, 255, 0.63);
+    text-decoration: underline;
+    cursor: pointer;
+}

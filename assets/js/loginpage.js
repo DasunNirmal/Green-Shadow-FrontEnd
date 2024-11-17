@@ -1,4 +1,5 @@
 $(document).ready(function(){
+   $('#registration-section').hide();
    $('#email-input').focus(function(){
        $('#email-logo').addClass('focused');
    });

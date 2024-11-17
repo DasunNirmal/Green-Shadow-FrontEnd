@@ -190,3 +190,10 @@ body {
     right: 475px;
     animation-duration: 1.4s;
 }
+#sign-up-button {
+    width: fit-content;
+    height: fit-content;
+    color: rgba(18, 0, 255, 0.63);
+    text-decoration: underline;
+    cursor: pointer;
+}

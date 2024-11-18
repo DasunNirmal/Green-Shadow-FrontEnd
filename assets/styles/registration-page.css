@@ -1,5 +1,6 @@
 body.color {
     background: rgba(80, 77, 117, 0.75);
+
 }
 #box-login {
     width: 1220px;
@@ -13,12 +14,119 @@ body.color {
 }
 #box-login.rotate-and-color {
     transform: rotate(30deg);
-    background-color: rgba(237, 218, 184, 0.74); /* darker - #3E3C5C*/
+    background-color: rgba(237, 218, 184, 0.95); /* darker - #3E3C5C*/
+}
+#registration-form-wrapper {
+    width: 30dvw;
+    height: 700px;
+    /*border: 2px solid rebeccapurple;*/
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    animation-duration: 1s;
+}
+#email-reg,#password-reg {
+    width: 25dvw;
+    height: 100px;
+    top: 245px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+#email-input-reg,#password-input-reg {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    border-bottom: 2px solid #3E3C5C;
+    background-color: rgba(237, 218, 184, 0.11);
+}
+.form-floating > input + label:after {
+    background-color: rgba(233, 208, 169, 0.45) !important;
+}
+#email-input-reg:focus,#password-input-reg:focus {
+    border-bottom: 3px solid #3E3C5C;
+    border-top: none;
+    border-radius: 10px;
+    background-color: rgba(233, 208, 169, 0.65);
+    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
+}
+#login-button-div-reg {
+    width: 25dvw;
+    height: 50px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 180px;
+}
+#login-button-reg {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    background-color: rgba(80, 77, 117, 0.75);
+    border-color: rgba(80, 77, 117, 0.75);
+}
+#login-button-reg:hover {
+    color: white;
+    border-radius: 15px;
+    background-color: #3E3C5C;
+    border-left: 4px solid #B4A1A4;
+    border-right: 4px solid #B4A1A4;
+    border-top: none;
+    border-bottom: none;
+    font-weight: 600;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
+}
+#sign-up-div-reg {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    color: #3E3C5C;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 110px;
+}
+#email-logo-reg,#password-logo-reg {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 50px;
+    z-index: 2;
+    margin: auto;
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+#email-logo-reg {
+    top: 260px;
+}
+#password-logo-reg {
+    top: 380px;
+}
+#email-logo-reg.focused,#password-logo-reg.focused {
+    width: 28px;
+    height: 28px;
+    right: 55px;
+}
+#email-logo-reg.vanished,#password-logo-reg.vanished {
+    opacity: 0; /* Fades out */
+    pointer-events: none; /* Prevents interaction */
+}
+#welcome-text.text-01-left {
+    top: 65px;
+    left: 360px;
+    animation-duration: 1.4s;
+}
+#welcome-text-2.text-02-left {
+    top: 165px;
+    left: 475px;
+    animation-duration: 1.4s;
 }
 #registration-section {
     width: 85dvw;
     height: 725px;
-    border: 2px solid rebeccapurple;
+    /*border: 2px solid rebeccapurple;*/
     position: absolute;
     top: 100px;
     left: 0;

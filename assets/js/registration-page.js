@@ -8,6 +8,8 @@ $(document).ready(function () {
        const boxLogin = $("#box-login");
        const welcomeTextOne = $('#welcome-text');
        const welcomeTextTwo = $('#welcome-text-2');
+       $(welcomeTextOne).addClass('text-01-left');
+       $(welcomeTextTwo).addClass('text-02-left');
        boxLogin.removeClass("animate__zoomIn").hide();
        boxLogin.show().addClass("animate__zoomIn");
        welcomeTextOne.removeClass("animate__lightSpeedInRight").hide();
@@ -21,10 +23,11 @@ $(document).ready(function () {
         $('#registration-section').hide();
         $('#box-login').removeClass('rotate-and-color');
         $('body').removeClass('color');
-
         const boxLogin = $("#box-login");
         const welcomeTextOne = $('#welcome-text');
         const welcomeTextTwo = $('#welcome-text-2');
+        $(welcomeTextOne).removeClass('text-01-left');
+        $(welcomeTextTwo).removeClass('text-02-left');
         boxLogin.removeClass("animate__zoomIn").hide();
         boxLogin.show().addClass("animate__zoomIn");
         welcomeTextOne.removeClass("animate__lightSpeedInRight").hide();

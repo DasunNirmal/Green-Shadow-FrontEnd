@@ -6,6 +6,9 @@ body {
     font-weight: 500;
     font-style: normal;
 }
+#registration-section {
+    display: none;
+}
 #login-section {
     width: 85dvw;
     height: 725px;
@@ -59,7 +62,7 @@ body {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 180px;
+    bottom: 140px;
 }
 #box-login {
     width: 1220px;
@@ -107,7 +110,8 @@ body {
     left: 0;
     right: 0;
     margin: auto;
-    bottom: 110px;
+    bottom: 90px;
+    font-weight: 400;
 }
 #email-logo,#password-logo {
     width: 30px;
@@ -196,4 +200,19 @@ body {
     color: rgba(18, 0, 255, 0.63);
     text-decoration: underline;
     cursor: pointer;
+}
+#sign-up-button:hover {
+    color: rgb(18, 0, 255);
+}
+#password-visible {
+    background-color: red;
+}
+#show-password {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    color: #3E3C5C;
+    font-weight: 480;
+    top: 455px;
+    left: 48px;
 }

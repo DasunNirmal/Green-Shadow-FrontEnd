@@ -8,7 +8,7 @@ body.color {
     position: absolute;
     border-radius: 250px 250px 250px 250px;
     top: -140px;
-    left: 920px;
+    left: 970px;
     clip-path: polygon(0px 0px, 100% 0%, 100% 100%, 0% 100%);
     animation-duration: 1s;
 }
@@ -18,24 +18,41 @@ body.color {
 }
 #registration-form-wrapper {
     width: 30dvw;
-    height: 700px;
+    height: 745px;
     /*border: 2px solid rebeccapurple;*/
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 0;
+    right: 155px;
     margin: 0;
     animation-duration: 1s;
 }
-#email-reg,#password-reg {
+#email-reg,#password-reg,#name-reg,#confirm-password {
     width: 25dvw;
     height: 100px;
-    top: 245px;
+    position: relative;
+    top: 215px;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
 }
-#email-input-reg,#password-input-reg {
+#name-reg {
+    position: absolute;
+    top: 225px;
+}
+#email-reg {
+    position: absolute;
+    top: 320px;
+}
+#password-reg {
+    position: absolute;
+    top: 420px;
+}
+#confirm-password {
+    position: absolute;
+    top: 520px;
+}
+#email-input-reg,#password-input-reg,#name-input-reg,#confirm-password-input {
     border-top: none;
     border-right: none;
     border-left: none;
@@ -46,7 +63,7 @@ body.color {
 .form-floating > input + label:after {
     background-color: rgba(233, 208, 169, 0.45) !important;
 }
-#email-input-reg:focus,#password-input-reg:focus {
+#email-input-reg:focus,#password-input-reg:focus,#name-input-reg:focus,#confirm-password-input:focus {
     border-bottom: 3px solid #3E3C5C;
     border-top: none;
     border-radius: 10px;
@@ -59,7 +76,7 @@ body.color {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 180px;
+    bottom: 20px;
 }
 #login-button-reg {
     font-family: "Poppins", sans-serif;
@@ -88,7 +105,7 @@ body.color {
     margin: auto;
     bottom: 110px;
 }
-#email-logo-reg,#password-logo-reg {
+#email-logo-reg,#password-logo-reg,#user-logo-reg,#confirm-password-logo {
     width: 30px;
     height: 30px;
     position: absolute;
@@ -98,13 +115,19 @@ body.color {
     transition: all 0.3s ease;
     opacity: 1;
 }
+#user-logo-reg {
+    top: 240px;
+}
 #email-logo-reg {
-    top: 260px;
+    top: 342px;
 }
 #password-logo-reg {
-    top: 380px;
+    top: 438px;
 }
-#email-logo-reg.focused,#password-logo-reg.focused {
+#confirm-password-logo {
+    top: 538px;
+}
+#email-logo-reg.focused,#password-logo-reg.focused,#user-logo-reg.focused,#confirm-password-logo.focused {
     width: 28px;
     height: 28px;
     right: 55px;
@@ -115,17 +138,17 @@ body.color {
 }
 #welcome-text.text-01-left {
     top: 65px;
-    left: 360px;
+    left: 60px;
     animation-duration: 1.4s;
 }
 #welcome-text-2.text-02-left {
-    top: 165px;
-    left: 475px;
+    top: 225px;
+    left: 60px;
     animation-duration: 1.4s;
 }
 #registration-section {
-    width: 85dvw;
-    height: 725px;
+    width: 98dvw;
+    height: 745px;
     /*border: 2px solid rebeccapurple;*/
     position: absolute;
     top: 100px;
@@ -135,10 +158,61 @@ body.color {
     margin-left: auto;
     margin-right: auto;
 }
+#image-registration {
+    width: 790px;
+    height: 500px;
+    /*border: 2px solid rebeccapurple;*/
+    position: absolute;
+    top: 200px;
+    left: 0;
+}
+#logo-reg {
+    width: 90px;
+    height: 90px;
+    background: url("/assets/icons/logo.png") center no-repeat;
+    background-size: 82px 82px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
 #sign-up-button-2 {
-    width: fit-content;
-    height: fit-content;
+    width: 55px;
+    height: 20px;
     color: rgba(18, 0, 255, 0.63);
     text-decoration: underline;
     cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#sign-up-button-2:hover {
+    color: rgb(18, 0, 255);
+}
+#create-acc-text-01 {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    font-weight: 680;
+    color: #3E3C5C;
+    top: 120px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+#create-acc-text-02>p {
+    margin: 0;
+}
+#create-acc-text-02 {
+    width: 265px;
+    height: 27px;
+    font-weight: 400;
+    color: #3E3C5C;
+    position: absolute;
+    top: 155px;
+    left: 0;
+    right: 0;
+    margin: auto;
 }

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-   $('#registration-section').hide();
    $('#email-input').focus(function(){
        $('#email-logo').addClass('focused');
    });
@@ -25,6 +24,20 @@ $(document).ready(function(){
             $('#password-logo').addClass('vanished');
         } else {
             $('#password-logo').removeClass('vanished');
+        }
+    });
+    $('#email-input').keypress((e) => {
+        if (e.which === 13) {
+            $('#password-input').focus();
+        }
+    });
+
+    $('#password-visible').on('click', () => {
+        const passwordField = $('#password-input');
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+        } else {
+            passwordField.attr('type', 'password');
         }
     });
 });

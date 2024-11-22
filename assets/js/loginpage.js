@@ -32,7 +32,7 @@ $(document).ready(function(){
         }
     });
 
-    $('#password-visible').on('click', () => {
+    $('#check-box-login').on('click', () => {
         const passwordField = $('#password-input');
         if (passwordField.attr('type') === 'password') {
             passwordField.attr('type', 'text');

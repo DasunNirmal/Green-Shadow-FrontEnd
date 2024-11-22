@@ -216,3 +216,32 @@ body.color {
     right: 0;
     margin: auto;
 }
+#check-box-reg {
+    width:14px;
+    aspect-ratio: 1;
+    vertical-align: middle;
+    background-color: #f3e8d7;
+    border: 1px solid #3E3C5C;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+#check-box-reg:checked {
+    appearance: auto;
+    background-color: blue;
+}
+#show-password-reg {
+    width: 130px;
+    height: 30px;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 20px 130px;
+    color: #3E3C5C;
+    font-weight: 480;
+    font-size: 14px;
+    top: 595px;
+    left: 47px;
+    align-items: center;
+    justify-items: center;
+}

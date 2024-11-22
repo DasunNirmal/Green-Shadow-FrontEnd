@@ -204,15 +204,32 @@ body {
 #sign-up-button:hover {
     color: rgb(18, 0, 255);
 }
-#password-visible {
-    background-color: red;
+#check-box-login {
+    width:14px;
+    aspect-ratio: 1;
+    vertical-align: middle;
+    background-color: #f3e8d7;
+    border: 1px solid #3E3C5C;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+#check-box-login:checked {
+    appearance: auto;
+    background-color: blue;
 }
 #show-password {
-    width: fit-content;
-    height: fit-content;
+    width: 130px;
+    height: 30px;
     position: absolute;
+    display: grid;
+    grid-template-columns: 20px 130px;
     color: #3E3C5C;
     font-weight: 480;
-    top: 455px;
+    font-size: 14px;
+    top: 435px;
     left: 48px;
+    align-items: center;
+    justify-items: center;
 }

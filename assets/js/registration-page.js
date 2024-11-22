@@ -110,4 +110,16 @@ $(document).ready(function () {
             $('#confirm-password-input').focus();
         }
     });
+
+    $('#check-box-reg').on('click', () => {
+        const passwordField = $('#password-input-reg');
+        const confirmPasswordField = $('#confirm-password-input');
+        if (passwordField.attr('type') === 'password' && confirmPasswordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            confirmPasswordField.attr('type', 'text');
+        } else {
+            passwordField.attr('type', 'password');
+            confirmPasswordField.attr('type', 'password');
+        }
+    });
 });

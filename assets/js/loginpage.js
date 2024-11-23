@@ -40,4 +40,15 @@ $(document).ready(function(){
             passwordField.attr('type', 'password');
         }
     });
+
+    $('#login-button').on('click', () => {
+        $('#login-section').hide();
+        $('#registration-section').hide();
+        $('#box-login').hide();
+        $('#image-login').hide();
+        $('#welcome-text').hide();
+        $('#welcome-text-2').hide();
+        $('#dashboard-section').show();
+        $('#navigation-bar').show();
+    });
 });

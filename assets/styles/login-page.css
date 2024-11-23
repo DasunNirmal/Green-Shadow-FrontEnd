@@ -6,7 +6,7 @@ body {
     font-weight: 500;
     font-style: normal;
 }
-#registration-section {
+#registration-section,#dashboard-section,#navigation-bar {
     display: none;
 }
 #login-section {

@@ -11,22 +11,27 @@
     <link rel="stylesheet" href="assets/styles/normalize.css">
     <link rel="stylesheet" href="assets/styles/login-page.css">
     <link rel="stylesheet" href="assets/styles/registration-page.css">
+    <link rel="stylesheet" href="assets/styles/navigation-bar.css">
+    <link rel="stylesheet" href="assets/styles/dashboard-page.css">
 
 </head>
 <body>
     <!--navigation bar-->
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navigation-bar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a id="logo-navbar-div" class="navbar-brand" href="#"><div id="logo-navbar"></div></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Pricing</a>
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <a class="nav-link active" aria-current="page" href="#dashboard-section" id="home">Home</a>
+                    <a class="nav-link"  href="#field-section" id="field">Field</a>
+                    <a class="nav-link" href="#crop-section" id="crop">Crop</a>
+                    <a class="nav-link" href="#staff-section" id="staff">Staff</a>
+                    <a class="nav-link" href="#vehicle-section" id="vehicle">Vehicle</a>
+                    <a class="nav-link" href="#equipment-section" id="equipment">Equipment</a>
+                    <a class="nav-link" href="#logs-section" id="logs">Logs</a>
                 </div>
             </div>
         </div>
@@ -110,10 +115,23 @@
         </div>
     </section>
     <!--dashboard Section-->
-    <section id="dashboard-section"> welcome</section>
+    <section id="dashboard-section"> welcome to dashboard</section>
+
+    <section id="field-section"> welcome to field</section>
+
+    <section id="crop-section"> welcome to crop</section>
+
+    <section id="staff-section"> welcome to staff</section>
+
+    <section id="vehicle-section"> welcome vehicle</section>
+
+    <section id="equipment-section"> welcome equipment</section>
+
+    <section id="logs-section"> welcome logs</section>
 
     <script type="module" src="assets/js/loginpage.js"></script>
     <script type="module" src="assets/js/registration-page.js"></script>
+    <script type="module" src="assets/js/navigation-bar.js"></script>
     <script src="assets/lib/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

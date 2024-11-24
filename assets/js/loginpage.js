@@ -49,7 +49,8 @@ $(document).ready(function(){
         $('#welcome-text').hide();
         $('#welcome-text-2').hide();
         $('#dashboard-section').show();
-        $('#navigation-bar').show();
+        $('#navigation-bar').show().addClass('animate__animated animate__slideInDown');
         $('body').addClass('color-dashboard');
+        $('#home').addClass('active-page');
     });
 });

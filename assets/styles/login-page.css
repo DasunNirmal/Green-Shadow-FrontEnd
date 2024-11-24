@@ -6,7 +6,8 @@ body {
     font-weight: 500;
     font-style: normal;
 }
-#registration-section,#dashboard-section,#navigation-bar {
+#registration-section,#dashboard-section,#navigation-bar,#field-section,
+#crop-section,#staff-section,#vehicle-section,#equipment-section,#logs-section {
     display: none;
 }
 #login-section {

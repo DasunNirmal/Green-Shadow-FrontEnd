@@ -1,5 +1,22 @@
 $(document).ready(function () {
-    $('#home').on('click',  () => {
+
+    const home = $('#home');
+    const field = $('#field');
+    const crop = $('#crop');
+    const staff = $('#staff');
+    const vehicle = $('#vehicle');
+    const logs = $('#logs');
+    const equipment = $('#equipment');
+    const logo = $('#logo-navbar');
+
+    home.addClass('hover-nav-bar');
+    field.addClass('hover-nav-bar');
+    crop.addClass('hover-nav-bar');
+    staff.addClass('hover-nav-bar');
+    vehicle.addClass('hover-nav-bar');
+    logs.addClass('hover-nav-bar');
+    equipment.addClass('hover-nav-bar');
+    logo.on('click',  () => {
         $('#dashboard-section').show();
         $('#field-section').hide();
         $('#crop-section').hide();
@@ -9,8 +26,35 @@ $(document).ready(function () {
         $('#logs-section').hide();
         $('#registration-section').hide();
         $('#login-section').hide();
+        // Manage active page class
+        home.addClass('active-page');
+        field.removeClass('active-page');
+        crop.removeClass('active-page');
+        staff.removeClass('active-page');
+        vehicle.removeClass('active-page');
+        logs.removeClass('active-page');
+        equipment.removeClass('active-page');
     });
-    $('#field').on('click',  () => {
+    home.on('click',  () => {
+        $('#dashboard-section').show();
+        $('#field-section').hide();
+        $('#crop-section').hide();
+        $('#staff-section').hide();
+        $('#vehicle-section').hide();
+        $('#equipment-section').hide();
+        $('#logs-section').hide();
+        $('#registration-section').hide();
+        $('#login-section').hide();
+        // Manage active page class
+        home.addClass('active-page').removeClass('hover-nav-bar');
+        field.removeClass('active-page').addClass('hover-nav-bar');
+        crop.removeClass('active-page').addClass('hover-nav-bar');
+        staff.removeClass('active-page').addClass('hover-nav-bar');
+        vehicle.removeClass('active-page').addClass('hover-nav-bar');
+        logs.removeClass('active-page').addClass('hover-nav-bar');
+        equipment.removeClass('active-page').addClass('hover-nav-bar');
+    });
+    field.on('click',  () => {
         $('#field-section').show();
         $('#dashboard-section').hide();
         $('#crop-section').hide();
@@ -20,8 +64,15 @@ $(document).ready(function () {
         $('#logs-section').hide();
         $('#registration-section').hide();
         $('#login-section').hide();
+        field.addClass('active-page').removeClass('hover-nav-bar');
+        home.removeClass('active-page').addClass('hover-nav-bar');
+        staff.removeClass('active-page').addClass('hover-nav-bar');
+        crop.removeClass('active-page').addClass('hover-nav-bar');
+        vehicle.removeClass('active-page').addClass('hover-nav-bar');
+        logs.removeClass('active-page').addClass('hover-nav-bar');
+        equipment.removeClass('active-page').addClass('hover-nav-bar');
     });
-    $('#crop').on('click',  () => {
+    crop.on('click',  () => {
         $('#crop-section').show();
         $('#field-section').hide();
         $('#dashboard-section').hide();
@@ -31,8 +82,15 @@ $(document).ready(function () {
         $('#logs-section').hide();
         $('#registration-section').hide();
         $('#login-section').hide();
+        crop.addClass('active-page').removeClass('hover-nav-bar');
+        home.removeClass('active-page').addClass('hover-nav-bar');
+        field.removeClass('active-page').addClass('hover-nav-bar');
+        staff.removeClass('active-page').addClass('hover-nav-bar');
+        vehicle.removeClass('active-page').addClass('hover-nav-bar');
+        equipment.removeClass('active-page').addClass('hover-nav-bar');
+        logs.removeClass('active-page').addClass('hover-nav-bar');
     });
-    $('#staff').on('click',  () => {
+    staff.on('click',  () => {
         $('#staff-section').show();
         $('#crop-section').hide();
         $('#field-section').hide();
@@ -42,8 +100,15 @@ $(document).ready(function () {
         $('#logs-section').hide();
         $('#registration-section').hide();
         $('#login-section').hide();
+        staff.addClass('active-page').removeClass('hover-nav-bar');
+        home.removeClass('active-page').addClass('hover-nav-bar');
+        field.removeClass('active-page').addClass('hover-nav-bar');
+        crop.removeClass('active-page').addClass('hover-nav-bar');
+        vehicle.removeClass('active-page').addClass('hover-nav-bar');
+        equipment.removeClass('active-page').addClass('hover-nav-bar');
+        logs.removeClass('active-page').addClass('hover-nav-bar');
     });
-    $('#vehicle').on('click',  () => {
+    vehicle.on('click',  () => {
         $('#vehicle-section').show();
         $('#staff-section').hide();
         $('#crop-section').hide();
@@ -53,8 +118,15 @@ $(document).ready(function () {
         $('#logs-section').hide();
         $('#registration-section').hide();
         $('#login-section').hide();
+        vehicle.addClass('active-page').removeClass('hover-nav-bar');
+        home.removeClass('active-page').addClass('hover-nav-bar');
+        field.removeClass('active-page').addClass('hover-nav-bar');
+        crop.removeClass('active-page').addClass('hover-nav-bar');
+        staff.removeClass('active-page').addClass('hover-nav-bar');
+        equipment.removeClass('active-page').addClass('hover-nav-bar');
+        logs.removeClass('active-page').addClass('hover-nav-bar');
     });
-    $('#equipment').on('click',  () => {
+    equipment.on('click',  () => {
         $('#equipment-section').show();
         $('#vehicle-section').hide();
         $('#staff-section').hide();
@@ -64,8 +136,15 @@ $(document).ready(function () {
         $('#logs-section').hide();
         $('#registration-section').hide();
         $('#login-section').hide();
+        equipment.addClass('active-page').removeClass('hover-nav-bar');
+        home.removeClass('active-page').addClass('hover-nav-bar');
+        field.removeClass('active-page').addClass('hover-nav-bar');
+        crop.removeClass('active-page').addClass('hover-nav-bar');
+        staff.removeClass('active-page').addClass('hover-nav-bar');
+        vehicle.removeClass('active-page').addClass('hover-nav-bar');
+        logs.removeClass('active-page').addClass('hover-nav-bar');
     });
-    $('#logs').on('click',  () => {
+    logs.on('click',  () => {
         $('#logs-section').show();
         $('#equipment-section').hide();
         $('#vehicle-section').hide();
@@ -75,5 +154,12 @@ $(document).ready(function () {
         $('#dashboard-section').hide();
         $('#registration-section').hide();
         $('#login-section').hide();
+        logs.addClass('active-page').removeClass('hover-nav-bar');
+        home.removeClass('active-page').addClass('hover-nav-bar');
+        field.removeClass('active-page').addClass('hover-nav-bar');
+        crop.removeClass('active-page').addClass('hover-nav-bar');
+        staff.removeClass('active-page').addClass('hover-nav-bar');
+        vehicle.removeClass('active-page').addClass('hover-nav-bar');
+        equipment.removeClass('active-page').addClass('hover-nav-bar');
     });
 });

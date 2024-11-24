@@ -50,5 +50,6 @@ $(document).ready(function(){
         $('#welcome-text-2').hide();
         $('#dashboard-section').show();
         $('#navigation-bar').show();
+        $('body').addClass('color-dashboard');
     });
 });

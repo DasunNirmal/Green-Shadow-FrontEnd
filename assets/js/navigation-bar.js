@@ -16,6 +16,7 @@ $(document).ready(function () {
     vehicle.addClass('hover-nav-bar');
     logs.addClass('hover-nav-bar');
     equipment.addClass('hover-nav-bar');
+
     logo.on('click',  () => {
         $('#dashboard-section').show();
         $('#field-section').hide();
@@ -161,5 +162,25 @@ $(document).ready(function () {
         staff.removeClass('active-page').addClass('hover-nav-bar');
         vehicle.removeClass('active-page').addClass('hover-nav-bar');
         equipment.removeClass('active-page').addClass('hover-nav-bar');
+    });
+    $('#log-out').on('click',  () => {
+        $('#login-section').show();
+        $('#image-login').show();
+        $('#box-login').show();
+        const welcomeTextOne = $('#welcome-text');
+        const welcomeTextTwo = $('#welcome-text-2');
+        welcomeTextOne.show();
+        welcomeTextTwo.show();
+        welcomeTextOne.html("Welcome Back !");
+        welcomeTextTwo.html("Pickup Where Your Left Off");
+        $('body').removeClass('color-dashboard');
+        $('#logs-section').hide();
+        $('#equipment-section').hide();
+        $('#vehicle-section').hide();
+        $('#staff-section').hide();
+        $('#crop-section').hide();
+        $('#field-section').hide();
+        $('#dashboard-section').hide();
+        $('#navigation-bar').hide();
     });
 });

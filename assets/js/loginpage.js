@@ -50,7 +50,13 @@ $(document).ready(function(){
         $('#welcome-text-2').hide();
         $('#dashboard-section').show();
         $('#navigation-bar').show().addClass('animate__animated animate__slideInDown');
-        $('body').addClass('color-dashboard');
+        $('body').addClass('color-dashboard').addClass('allowOverFlow-y');
         $('#home').addClass('active-page');
+        $('#field').removeClass('active-page');
+        $('#crop').removeClass('active-page');
+        $('#staff').removeClass('active-page');
+        $('#vehicle').removeClass('active-page');
+        $('#logs').removeClass('active-page');
+        $('#equipment').removeClass('active-page');
     });
 });

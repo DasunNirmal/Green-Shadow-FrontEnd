@@ -33,7 +33,7 @@
 #field-content-card-left label {
     margin-bottom: 8px;
 }
-#button-div {
+#button-div-field {
     position: relative !important;
     width: 538px !important;
     height: 40px !important;
@@ -54,4 +54,8 @@
 #txtSearch-fields {
     flex: 1;
     max-width: 300px;
+}
+#Tbl-fields,#search-fields-div {
+    position: relative;
+    top: 50px;
 }

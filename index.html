@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="assets/styles/registration-page.css">
     <link rel="stylesheet" href="assets/styles/navigation-bar.css">
     <link rel="stylesheet" href="assets/styles/dashboard-page.css">
+    <link rel="stylesheet" href="assets/styles/field-page.css">
+    <link rel="stylesheet" href="assets/styles/crop-page.css">
+    <link rel="stylesheet" href="assets/styles/staff-page.css">
+    <link rel="stylesheet" href="assets/styles/vehicle-page.css">
+    <link rel="stylesheet" href="assets/styles/equipment-page.css">
+    <link rel="stylesheet" href="assets/styles/logs-page.css">
 
 </head>
 <body>
@@ -119,19 +125,98 @@
         </div>
     </section>
     <!--dashboard Section-->
-    <section id="dashboard-section"> welcome to dashboard</section>
+    <section id="dashboard-section" class="animate__animated animate__fadeIn"> welcome to dashboard</section>
 
-    <section id="field-section"> welcome to field</section>
+    <section id="field-section" class="animate__animated animate__fadeIn">
+        <!--Left Card-->
+        <div id="field-content-card-left">
+            <!--Field ID-->
+            <div id="field-id-div">
+                <label id="lblFieldID" for="txtFieldID">Field ID :</label>
+                <input id="txtFieldID" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-    <section id="crop-section"> welcome to crop</section>
+            <!--Field Name-->
+            <div id="field-name-div">
+                <label id="lblFieldName" for="txtFieldName">Field Name :</label>
+                <input id="txtFieldName" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-    <section id="staff-section"> welcome to staff</section>
+            <!--Field Location-->
+            <div id="field-location-div">
+                <label id="lblFieldLocation" for="txtFieldLocation">Field Location :</label>
+                <input id="txtFieldLocation" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-    <section id="vehicle-section"> welcome vehicle</section>
+            <!--Field Size-->
+            <div id="field-size-div">
+                <label id="lblFieldSize" for="txtFieldSize">Field Size :</label>
+                <input id="txtFieldSize" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-    <section id="equipment-section"> welcome equipment</section>
+            <!--Field Image 01-->
+            <div id="field-image1-div">
+                <label id="lblFieldImage1" for="txtFieldImage1">Field Image 01 :</label>
+                <input id="txtFieldImage1" class="form-control" type="file" aria-label="default input example">
+            </div>
 
-    <section id="logs-section"> welcome logs</section>
+            <!--Field Image 02-->
+            <div id="field-image2-div">
+                <label id="lblFieldImage2" for="txtFieldImage2">Field Image 02 :</label>
+                <input id="txtFieldImage2" class="form-control" type="file" aria-label="default input example">
+            </div>
+
+            <!--Buttons-->
+            <div id="button-div">
+                <button type="button" class="btn btn-primary" id="save-fields">Save</button>
+                <button type="button" class="btn btn-secondary" id="update-fields">Update</button>
+                <button type="button" class="btn btn-danger" id="delete-fields">Delete</button>
+                <button type="button" class="btn btn-warning" id="clear-fields">Clear</button>
+            </div>
+        </div>
+        <!--Search Section-->
+        <div id="search-fields-div">
+            <!--Label for Search-->
+            <label id="lblSearchFields" for="txtSearch-fields">Search Fields :</label>
+
+            <!--Search Input Field-->
+            <input id="txtSearch-fields" class="form-control" type="text" placeholder="Search by ID or size" aria-label="default input example">
+
+            <!--Search Button-->
+            <button id="search-field" type="button" class="btn btn-primary">Search</button>
+        </div>
+
+        <!--Table-->
+        <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-fields">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Field ID</th>
+                    <th>Field Name</th>
+                    <th>Field Location</th>
+                    <th>Field Size</th>
+                    <th>Field Image 01</th>
+                    <th>Field Image 02</th>
+                </tr>
+                </thead>
+                <tbody id="fields-table-tb">
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <section id="crop-section" class="animate__animated animate__fadeIn"> welcome to crop</section>
+
+    <section id="staff-section" class="animate__animated animate__fadeIn"> welcome to staff</section>
+
+    <section id="vehicle-section" class="animate__animated animate__fadeIn"> welcome vehicle</section>
+
+    <section id="equipment-section" class="animate__animated animate__fadeIn"> welcome equipment</section>
+
+    <section id="logs-section" class="animate__animated animate__fadeIn"> welcome logs</section>
 
     <script type="module" src="assets/js/loginpage.js"></script>
     <script type="module" src="assets/js/registration-page.js"></script>

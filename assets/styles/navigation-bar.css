@@ -48,8 +48,29 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     transition: all 0.1s ease-in-out;
 }
+#log-out {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+}
+#log-out:hover {
+    width: 42px;
+    height: 42px;
+    transition: all 0.3s ease-in-out;
+}
+#log-out svg:hover path {
+    filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.54));
+    transition: all 0.3s ease-in-out;
+}
 @media all and (max-width: 991px) {
     #nav-bar>a {
         margin-right: 0;
+    }
+    #log-out {
+        position: relative;
+        top: 10px;
+        bottom: 0;
+        margin: auto;
     }
 }

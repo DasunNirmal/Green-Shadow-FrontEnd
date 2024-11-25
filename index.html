@@ -167,7 +167,7 @@
             </div>
 
             <!--Buttons-->
-            <div id="button-div">
+            <div id="button-div-field">
                 <button type="button" class="btn btn-primary" id="save-fields">Save</button>
                 <button type="button" class="btn btn-secondary" id="update-fields">Update</button>
                 <button type="button" class="btn btn-danger" id="delete-fields">Delete</button>
@@ -178,10 +178,7 @@
         <div id="search-fields-div">
             <!--Label for Search-->
             <label id="lblSearchFields" for="txtSearch-fields">Search Fields :</label>
-
-            <!--Search Input Field-->
             <input id="txtSearch-fields" class="form-control" type="text" placeholder="Search by ID or size" aria-label="default input example">
-
             <!--Search Button-->
             <button id="search-field" type="button" class="btn btn-primary">Search</button>
         </div>
@@ -208,9 +205,244 @@
 
     </section>
 
-    <section id="crop-section" class="animate__animated animate__fadeIn"> welcome to crop</section>
+    <section id="crop-section" class="animate__animated animate__fadeIn">
+        <!--Left Card-->
+        <div id="crop-content-card-left">
+            <!--Crop Code-->
+            <div id="crop-code-div">
+                <label id="lblCropCode" for="txtCropCode">Crop Code :</label>
+                <input id="txtCropCode" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-    <section id="staff-section" class="animate__animated animate__fadeIn"> welcome to staff</section>
+            <!--Common Name-->
+            <div id="crop-common-name-div">
+                <label id="lblCommonName" for="txtCommonName">Common Name :</label>
+                <input id="txtCommonName" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Scientific Name-->
+            <div id="crop-scientific-name-div">
+                <label id="lblScientificName" for="txtScientificName">Scientific Name :</label>
+                <input id="txtScientificName" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Category-->
+            <div id="crop-category-div">
+                <label id="lblCategory" for="txtCategory">Category :</label>
+                <input id="txtCategory" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Season-->
+            <div id="crop-season-div">
+                <label id="lblSeason" for="txtSeason">Season :</label>
+                <input id="txtSeason" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Crop Image-->
+            <div id="crop-image-div">
+                <label id="lblCropImage" for="txtCropImage">Crop Image :</label>
+                <input id="txtCropImage" class="form-control" type="file" aria-label="default input example">
+            </div>
+
+            <div id="search-field-div">
+                <label id="lblSearchField" for="txtSearchField">Search Field :</label>
+                <input id="txtSearchField" class="form-control" type="text" placeholder="Enter field code" aria-label="default input example">
+                <button id="btnSearchField" type="button" class="btn btn-primary">Search</button>
+            </div>
+
+            <div id="crop-field-div">
+                <label id="lblCropFieldName" for="txtCropFieldName">Field Name :</label>
+                <input id="txtCropFieldName" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Buttons-->
+            <div id="button-div-crop">
+                <button type="button" class="btn btn-primary" id="save-crops">Save</button>
+                <button type="button" class="btn btn-secondary" id="update-crops">Update</button>
+                <button type="button" class="btn btn-danger" id="delete-crops">Delete</button>
+                <button type="button" class="btn btn-warning" id="clear-crops">Clear</button>
+            </div>
+        </div>
+
+        <!--Search Section-->
+        <div id="search-crops-div">
+            <!--Label for Search-->
+            <label id="lblSearchCrops" for="txtSearch-crops">Search Crops :</label>
+            <input id="txtSearch-crops" class="form-control" type="text" placeholder="Search by code or category" aria-label="default input example">
+            <!--Search Button-->
+            <button id="search-crop" type="button" class="btn btn-primary">Search</button>
+        </div>
+
+        <!--Table-->
+        <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-crops">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Crop Code</th>
+                    <th>Common Name</th>
+                    <th>Scientific Name</th>
+                    <th>Category</th>
+                    <th>Season</th>
+                    <th>Crop Image</th>
+                    <th>Field</th>
+                </tr>
+                </thead>
+                <tbody id="crops-table-tb">
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+
+    <section id="staff-section" class="animate__animated animate__fadeIn">
+        <!--Left Card-->
+        <div id="staff-content-card-left">
+            <!--Member ID-->
+            <div id="staff-id-div">
+                <label id="lblMemberID" for="txtMemberID">Member ID :</label>
+                <input id="txtMemberID" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--First Name-->
+            <div id="staff-first-name-div">
+                <label id="lblFirstName" for="txtFirstName">First Name :</label>
+                <input id="txtFirstName" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Last Name-->
+            <div id="staff-last-name-div">
+                <label id="lblLastName" for="txtLastName">Last Name :</label>
+                <input id="txtLastName" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Email-->
+            <div id="staff-email-div">
+                <label id="lblEmail" for="txtEmail">Email :</label>
+                <input id="txtEmail" class="form-control" type="email" aria-label="default input example">
+            </div>
+
+            <!--Phone Number-->
+            <div id="staff-phone-div">
+                <label id="lblPhoneNumber" for="txtPhoneNumber">Phone Number :</label>
+                <input id="txtPhoneNumber" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Designation-->
+            <div id="staff-designation-div">
+                <label id="lblDesignation" for="txtDesignation">Designation :</label>
+                <input id="txtDesignation" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Date of Birth-->
+            <div id="staff-dob-div">
+                <label id="lblDateOfBirth" for="txtDateOfBirth">Date of Birth :</label>
+                <input id="txtDateOfBirth" class="form-control" type="date" aria-label="default input example">
+            </div>
+
+            <!--Role-->
+            <div id="staff-role-div">
+                <label id="lblRole" for="txtRole">Role :</label>
+                <input id="txtRole" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Birth-->
+            <div id="staff-birth-div">
+                <label id="lblBirth" for="txtBirth">Birth :</label>
+                <input id="txtBirth" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Gender-->
+            <div id="staff-gender-div">
+                <label id="lblGender" for="txtGender">Gender :</label>
+                <input id="txtGender" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Joined Date-->
+            <div id="staff-joined-div">
+                <label id="lblJoinedDate" for="txtJoinedDate">Joined Date :</label>
+                <input id="txtJoinedDate" class="form-control" type="date" aria-label="default input example">
+            </div>
+
+            <!--Address Line 01-->
+            <div id="staff-address-line1-div">
+                <label id="lblAddressLine1" for="txtAddressLine1">Address Line 01 :</label>
+                <input id="txtAddressLine1" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Address Line 02-->
+            <div id="staff-address-line2-div">
+                <label id="lblAddressLine2" for="txtAddressLine2">Address Line 02 :</label>
+                <input id="txtAddressLine2" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Address Line 03-->
+            <div id="staff-address-line3-div">
+                <label id="lblAddressLine3" for="txtAddressLine3">Address Line 03 :</label>
+                <input id="txtAddressLine3" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Address Line 04-->
+            <div id="staff-address-line4-div">
+                <label id="lblAddressLine4" for="txtAddressLine4">Address Line 04 :</label>
+                <input id="txtAddressLine4" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Address Line 05-->
+            <div id="staff-address-line5-div">
+                <label id="lblAddressLine5" for="txtAddressLine5">Address Line 05 :</label>
+                <input id="txtAddressLine5" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Buttons-->
+            <div id="button-div-staff">
+                <button type="button" class="btn btn-primary" id="save-staff">Save</button>
+                <button type="button" class="btn btn-secondary" id="update-staff">Update</button>
+                <button type="button" class="btn btn-danger" id="delete-staff">Delete</button>
+                <button type="button" class="btn btn-warning" id="clear-staff">Clear</button>
+            </div>
+        </div>
+
+        <!--Search Section-->
+        <div id="search-staff-div">
+            <!--Label for Search-->
+            <label id="lblSearchStaff" for="txtSearch-staff">Search Staff :</label>
+            <input id="txtSearch-staff" class="form-control" type="text" placeholder="Search by ID or Name" aria-label="default input example">
+            <!--Search Button-->
+            <button id="search-staff" type="button" class="btn btn-primary">Search</button>
+        </div>
+
+        <!--Table-->
+        <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-staff">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Member ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Designation</th>
+                    <th>Date of Birth</th>
+                    <th>Role</th>
+                    <th>Gender</th>
+                    <th>Joined Date</th>
+                    <th>Address Line 01</th>
+                    <th>Address Line 02</th>
+                    <th>Address Line 03</th>
+                    <th>Address Line 04</th>
+                    <th>Address Line 05</th>
+                </tr>
+                </thead>
+                <tbody id="staff-table-tb">
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
 
     <section id="vehicle-section" class="animate__animated animate__fadeIn"> welcome vehicle</section>
 

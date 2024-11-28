@@ -683,11 +683,127 @@
 
     </section>
 
-    <section id="logs-section" class="animate__animated animate__fadeIn"> welcome logs</section>
+    <section id="logs-section" class="animate__animated animate__fadeIn">
+        <div id="select-logs-div">
+            <div class="form-check" id="field-log">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="field-log-button" checked>
+                <label class="form-check-label" for="field-log-button">
+                    Fields Logs
+                </label>
+            </div>
+            <div class="form-check" id="crop-log">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="crop-log-button">
+                <label class="form-check-label" for="crop-log-button">
+                    Crops Logs
+                </label>
+            </div>
+            <div class="form-check" id="staff-log">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="staff-log-button">
+                <label class="form-check-label" for="staff-log-button">
+                    Staff Logs
+                </label>
+            </div>
+        </div>
+        <div id="field-log-section">
+            <!--Left Card-->
+            <div id="field-logs-content-card-left">
+                <!--Log Code-->
+                <div id="log-code-div">
+                    <label id="lblLogCode" for="txtLogCode">Log Code :</label>
+                    <input id="txtLogCode" class="form-control" type="text" aria-label="default input example">
+                </div>
 
-    <script type="module" src="assets/js/loginpage.js"></script>
+                <!--Search Fields-->
+                <div id="search-fields-logs-div">
+                    <label id="lblSearchFieldsLogs" for="txtSearchFieldsLogs">Search Fields :</label>
+                    <input id="txtSearchFieldsLogs" class="form-control" type="text" placeholder="Enter field code or name" aria-label="default input example">
+                    <button id="btnSearchFieldsLogs" type="button" class="btn btn-primary">Search</button>
+                </div>
+
+                <!--Field Code-->
+                <div id="field-code-logs-div">
+                    <label id="lblFieldCodeLogs" for="txtFieldCode">Field Code :</label>
+                    <input id="txtFieldCodeLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Field Name-->
+                <div id="field-name-logs-div">
+                    <label id="lblFieldNameLogs" for="txtFieldName">Field Name :</label>
+                    <input id="txtFieldNameLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Field Location-->
+                <div id="field-location-logs-div">
+                    <label id="lblFieldLocationLogs" for="txtFieldLocation">Field Location :</label>
+                    <input id="txtFieldLocationLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Details-->
+                <div id="field-details-div">
+                    <label id="lblFieldDetails" for="txtFieldDetails">Details :</label>
+                    <textarea id="txtFieldDetails" class="form-control" rows="3" placeholder="Enter details here" aria-label="default input example"></textarea>
+                </div>
+
+                <!--Date-->
+                <div id="log-date-div">
+                    <label id="lblLogDate" for="txtLogDate">Date :</label>
+                    <input id="txtLogDate" class="form-control" type="date" aria-label="default input example">
+                </div>
+
+                <!--Image-->
+                <div id="log-image-div">
+                    <label id="lblLogImage" for="txtLogImage">Image :</label>
+                    <input id="txtLogImage" class="form-control" type="file" aria-label="default input example">
+                </div>
+
+                <!--Buttons-->
+                <div id="button-div-field-logs">
+                    <button type="button" class="btn btn-primary" id="save-field-logs">Save</button>
+                    <button type="button" class="btn btn-secondary" id="update-field-logs">Update</button>
+                    <button type="button" class="btn btn-danger" id="delete-field-logs">Delete</button>
+                    <button type="button" class="btn btn-warning" id="clear-field-logs">Clear</button>
+                </div>
+            </div>
+
+            <!--Search Section-->
+            <div id="search-field-logs-tbl-div">
+                <!--Label for Search-->
+                <label id="lblSearchFieldLogs" for="txtSearch-field-logs">Search Logs :</label>
+                <input id="txtSearch-field-logs" class="form-control" type="text" placeholder="log code or field name" aria-label="default input example">
+                <!--Search Button-->
+                <button id="search-field-logs" type="button" class="btn btn-primary">Search</button>
+            </div>
+
+            <!--Table-->
+            <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-field-logs">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Log Code</th>
+                        <th>Field Code</th>
+                        <th>Field Name</th>
+                        <th>Field Location</th>
+                        <th>Details</th>
+                        <th>Date</th>
+                        <th>Image</th>
+                    </tr>
+                    </thead>
+                    <tbody id="field-logs-table-tb">
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div id="crop-log-section">crop Logs are here</div>
+        <div id="staff-log-section">staff Logs are here</div>
+    </section>
+
+    <script type="module" src="assets/js/login-page.js"></script>
     <script type="module" src="assets/js/registration-page.js"></script>
     <script type="module" src="assets/js/navigation-bar.js"></script>
+    <script type="module" src="assets/js/logs-page.js"></script>
     <script src="assets/lib/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

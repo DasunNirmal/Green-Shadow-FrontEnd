@@ -494,6 +494,11 @@
                 <input id="txtVehicleEmail" class="form-control" type="email" aria-label="default input example">
             </div>
 
+            <div id="employee-member-id-vehicle-div">
+                <label id="lblVehicleMemberID" for="txtMemberID">Member ID :</label>
+                <input id="txtVehicleMemberID" class="form-control" type="text" aria-label="default input example">
+            </div>
+
             <div id="employee-first-name-vehicle-div">
                 <label id="lblVehicleFirstName" for="txtFirstName">First Name :</label>
                 <input id="txtVehicleFirstName" class="form-control" type="text" aria-label="default input example">
@@ -504,10 +509,6 @@
                 <input id="txtVehicleRole" class="form-control" type="text" aria-label="default input example">
             </div>
 
-            <div id="employee-member-id-vehicle-div">
-                <label id="lblVehicleMemberID" for="txtMemberID">Member ID :</label>
-                <input id="txtVehicleMemberID" class="form-control" type="text" aria-label="default input example">
-            </div>
 
             <!--Buttons-->
             <div id="button-div-vehicle">
@@ -554,7 +555,133 @@
 
     </section>
 
-    <section id="equipment-section" class="animate__animated animate__fadeIn"> welcome equipment</section>
+    <section id="equipment-section" class="animate__animated animate__fadeIn">
+        <!--Left Card-->
+        <div id="equipment-content-card-left">
+            <!--Equipment Code-->
+            <div id="equipment-code-div">
+                <label id="lblEquipmentCode" for="txtEquipmentCode">Equipment Code :</label>
+                <input id="txtEquipmentCode" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Equipment Name-->
+            <div id="equipment-name-div">
+                <label id="lblEquipmentName" for="txtEquipmentName">Equipment Name :</label>
+                <input id="txtEquipmentName" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Type-->
+            <div id="equipment-type-div">
+                <label id="lblType" for="txtType">Type :</label>
+                <input id="txtType" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Status-->
+            <div id="equipment-status-div">
+                <label id="lblEquipmentStatus" for="txtEquipmentStatus">Status :</label>
+                <input id="txtEquipmentStatus" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Search Employees-->
+            <div id="search-employees-div">
+                <label id="lblSearchEmployees" for="txtSearchEmployees">Search Employees :</label>
+                <input id="txtSearchEmployees" class="form-control" type="text" placeholder="Enter employee name or ID" aria-label="default input example">
+                <button id="btnSearchEmployees" type="button" class="btn btn-primary">Search</button>
+            </div>
+
+            <!--Member ID-->
+            <div id="employee-member-id-div">
+                <label id="lblMemberID-equipment" for="txtMemberID">Member ID :</label>
+                <input id="txtMemberID-equipment" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--First Name-->
+            <div id="employee-first-name-div">
+                <label id="lblFirstName-equipment" for="txtFirstName">First Name :</label>
+                <input id="txtFirstName-equipment" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Role-->
+            <div id="employee-role-div">
+                <label id="lblRole-equipment" for="txtRole">Role :</label>
+                <input id="txtRole-equipment" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Phone Number-->
+            <div id="employee-phone-number-div">
+                <label id="lblPhoneNumber-equipment" for="txtPhoneNumber">Phone Number :</label>
+                <input id="txtPhoneNumber-equipment" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Search Fields-->
+            <div id="search-fields-equipment-div">
+                <label id="lblSearchFields-equipment" for="txtSearchFields-equipment">Search Fields :</label>
+                <input id="txtSearchFields-equipment" class="form-control" type="text" placeholder="Enter field code or name" aria-label="default input example">
+                <button id="btnSearchFields-equipment" type="button" class="btn btn-primary">Search</button>
+            </div>
+
+            <!--Field Code-->
+            <div id="field-code-div">
+                <label id="lblFieldCode" for="txtFieldCode">Field Code :</label>
+                <input id="txtFieldCode" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Field Name-->
+            <div id="field-name-equipment-div">
+                <label id="lblFieldName-equipment" for="txtFieldName">Field Name :</label>
+                <input id="txtFieldName-equipment" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Field Location-->
+            <div id="field-location-equipment-div">
+                <label id="lblFieldLocation-equipment" for="txtFieldLocation">Field Location :</label>
+                <input id="txtFieldLocation-equipment" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            <!--Buttons-->
+            <div id="button-div-equipment">
+                <button type="button" class="btn btn-primary" id="save-equipment">Save</button>
+                <button type="button" class="btn btn-secondary" id="update-equipment">Update</button>
+                <button type="button" class="btn btn-danger" id="delete-equipment">Delete</button>
+                <button type="button" class="btn btn-warning" id="clear-equipment">Clear</button>
+            </div>
+        </div>
+
+        <!--Search Section-->
+        <div id="search-equipment-div">
+            <!--Label for Search-->
+            <label id="lblSearchEquipment" for="txtSearch-equipment">Search Vehicles :</label>
+            <input id="txtSearch-equipment" class="form-control" type="text" placeholder="vehicle code or license plate" aria-label="default input example">
+            <!--Search Button-->
+            <button id="search-equipment" type="button" class="btn btn-primary">Search</button>
+        </div>
+
+        <!--Table-->
+        <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-equipment">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Equipment Code</th>
+                    <th>Equipment Name</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Member ID</th>
+                    <th>First Name</th>
+                    <th>Role</th>
+                    <th>Phone Number</th>
+                    <th>Field Code</th>
+                    <th>Field Name</th>
+                    <th>Field Location</th>
+                </tr>
+                </thead>
+                <tbody id="equipment-table-tb">
+                <tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </section>
 
     <section id="logs-section" class="animate__animated animate__fadeIn"> welcome logs</section>
 

@@ -103,3 +103,172 @@
     padding: 5px;
 }
 
+/*Crops CSS*/
+
+#crop-logs-content-card-left {
+    width: 1526px;
+    height: 315px;
+    border: 3px solid #B05200;
+    border-radius: 30px;
+    position: relative;
+    top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+}
+
+#crop-logs-content-card-left > div {
+    width: 280px;
+}
+
+#crop-logs-content-card-left label {
+    margin-bottom: 8px;
+}
+
+#button-div-crop-logs {
+    position: relative !important;
+    width: 538px !important;
+    height: 40px !important;
+    top: 28px;
+    left: 0;
+    display: flex;
+    gap: 40px;
+    margin-top: 0;
+}
+
+#save-crop-logs, #update-crop-logs, #delete-crop-logs, #clear-crop-logs {
+    width: 110px !important;
+}
+
+#search-crop-logs-tbl-div {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 40px;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#search-crops-logs-div > input {
+    width: 180px !important;
+}
+
+#btnSearchCropsLogs {
+    width: 80px !important;
+    position: relative !important;
+    left: 200px;
+    bottom: 38px;
+}
+
+#txtSearch-crop-logs {
+    flex: 1;
+    max-width: 300px;
+}
+
+#search-crop-logs {
+    width: 110px;
+}
+
+#Tbl-crop-logs {
+    position: relative;
+    top: 30px;
+}
+
+#Tbl-crop-logs th, #Tbl-crop-logs td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#crop-details-div textarea {
+    resize: none;
+}
+
+#log-image-crop-div input[type="file"] {
+    padding: 5px;
+}
+
+/*Staff CSS*/
+
+#staff-logs-content-card-left {
+    width: 1526px;
+    height: 315px;
+    border: 3px solid #B05200;
+    border-radius: 30px;
+    position: relative;
+    top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+}
+
+#staff-logs-content-card-left > div {
+    width: 280px;
+}
+
+#staff-logs-content-card-left label {
+    margin-bottom: 8px;
+}
+
+#button-div-staff-logs {
+    position: relative !important;
+    width: 538px !important;
+    height: 40px !important;
+    top: 28px;
+    left: 0;
+    display: flex;
+    gap: 40px;
+    margin-top: 0;
+}
+
+#save-staff-logs, #update-staff-logs, #delete-staff-logs, #clear-staff-logs {
+    width: 110px !important;
+}
+
+#search-staff-logs-tbl-div {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 40px;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#search-members-logs-div > input {
+    width: 180px !important;
+}
+
+#btnSearchMembersLogs {
+    width: 80px !important;
+    position: relative !important;
+    left: 200px;
+    bottom: 38px;
+}
+
+#txtSearch-staff-logs {
+    flex: 1;
+    max-width: 300px;
+}
+
+#search-staff-logs {
+    width: 110px;
+}
+
+#Tbl-staff-logs {
+    position: relative;
+    top: 30px;
+}
+
+#Tbl-staff-logs th, #Tbl-staff-logs td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#staff-details-div textarea {
+    resize: none;
+}
+
+#log-image-staff-div input[type="file"] {
+    padding: 5px;
+}

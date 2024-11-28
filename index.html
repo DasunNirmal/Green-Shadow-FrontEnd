@@ -794,10 +794,182 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
-        <div id="crop-log-section">crop Logs are here</div>
-        <div id="staff-log-section">staff Logs are here</div>
+        <div id="crop-log-section">
+            <!--Left Card-->
+            <div id="crop-logs-content-card-left">
+                <!--Log Code-->
+                <div id="log-code-crop-div">
+                    <label id="lblLogCodeCrop" for="txtLogCode">Log Code :</label>
+                    <input id="txtLogCodeCrop" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Search Crops-->
+                <div id="search-crops-logs-div">
+                    <label id="lblSearchCropsLogs" for="txtSearchCropsLogs">Search Crops :</label>
+                    <input id="txtSearchCropsLogs" class="form-control" type="text" placeholder="Enter crop code or name" aria-label="default input example">
+                    <button id="btnSearchCropsLogs" type="button" class="btn btn-primary">Search</button>
+                </div>
+
+                <!--Crop Code-->
+                <div id="crop-code-logs-div">
+                    <label id="lblCropCodeLogs" for="txtCropCode">Crop Code :</label>
+                    <input id="txtCropCodeLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Crop Name-->
+                <div id="crop-name-logs-div">
+                    <label id="lblCropNameLogs" for="txtCropNameLogs">Crop Name :</label>
+                    <input id="txtCropNameLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Date-->
+                <div id="log-date-crop-div">
+                    <label id="lblLogDateCrop" for="txtLogDate">Date :</label>
+                    <input id="txtLogDateCrop" class="form-control" type="date" aria-label="default input example">
+                </div>
+
+                <!--Details-->
+                <div id="crop-details-div">
+                    <label id="lblCropDetails" for="txtCropDetails">Details :</label>
+                    <textarea id="txtCropDetails" class="form-control" rows="3" placeholder="Enter details here" aria-label="default input example"></textarea>
+                </div>
+
+                <!--Image-->
+                <div id="log-image-crop-div">
+                    <label id="lblLogImageCrop" for="txtLogImageCrop">Image :</label>
+                    <input id="txtLogImageCrop" class="form-control" type="file" aria-label="default input example">
+                </div>
+
+                <!--Buttons-->
+                <div id="button-div-crop-logs">
+                    <button type="button" class="btn btn-primary" id="save-crop-logs">Save</button>
+                    <button type="button" class="btn btn-secondary" id="update-crop-logs">Update</button>
+                    <button type="button" class="btn btn-danger" id="delete-crop-logs">Delete</button>
+                    <button type="button" class="btn btn-warning" id="clear-crop-logs">Clear</button>
+                </div>
+            </div>
+
+            <!--Search Section-->
+            <div id="search-crop-logs-tbl-div">
+                <!--Label for Search-->
+                <label id="lblSearchCropLogs" for="txtSearch-crop-logs">Search Crops :</label>
+                <input id="txtSearch-crop-logs" class="form-control" type="text" placeholder="log code or crop name" aria-label="default input example">
+                <!--Search Button-->
+                <button id="search-crop-logs" type="button" class="btn btn-primary">Search</button>
+            </div>
+
+            <!--Table-->
+            <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-crop-logs">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Log Code</th>
+                        <th>Crop Code</th>
+                        <th>Crop Name</th>
+                        <th>Details</th>
+                        <th>Date</th>
+                        <th>Image</th>
+                    </tr>
+                    </thead>
+                    <tbody id="crop-logs-table-tb">
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="staff-log-section">
+            <!--Left Card-->
+            <div id="staff-logs-content-card-left">
+                <!--Log Code-->
+                <div id="log-code-staff-div">
+                    <label id="lblLogCodeStaff" for="txtLogCodeStaff">Log Code :</label>
+                    <input id="txtLogCodeStaff" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Search Members-->
+                <div id="search-members-logs-div">
+                    <label id="lblSearchMembersLogs" for="txtSearchMembersLogs">Search Members :</label>
+                    <input id="txtSearchMembersLogs" class="form-control" type="text" placeholder="Enter member ID or name" aria-label="default input example">
+                    <button id="btnSearchMembersLogs" type="button" class="btn btn-primary">Search</button>
+                </div>
+
+                <!--Member ID-->
+                <div id="member-id-logs-div">
+                    <label id="lblMemberIDLogs" for="txtMemberIDLogs">Member ID :</label>
+                    <input id="txtMemberIDLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--First Name-->
+                <div id="first-name-logs-div">
+                    <label id="lblFirstNameLogs" for="txtFirstNameLogs">First Name :</label>
+                    <input id="txtFirstNameLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Phone Number-->
+                <div id="phone-number-logs-div">
+                    <label id="lblPhoneNumberLogs" for="txtPhoneNumberLogs">Phone Number :</label>
+                    <input id="txtPhoneNumberLogs" class="form-control" type="text" aria-label="default input example">
+                </div>
+
+                <!--Details-->
+                <div id="staff-details-div">
+                    <label id="lblStaffDetails" for="txtStaffDetails">Details :</label>
+                    <textarea id="txtStaffDetails" class="form-control" rows="3" placeholder="Enter details here" aria-label="default input example"></textarea>
+                </div>
+
+                <!--Date-->
+                <div id="log-date-staff-div">
+                    <label id="lblLogDateStaff" for="txtLogDateStaff">Date :</label>
+                    <input id="txtLogDateStaff" class="form-control" type="date" aria-label="default input example">
+                </div>
+
+                <!--Image-->
+                <div id="log-image-staff-div">
+                    <label id="lblLogImageStaff" for="txtLogImageStaff">Image :</label>
+                    <input id="txtLogImageStaff" class="form-control" type="file" aria-label="default input example">
+                </div>
+
+                <!--Buttons-->
+                <div id="button-div-staff-logs">
+                    <button type="button" class="btn btn-primary" id="save-staff-logs">Save</button>
+                    <button type="button" class="btn btn-secondary" id="update-staff-logs">Update</button>
+                    <button type="button" class="btn btn-danger" id="delete-staff-logs">Delete</button>
+                    <button type="button" class="btn btn-warning" id="clear-staff-logs">Clear</button>
+                </div>
+            </div>
+
+            <!--Search Section-->
+            <div id="search-staff-logs-tbl-div">
+                <!--Label for Search-->
+                <label id="lblSearchStaffLogs" for="txtSearch-staff-logs">Search Members :</label>
+                <input id="txtSearch-staff-logs" class="form-control" type="text" placeholder="Log code or member name" aria-label="default input example">
+                <!--Search Button-->
+                <button id="search-staff-logs" type="button" class="btn btn-primary">Search</button>
+            </div>
+
+            <!--Table-->
+            <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-staff-logs">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Log Code</th>
+                        <th>Member ID</th>
+                        <th>First Name</th>
+                        <th>Phone Number</th>
+                        <th>Details</th>
+                        <th>Date</th>
+                        <th>Image</th>
+                    </tr>
+                    </thead>
+                    <tbody id="staff-logs-table-tb">
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 
     <script type="module" src="assets/js/login-page.js"></script>

@@ -1,6 +1,17 @@
 $(document).ready(function () {
     var recordIndexFields;
     loadFieldTable();
+
+    function clearFields() {
+        $('#txtFieldID').val("");
+        $('#txtFieldName').val("");
+        $('#txtFieldLocation').val("");
+        $('#txtFieldSize').val("");
+        $('#txtFieldImage1').val("");
+        $('#txtFieldImage2').val("");
+        $('#txtSearch-fields').val("");
+    }
+
     function loadFieldTable() {
         $("#fields-table-tb").empty();
 
@@ -80,6 +91,7 @@ $(document).ready(function () {
                 loadFieldTable();
                 console.log(res);
                 console.log("field saved");
+                clearFields();
             },
             error: (res) => {
                 console.error(res);
@@ -102,6 +114,7 @@ $(document).ready(function () {
                 console.log(JSON.stringify(res));
                 loadFieldTable();
                 console.log("Field Deleted");
+                clearFields();
             },
             error: (res) => {
                 console.error(res);
@@ -137,6 +150,7 @@ $(document).ready(function () {
                 loadFieldTable();
                 console.log(res);
                 console.log("field updated");
+                clearFields();
             },
             error: (res) => {
                 console.error(res);
@@ -183,4 +197,8 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('#clear-fields').on('click', () => {
+        clearFields();
+    });
 });

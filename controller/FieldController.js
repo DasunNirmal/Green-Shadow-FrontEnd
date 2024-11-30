@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var recordIndexFields;
     loadFieldTable();
     function loadFieldTable() {
         $("#fields-table-tb").empty();
@@ -38,6 +39,20 @@ $(document).ready(function () {
         });
     }
 
+    $('#fields-table-tb').on('click','tr',function () {
+        recordIndexFields = $(this).index();
+
+        var field_code = $(this).find(".f-id").text();
+        var field_name = $(this).find(".f-name").text();
+        var field_location = $(this).find(".f-location").text();
+        var extent_size = $(this).find(".f-size").text();
+
+        $('#txtFieldID').val(field_code);
+        $('#txtFieldName').val(field_name);
+        $('#txtFieldLocation').val(field_location);
+        $('#txtFieldSize').val(extent_size);
+    });
+
     $('#save-fields').on('click', () => {
         var fieldID = $('#txtFieldID').val();
         var fieldName = $('#txtFieldName').val();
@@ -71,4 +86,44 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#search-field').on('click', function() {
+        const searchQuery = $('#txtSearch-fields').val();
+        searchFieldsByID(searchQuery);
+    });
+
+    function searchFieldsByID(query) {
+        const field_code = query.toLowerCase();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/field?field_code=' + field_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (response) => {
+                console.log('Full response:', response);
+                for (let i = 0; i < response.length; i++) {
+                    if (field_code === response[i].field_code) {
+                        var field = response[i];
+                        break;
+                    }
+                }
+
+                if (field) {
+                    console.log('Field retrieved successfully:', field);
+
+                    $('#txtFieldID').val(field.field_code);
+                    $('#txtFieldName').val(field.field_name);
+                    $('#txtFieldLocation').val(field.field_location);
+                    $('#txtFieldSize').val(field.extent_size);
+                    $('#txtSearch-fields').val("");
+                } else {
+                    console.error('Field not found');
+                }
+            },
+            error: function(error) {
+                console.error('Error searching field:', error);
+                loadFieldTable();
+            }
+        });
+    }
 });

@@ -110,6 +110,40 @@ $(document).ready(function () {
         });
     });
 
+    $('#update-fields').on('click', () => {
+        var field_code = $('#txtFieldID').val();
+        var fieldName = $('#txtFieldName').val();
+        var fieldLocation = $('#txtFieldLocation').val();
+        var fieldSize = $('#txtFieldSize').val();
+        var image_01 = $('#txtFieldImage1').prop('files')[0];
+        var image_02 = $('#txtFieldImage2').prop('files')[0];
+
+        var fieldData = new FormData();
+        fieldData.append('fieldID', field_code);
+        fieldData.append('fieldName', fieldName);
+        fieldData.append('fieldLocation', fieldLocation);
+        fieldData.append('fieldSize', fieldSize);
+        fieldData.append('image_01', image_01);
+        fieldData.append('image_02', image_02);
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/field/' + field_code,
+            type: 'PATCH',
+            data: fieldData,
+            mimeType: 'multipart/form-data',
+            contentType: false,
+            processData: false,
+            success: (res) => {
+                loadFieldTable();
+                console.log(res);
+                console.log("field updated");
+            },
+            error: (res) => {
+                console.error(res);
+            }
+        });
+    });
+
     $('#search-field').on('click', function() {
         const searchQuery = $('#txtSearch-fields').val();
         searchFieldsByID(searchQuery);

@@ -87,6 +87,29 @@ $(document).ready(function () {
         });
     });
 
+    $('#delete-fields').on('click',() => {
+        var field_code = $('#txtFieldID').val();
+        var fieldName = $('#txtFieldName').val();
+        var fieldLocation = $('#txtFieldLocation').val();
+        var fieldSize = $('#txtFieldSize').val();
+        var image_01 = $('#txtFieldImage1').prop('files')[0];
+        var image_02 = $('#txtFieldImage2').prop('files')[0];
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/field/' + field_code,
+            type: 'DELETE',
+            success: (res) => {
+                console.log(JSON.stringify(res));
+                loadFieldTable();
+                console.log("Field Deleted");
+            },
+            error: (res) => {
+                console.error(res);
+                console.log("Field Not Deleted");
+            }
+        });
+    });
+
     $('#search-field').on('click', function() {
         const searchQuery = $('#txtSearch-fields').val();
         searchFieldsByID(searchQuery);

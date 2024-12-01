@@ -137,4 +137,36 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#delete-staff').on('click',() => {
+        var staff_id = $('#txtMemberID').val();
+        var first_name = $('#txtFirstName').val();
+        var last_name = $('#txtLastName').val();
+        var designation = $('#txtDesignation').val();
+        var email = $('#txtEmail').val();
+        var role = $('#txtRole').val();
+        var gender = $('#txtGender').val();
+        var joined_date = $('#txtJoinedDate').val();
+        var dob = $('#txtDateOfBirth').val();
+        var address_01 = $('#txtAddressLine1').val();
+        var address_02 = $('#txtAddressLine2').val();
+        var address_03 = $('#txtAddressLine3').val();
+        var address_04 = $('#txtAddressLine4').val();
+        var address_05 = $('#txtAddressLine5').val();
+        var phone_no = $('#txtPhoneNumber').val();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/staff/' + staff_id,
+            type: 'DELETE',
+            success: (res) => {
+                console.log(JSON.stringify(res));
+                loadStaffTable();
+                console.log("Staff Deleted");
+            },
+            error: (res) => {
+                console.error(res);
+                console.log("Staff Not Deleted");
+            }
+        });
+    });
 });

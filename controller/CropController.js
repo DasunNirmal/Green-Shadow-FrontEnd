@@ -131,4 +131,29 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#delete-crops').on('click',() => {
+        var crop_code = $('#txtCropCode').val();
+        var common_name = $('#txtCommonName').val();
+        var scientific_name = $('#txtScientificName').val();
+        var category = $('#txtCategory').val();
+        var img = $('#txtCropImage').prop('files')[0];
+        var season = $('#txtSeason').val();
+        var field_code = $('#txtSearchField').val();
+
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/crop/' + crop_code,
+            type: 'DELETE',
+            success: (res) => {
+                console.log(JSON.stringify(res));
+                loadCropTable();
+                console.log("Crop Deleted");
+            },
+            error: (res) => {
+                console.error(res);
+                console.log("Crop Not Deleted");
+            }
+        });
+    });
 });

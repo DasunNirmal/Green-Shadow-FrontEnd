@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    var recordIndexFields;
     loadCropTable();
 
     function loadCropTable() {
@@ -75,6 +76,25 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('#crops-table-tb').on('click','tr',function () {
+        recordIndexFields = $(this).index();
+
+        var crop_code = $(this).find(".c-crop_code").text();
+        var common_name = $(this).find(".c-common_name").text();
+        var scientific_name = $(this).find(".c-scientific_name").text();
+        var category = $(this).find(".c-category").text();
+        var season = $(this).find(".c-season").text();
+        var field_code = $(this).find(".c-field_code").text();
+        searchFieldsByID(field_code);
+
+        $('#txtCropCode').val(crop_code);
+        $('#txtCommonName').val(common_name);
+        $('#txtScientificName').val(scientific_name);
+        $('#txtCategory').val(category);
+        $('#txtSeason').val(season);
+        $('#txtSearchField').val(field_code);
+    });
 
     $('#save-crops').on('click', () => {
         var crop_code = $('#txtCropCode').val();

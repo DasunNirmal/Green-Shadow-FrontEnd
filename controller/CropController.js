@@ -207,6 +207,49 @@ $(document).ready(function () {
         });
     });
 
+    $('#search-crop').on('click', function() {
+        const searchQuery = $('#txtSearch-crops').val();
+        searchCropsByID(searchQuery);
+    });
+
+    function searchCropsByID(query) {
+        const crop_code = query.toLowerCase();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/crop?crop_code=' + crop_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (response) => {
+                console.log('Full response:', response);
+                for (let i = 0; i < response.length; i++) {
+                    if (crop_code === response[i].crop_code) {
+                        var crop = response[i];
+                        break;
+                    }
+                }
+
+                if (crop) {
+                    console.log('Field retrieved successfully:', crop);
+
+                    $('#txtCropCode').val(crop.crop_code);
+                    $('#txtCommonName').val(crop.common_name);
+                    $('#txtScientificName').val(crop.scientific_name);
+                    $('#txtCategory').val(crop.category);
+                    $('#txtSeason').val(crop.season);
+                    $('#txtSearchField').val(crop.field_code);
+                    searchFieldsByID(crop.field_code);
+                    $('#txtSearch-crops').val("");
+                } else {
+                    console.error('Crop not found');
+                }
+            },
+            error: function(error) {
+                console.error('Error searching crop:', error);
+                loadCropTable();
+            }
+        });
+    }
+
     $('#clear-crops').on('click', () => {
         clearFields();
     });

@@ -2,6 +2,17 @@ $(document).ready(function () {
     var recordIndexFields;
     loadCropTable();
 
+    function clearFields() {
+        $('#txtCropCode').val("");
+        $('#txtCommonName').val("");
+        $('#txtScientificName').val("");
+        $('#txtCategory').val("");
+        $('#txtCropImage').val("");
+        $('#txtSeason').val("");
+        $('#txtSearchField').val("");
+        $('#txtCropFieldName').val("");
+    }
+
     function loadCropTable() {
         $("#crops-table-tb").empty();
 
@@ -125,6 +136,7 @@ $(document).ready(function () {
                 console.log(res);
                 console.log("crop saved");
                 loadCropTable();
+                clearFields();
             },
             error: (res) => {
                 console.error(res);
@@ -161,6 +173,7 @@ $(document).ready(function () {
                 loadCropTable();
                 console.log(res);
                 console.log("crop updated");
+                clearFields();
             },
             error: (res) => {
                 console.error(res);
@@ -185,11 +198,16 @@ $(document).ready(function () {
                 console.log(JSON.stringify(res));
                 loadCropTable();
                 console.log("Crop Deleted");
+                clearFields();
             },
             error: (res) => {
                 console.error(res);
                 console.log("Crop Not Deleted");
             }
         });
+    });
+
+    $('#clear-crops').on('click', () => {
+        clearFields();
     });
 });

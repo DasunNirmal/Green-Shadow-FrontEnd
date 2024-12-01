@@ -17,7 +17,7 @@ $(document).ready(function () {
                         <tr>
                             <td class="c-crop_code">${crop.crop_code}</td>
                             <td class="c-common_name">${crop.common_name}</td>
-                            <td class="c-fscientific_name">${crop.scientific_name}</td>
+                            <td class="c-scientific_name">${crop.scientific_name}</td>
                             <td class="c-category">${crop.category}</td>
                             <td class="c-season">${crop.season}</td>
                             <td class="c-field_code">${crop.field_code}</td>
@@ -125,6 +125,42 @@ $(document).ready(function () {
                 console.log(res);
                 console.log("crop saved");
                 loadCropTable();
+            },
+            error: (res) => {
+                console.error(res);
+            }
+        });
+    });
+
+    $('#update-crops').on('click', () => {
+        var crop_code = $('#txtCropCode').val();
+        var common_name = $('#txtCommonName').val();
+        var scientific_name = $('#txtScientificName').val();
+        var category = $('#txtCategory').val();
+        var img = $('#txtCropImage').prop('files')[0];
+        var season = $('#txtSeason').val();
+        var field_code = $('#txtSearchField').val();
+
+        var cropData = new FormData();
+        cropData.append('crop_code', crop_code);
+        cropData.append('common_name', common_name);
+        cropData.append('scientific_name', scientific_name);
+        cropData.append('category', category);
+        cropData.append('img', img);
+        cropData.append('season', season);
+        cropData.append('field_code', field_code);
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/crop/' + crop_code,
+            type: 'PATCH',
+            data: cropData,
+            mimeType: 'multipart/form-data',
+            contentType: false,
+            processData: false,
+            success: (res) => {
+                loadCropTable();
+                console.log(res);
+                console.log("crop updated");
             },
             error: (res) => {
                 console.error(res);

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var recordIndexFields;
+    var recordIndexCrops;
     loadCropTable();
 
     function clearFields() {
@@ -89,7 +89,7 @@ $(document).ready(function () {
     }
 
     $('#crops-table-tb').on('click','tr',function () {
-        recordIndexFields = $(this).index();
+        recordIndexCrops = $(this).index();
 
         var crop_code = $(this).find(".c-crop_code").text();
         var common_name = $(this).find(".c-common_name").text();

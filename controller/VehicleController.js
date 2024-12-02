@@ -156,6 +156,7 @@ $(document).ready(function(){
             success: (res) => {
                 console.log(JSON.stringify(res));
                 console.log("Vehicle saved successfully.");
+                loadVehicleTable();
             },
             error: (err) => {
                 console.error("Error saving vehicle:", err);
@@ -163,4 +164,31 @@ $(document).ready(function(){
         });
     });
 
+    $('#delete-vehicles').on('click',() => {
+        var vehicle_code = $('#txtVehicleCode').val();
+        var license_plate = $('#txtLicensePlate').val();
+        var fuel_type = $('#txtFuelType').val();
+        var vehicle_category = $('#txtVehicleCategory').val();
+        var remarks = $('#txtRemarks').val();
+        var status = $('#txtStatus').val();
+        var staff_id = $('#txtVehicleMemberID').val();
+        var first_name = $('#txtVehicleFirstName').val();
+        var role = $('#txtVehicleRole').val();
+        var phone_no = $('#txtVehiclePhoneNumber').val();
+        var email = $('#txtVehicleEmail').val();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/vehicle/' + vehicle_code,
+            type: 'DELETE',
+            success: (res) => {
+                console.log(JSON.stringify(res));
+                loadVehicleTable();
+                console.log("Vehicle Deleted");
+            },
+            error: (res) => {
+                console.error(res);
+                console.log("Vehicle Not Deleted");
+            }
+        });
+    });
 });

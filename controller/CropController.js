@@ -228,8 +228,6 @@ $(document).ready(function () {
                 }
 
                 if (crop) {
-                    console.log('Field retrieved successfully:', crop);
-
                     $('#txtCropCode').val(crop.crop_code);
                     $('#txtCommonName').val(crop.common_name);
                     $('#txtScientificName').val(crop.scientific_name);

@@ -2,6 +2,20 @@ $(document).ready(function(){
     loadVehicleTable();
     var recordIndexVehicle;
 
+    function clearFields() {
+        $('#txtVehicleCode').val("");
+        $('#txtLicensePlate').val("");
+        $('#txtFuelType').val("");
+        $('#txtVehicleCategory').val("");
+        $('#txtRemarks').val("");
+        $('#txtStatus').val("");
+        $('#txtVehicleMemberID').val("");
+        $('#txtVehicleFirstName').val("");
+        $('#txtVehicleRole').val("");
+        $('#txtVehiclePhoneNumber').val("");
+        $('#txtVehicleEmail').val("");
+    }
+
     function loadVehicleTable() {
         $("#vehicles-table-tb").empty();
 
@@ -106,6 +120,7 @@ $(document).ready(function(){
                     $('#txtVehicleEmail').val(staff.email);
                     $('#txtVehicleRole').val(staff.role);
                     $('#txtVehiclePhoneNumber').val(staff.phone_no);
+                    $('#txtSearchEmploys').val("");
                 } else {
                     console.error('Staff not found');
                 }
@@ -157,6 +172,7 @@ $(document).ready(function(){
                 console.log(JSON.stringify(res));
                 console.log("Vehicle saved successfully.");
                 loadVehicleTable();
+                clearFields();
             },
             error: (err) => {
                 console.error("Error saving vehicle:", err);
@@ -205,6 +221,7 @@ $(document).ready(function(){
                 console.log(JSON.stringify(res));
                 console.log("Vehicle updated successfully.");
                 loadVehicleTable();
+                clearFields();
             },
             error: (err) => {
                 console.error("Error updating vehicle:", err);
@@ -230,13 +247,64 @@ $(document).ready(function(){
             type: 'DELETE',
             success: (res) => {
                 console.log(JSON.stringify(res));
-                loadVehicleTable();
                 console.log("Vehicle Deleted");
+                loadVehicleTable();
+                clearFields();
             },
             error: (res) => {
                 console.error(res);
                 console.log("Vehicle Not Deleted");
             }
         });
+    });
+
+    $('#search-vehicle').on('click', function() {
+        const searchQuery = $('#txtSearch-vehicles').val();
+        searchVehiclesByID(searchQuery);
+    });
+
+    function searchVehiclesByID(query) {
+        const vehicle_code = query.toLowerCase();
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/vehicle?vehicle_code=' + vehicle_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (response) => {
+                console.log('Full response:', response);
+                for (let i = 0; i < response.length; i++) {
+                    if (vehicle_code === response[i].vehicle_code) {
+                        var vehicle = response[i];
+                        break;
+                    }
+                }
+                if (vehicle) {
+                    var isAvailable = vehicle.status === "Available";
+                    $('#txtVehicleRole').prop('disabled', !isAvailable).val(vehicle.role);
+                    $('#txtVehicleFirstName').prop('disabled', !isAvailable).val(vehicle.first_name);
+                    $('#txtVehiclePhoneNumber').prop('disabled', !isAvailable).val(vehicle.phone_no);
+                    $('#txtVehicleEmail').prop('disabled', !isAvailable).val(vehicle.email);
+                    $('#txtVehicleMemberID').prop('disabled', !isAvailable).val(vehicle.staff_id);
+                    $('#txtSearchEmploys').prop('disabled', !isAvailable);
+                    $('#btnSearchEmploys').prop('disabled', !isAvailable);
+                    $('#txtVehicleCode').val(vehicle.vehicle_code);
+                    $('#txtLicensePlate').val(vehicle.license_plate);
+                    $('#txtFuelType').val(vehicle.fuel_type);
+                    $('#txtVehicleCategory').val(vehicle.vehicle_category);
+                    $('#txtRemarks').val(vehicle.remarks);
+                    $('#txtStatus').val(vehicle.status);
+                    $('#txtSearch-vehicles').val("");
+                } else {
+                    console.error('Vehicle not found');
+                }
+            },
+            error: function(error) {
+                console.error('Error searching vehicle:', error);
+                loadVehicleTable();
+            }
+        });
+    }
+
+    $('#clear-vehicles').on('click', () => {
+        clearFields();
     });
 });

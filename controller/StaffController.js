@@ -19,6 +19,45 @@ $(document).ready(function () {
         $('#txtAddressLine5').val("");
         $('#txtPhoneNumber').val("");
         $('#txtSearch-staff').val("");
+        $('#txtSearchFields-staff').val("");
+        $('#txtFieldCode-staff').val("");
+        $('#txtFieldName-staff').val("");
+    }
+
+    $('#btnSearchFields-staff').on('click', function() {
+        const searchQuery = $('#txtSearchFields-staff').val();
+        searchFieldsByID(searchQuery);
+    });
+
+    function searchFieldsByID(query) {
+        const field_code = query.toLowerCase();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/field?field_code=' + field_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (response) => {
+                console.log('Full response:', response);
+                for (let i = 0; i < response.length; i++) {
+                    if (field_code === response[i].field_code) {
+                        var field = response[i];
+                        break;
+                    }
+                }
+
+                if (field) {
+                    console.log('Field retrieved successfully:', field);
+
+                    $('#txtFieldCode-staff').val(field.field_code);
+                    $('#txtFieldName-staff').val(field.field_name);
+                } else {
+                    console.error('Field not found');
+                }
+            },
+            error: function(error) {
+                console.error('Error searching field:', error);
+            }
+        });
     }
 
     function loadStaffTable() {
@@ -28,44 +67,74 @@ $(document).ready(function () {
             url: 'http://localhost:8081/greenShadow/api/v1/staff',
             type: 'GET',
             dataType: 'json',
-            success: function(res) {
-                console.log(res);
-                if (Array.isArray(res)) {
-                    res.forEach(function(staff) {
-                        var staffRecord = `
-                        <tr>
-                            <td class="s-staff-id">${staff.staff_id}</td>
-                            <td class="s-first-name">${staff.first_name}</td>
-                            <td class="s-last-name">${staff.last_name}</td>
-                            <td class="s-email">${staff.email}</td>
-                            <td class="s-phone-no">${staff.phone_no}</td>
-                            <td class="s-designation">${staff.designation}</td>
-                            <td class="s-dob">${staff.dob}</td>
-                            <td class="s-role">${staff.role}</td>
-                            <td class="s-gender">${staff.gender}</td>
-                            <td class="s-joined-date">${staff.joined_date}</td>
-                            <td class="s-address-01">${staff.address_01}</td>
-                            <td class="s-address-02">${staff.address_02}</td>
-                            <td class="s-address-03">${staff.address_03}</td>
-                            <td class="s-address-04">${staff.address_04}</td>
-                            <td class="s-address-05">${staff.address_05}</td>
-                        </tr>`;
-                        $('#staff-table-tb').append(staffRecord);
-                    });
-                    let count = 0;
-                    for (let i = 0; i < res.length; i++) {
-                        if (res[i] != null) {
-                            count++;
-                        }
+            success: function(staffResponse) {
+                console.log('Staff data:', staffResponse);
+
+                $.ajax({
+                    url: `http://localhost:8081/greenShadow/api/v1/staffAndFieldsDetails`,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(fieldStaffResponse) {
+                        console.log('details data',fieldStaffResponse);
+
+                        const combinedData = populateData(staffResponse, fieldStaffResponse);
+                        populateStaffTable(combinedData);
+                    },
+                    error: function(err) {
+                        console.error(`Error loading field staff data for staff_id`, err);
                     }
-                } else {
-                    console.log('No staff data found or incorrect response format.');
-                }
+                });
             },
-            error: function(res) {
-                console.error('Error loading staff data:', res);
+            error: function(err) {
+                console.error('Error loading staff data:', err);
             }
         });
+    }
+
+    function populateData(staffResponse, fieldStaffResponse) {
+        // Create a map of staffResponse by staff_id for easy merging
+        const staffMap = new Map(staffResponse.map(staff => [staff.staff_id, staff]));
+
+        // Iterate through fieldStaffResponse to add or update entries in the map
+        fieldStaffResponse.forEach(fieldStaff => {
+            if (staffMap.has(fieldStaff.staff_id)) {
+                // Merge additional fields into the existing staff entry
+                Object.assign(staffMap.get(fieldStaff.staff_id), fieldStaff);
+            } else {
+                // Add new field staff entry if it doesn't already exist
+                staffMap.set(fieldStaff.staff_id, fieldStaff);
+            }
+        });
+
+        // Convert the map back to an array
+        return Array.from(staffMap.values());
+    }
+
+    function populateStaffTable(data) {
+        if (Array.isArray(data)) {
+            data.forEach(function (staffFieldData) {
+                const staffRecord = `
+                <tr>
+                    <td class="s-staff-id">${staffFieldData.staff_id}</td>
+                    <td class="s-first-name">${staffFieldData.first_name}</td>
+                    <td class="s-last-name">${staffFieldData.last_name}</td>
+                    <td class="s-email">${staffFieldData.email}</td>
+                    <td class="s-phone-no">${staffFieldData.phone_no}</td>
+                    <td class="s-designation">${staffFieldData.designation}</td>
+                    <td class="s-dob">${staffFieldData.dob}</td>
+                    <td class="s-role">${staffFieldData.role}</td>
+                    <td class="s-gender">${staffFieldData.gender}</td>
+                    <td class="s-joined-date">${staffFieldData.joined_date}</td>
+                    <td class="s-address-01">${staffFieldData.address_01}</td>
+                    <td class="s-address-02">${staffFieldData.address_02}</td>
+                    <td class="s-address-03">${staffFieldData.address_03}</td>
+                    <td class="s-address-04">${staffFieldData.address_04}</td>
+                    <td class="s-address-05">${staffFieldData.address_05}</td>
+                    <td class="s-field-code">${staffFieldData.field_code}</td>
+                </tr>`;
+                $('#staff-table-tb').append(staffRecord);
+            });
+        }
     }
 
     $('#staff-table-tb').on('click','tr',function () {
@@ -86,6 +155,8 @@ $(document).ready(function () {
         var address_03 = $(this).find(".s-address-03").text();
         var address_04 = $(this).find(".s-address-04").text();
         var address_05 = $(this).find(".s-address-05").text();
+        var field_code = $(this).find(".s-field-code").text();
+        searchFieldsByID(field_code);
 
         $('#txtMemberID').val(staff_id);
         $('#txtFirstName').val(first_name);
@@ -102,6 +173,7 @@ $(document).ready(function () {
         $('#txtAddressLine4').val(address_04);
         $('#txtAddressLine5').val(address_05);
         $('#txtPhoneNumber').val(phone_no);
+        $('#txtFieldCode-staff').val(field_code);
     });
 
     $('#save-staff').on('click', () => {
@@ -120,6 +192,7 @@ $(document).ready(function () {
         var address_04 = $('#txtAddressLine4').val();
         var address_05 = $('#txtAddressLine5').val();
         var phone_no = $('#txtPhoneNumber').val();
+        var field_code = $('#txtFieldCode-staff').val();
 
         const staffData = {
            staff_id: staff_id,
@@ -136,10 +209,21 @@ $(document).ready(function () {
            address_03: address_03,
            address_04: address_04,
            address_05: address_05,
-           phone_no: phone_no,
+           phone_no: phone_no
        }
+        const staffAndFieldDetailData = {
+            details_id: staff_id,
+            first_name: first_name,
+            email: email,
+            phone_no: phone_no,
+            role: role,
+            staff_id: staff_id,
+            field_code: field_code,
+        }
        const staffJSON = JSON.stringify(staffData);
+       const staffAndDetailsJSON = JSON.stringify(staffAndFieldDetailData);
        console.log(staffJSON);
+       console.log(staffAndDetailsJSON);
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/staff',
@@ -148,13 +232,31 @@ $(document).ready(function () {
             contentType: 'application/json',
             success: (res) => {
                 console.log(JSON.stringify(res));
-                loadStaffTable();
+                console.log("staff saved")
+                saveDetails(staffAndDetailsJSON);
             },
             error: (res) => {
                 console.error(res);
             }
         });
     });
+
+    function saveDetails(staffAndDetailsJSON) {
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/staffAndFieldsDetails',
+            type: 'POST',
+            data: staffAndDetailsJSON,
+            contentType: 'application/json',
+            success: (res) => {
+                console.log(JSON.stringify(res));
+                console.log("details saved")
+                loadStaffTable();
+            },
+            error: (res) => {
+                console.error(res);
+            }
+        });
+    }
 
     $('#update-staff').on('click',() => {
         var staff_id = $('#txtMemberID').val();
@@ -188,7 +290,7 @@ $(document).ready(function () {
             address_03: address_03,
             address_04: address_04,
             address_05: address_05,
-            phone_no: phone_no,
+            phone_no: phone_no
         }
         const staffJSON = JSON.stringify(staffData);
         console.log(staffJSON);

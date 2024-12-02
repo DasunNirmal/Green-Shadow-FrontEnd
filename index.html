@@ -504,25 +504,29 @@
             </div>
 
             <div id="employee-email-vehicle-div">
-                <label id="lblVehicleEmail" for="txtEmail">Email :</label>
+                <label id="lblVehicleEmail" for="txtVehicleEmail">Email :</label>
                 <input id="txtVehicleEmail" class="form-control" type="email" aria-label="default input example">
             </div>
 
             <div id="employee-member-id-vehicle-div">
-                <label id="lblVehicleMemberID" for="txtMemberID">Member ID :</label>
+                <label id="lblVehicleMemberID" for="txtVehicleMemberID">Member ID :</label>
                 <input id="txtVehicleMemberID" class="form-control" type="text" aria-label="default input example">
             </div>
 
             <div id="employee-first-name-vehicle-div">
-                <label id="lblVehicleFirstName" for="txtFirstName">First Name :</label>
+                <label id="lblVehicleFirstName" for="txtVehicleFirstName">First Name :</label>
                 <input id="txtVehicleFirstName" class="form-control" type="text" aria-label="default input example">
             </div>
 
             <div id="employee-role-vehicle-div">
-                <label id="lblVehicleRole" for="txtRole">Role :</label>
+                <label id="lblVehicleRole" for="txtVehicleRole">Role :</label>
                 <input id="txtVehicleRole" class="form-control" type="text" aria-label="default input example">
             </div>
 
+            <div id="employee-phone-number-vehicle-div">
+                <label id="lblVehiclePhoneNumber" for="txtVehiclePhoneNumber">Phone Number :</label>
+                <input id="txtVehiclePhoneNumber" class="form-control" type="text" aria-label="default input example">
+            </div>
 
             <!--Buttons-->
             <div id="button-div-vehicle">
@@ -546,7 +550,7 @@
         <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-vehicles">
             <table class="table table-bordered">
                 <thead>
-                <tr>
+                <tr>StaffController.js
                     <th>Vehicle Code</th>
                     <th>Plate Number</th>
                     <th>Fuel Type</th>
@@ -566,7 +570,6 @@
                 </tbody>
             </table>
         </div>
-
     </section>
 
     <section id="equipment-section" class="animate__animated animate__fadeIn">
@@ -987,8 +990,9 @@
     </section>
 
     <script type="module" src="controller/FieldController.js"></script>
-    <script type="module" src="controller/StaffController.js"></script>
     <script type="module" src="controller/CropController.js"></script>
+    <script type="module" src="controller/StaffController.js"></script>
+    <script type="module" src="controller/VehicleController.js"></script>
     <script type="module" src="assets/js/login-page.js"></script>
     <script type="module" src="assets/js/registration-page.js"></script>
     <script type="module" src="assets/js/navigation-bar.js"></script>

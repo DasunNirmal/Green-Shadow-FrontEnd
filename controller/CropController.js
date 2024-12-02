@@ -190,7 +190,6 @@ $(document).ready(function () {
         var season = $('#txtSeason').val();
         var field_code = $('#txtSearchField').val();
 
-
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/crop/' + crop_code,
             type: 'DELETE',

@@ -491,10 +491,12 @@
                 <input id="txtRemarks" class="form-control" type="text" aria-label="default input example">
             </div>
 
-            <!--Status-->
             <div id="vehicle-status-div">
-                <label id="lblStatus" for="txtStatus">Status (Available/Not Available) :</label>
-                <input id="txtStatus" class="form-control" type="text" aria-label="default input example">
+                <label for="txtStatus" id="lblStatus">Status (Available/Not Available) :</label>
+                <select class="form-select" id="txtStatus" required>
+                    <option>Available</option>
+                    <option>Not Available</option>
+                </select>
             </div>
 
             <div id="search-employs-div">
@@ -550,7 +552,7 @@
         <div class="col-md-12 mt-4" style="height:285px; overflow-y: scroll" id="Tbl-vehicles">
             <table class="table table-bordered">
                 <thead>
-                <tr>StaffController.js
+                <tr>
                     <th>Vehicle Code</th>
                     <th>Plate Number</th>
                     <th>Fuel Type</th>
@@ -997,6 +999,7 @@
     <script type="module" src="assets/js/registration-page.js"></script>
     <script type="module" src="assets/js/navigation-bar.js"></script>
     <script type="module" src="assets/js/logs-page.js"></script>
+    <script type="module" src="assets/js/vehicle-page.js"></script>
     <script src="assets/lib/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

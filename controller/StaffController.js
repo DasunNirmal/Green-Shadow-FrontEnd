@@ -210,7 +210,7 @@ $(document).ready(function () {
            address_04: address_04,
            address_05: address_05,
            phone_no: phone_no
-       }
+        }
         const staffAndFieldDetailData = {
             details_id: staff_id,
             first_name: first_name,
@@ -220,10 +220,10 @@ $(document).ready(function () {
             staff_id: staff_id,
             field_code: field_code,
         }
-       const staffJSON = JSON.stringify(staffData);
-       const staffAndDetailsJSON = JSON.stringify(staffAndFieldDetailData);
-       console.log(staffJSON);
-       console.log(staffAndDetailsJSON);
+        const staffJSON = JSON.stringify(staffData);
+        const staffAndDetailsJSON = JSON.stringify(staffAndFieldDetailData);
+        console.log(staffJSON);
+        console.log(staffAndDetailsJSON);
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/staff',
@@ -274,6 +274,7 @@ $(document).ready(function () {
         var address_04 = $('#txtAddressLine4').val();
         var address_05 = $('#txtAddressLine5').val();
         var phone_no = $('#txtPhoneNumber').val();
+        var field_code = $('#txtFieldCode-staff').val();
 
         const staffData = {
             staff_id: staff_id,
@@ -292,23 +293,48 @@ $(document).ready(function () {
             address_05: address_05,
             phone_no: phone_no
         }
+        const staffAndFieldDetailData = {
+            details_id: staff_id,
+            first_name: first_name,
+            email: email,
+            phone_no: phone_no,
+            role: role,
+            staff_id: staff_id,
+            field_code: field_code,
+        }
         const staffJSON = JSON.stringify(staffData);
+        const staffAndDetailsJSON = JSON.stringify(staffAndFieldDetailData);
         console.log(staffJSON);
+        console.log(staffAndDetailsJSON);
 
         $.ajax({
-            url: 'http://localhost:8081/greenShadow/api/v1/staff/' + staff_id,
+            url: 'http://localhost:8081/greenShadow/api/v1/staffAndFieldsDetails/' + staff_id,
             type: 'PATCH',
-            data: staffJSON,
+            data: staffAndDetailsJSON,
             contentType: 'application/json',
             success: (res) => {
                 console.log(JSON.stringify(res));
-                console.log("Staff updated");
+                console.log("Details updated");
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/staff/' + staff_id,
+                    type: 'PATCH',
+                    data: staffJSON,
+                    contentType: 'application/json',
+                    success: (res) => {
+                        console.log(JSON.stringify(res));
+                        console.log("Staff updated");
+                    },
+                    error: (res) => {
+                        console.error(res);
+                        console.log("Staff not updated");
+                    }
+                });
                 loadStaffTable();
                 clearFields();
             },
             error: (res) => {
                 console.error(res);
-                console.log("Staff not updated");
+                console.log("Details not updated");
             }
         });
     });

@@ -315,6 +315,7 @@ $(document).ready(function () {
 
     $('#delete-staff').on('click',() => {
         var staff_id = $('#txtMemberID').val();
+        var field_code = $('#txtFieldCode-staff').val();
         var first_name = $('#txtFirstName').val();
         var last_name = $('#txtLastName').val();
         var designation = $('#txtDesignation').val();
@@ -331,17 +332,30 @@ $(document).ready(function () {
         var phone_no = $('#txtPhoneNumber').val();
 
         $.ajax({
-            url: 'http://localhost:8081/greenShadow/api/v1/staff/' + staff_id,
+            url: 'http://localhost:8081/greenShadow/api/v1/staffAndFieldsDetails/' + staff_id,
             type: 'DELETE',
             success: (res) => {
                 console.log(JSON.stringify(res));
+                console.log("Details Deleted");
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/staff/' + staff_id,
+                    type: 'DELETE',
+                    success: (res) => {
+                        console.log(JSON.stringify(res));
+                        loadStaffTable();
+                        console.log("Staff Deleted");
+                    },
+                    error: (res) => {
+                        console.error(res);
+                        console.log("Staff Not Deleted");
+                    }
+                });
                 loadStaffTable();
-                console.log("Staff Deleted");
                 clearFields();
             },
             error: (res) => {
                 console.error(res);
-                console.log("Staff Not Deleted");
+                console.log("Details Not Deleted");
             }
         });
     });

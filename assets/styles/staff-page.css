@@ -1,6 +1,6 @@
 #staff-section {
     width: 98vw;
-    height: 860px;
+    height: 930px;
     box-shadow: rgba(17, 17, 26, 0.1) 0 4px 16px, rgba(17, 17, 26, 0.05) 0 8px 32px;
     background-color: rgba(255, 233, 198, 0.74);
     position: relative;
@@ -11,7 +11,7 @@
 }
 #staff-content-card-left {
     width: 1526px;
-    height: 435px;
+    height: 506px;
     border: 3px solid #B05200;
     border-radius: 30px;
     position: relative;
@@ -38,16 +38,14 @@
 #staff-content-card-left label {
     margin-bottom: 8px;
 }
-
 #button-div-staff {
-    position: relative !important;
     width: 538px !important;
     height: 40px !important;
-    bottom: 20px;
+    position: relative !important;
+    top: 30px;
     display: flex;
     gap: 40px;
 }
-
 #save-staff, #update-staff, #delete-staff, #clear-staff {
     width: 110px !important;
 }
@@ -67,4 +65,14 @@
 #Tbl-staff, #search-staff-div {
     position: relative;
     top: 50px;
+}
+#txtSearchFields-staff {
+    flex: 1;
+    max-width: 180px;
+}
+#btnSearchFields-staff {
+    position: relative;
+    bottom: 38px;
+    left: 198px;
+    width: 80px;
 }

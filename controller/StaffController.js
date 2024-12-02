@@ -398,43 +398,62 @@ $(document).ready(function () {
             url: 'http://localhost:8081/greenShadow/api/v1/staff?staff_id=' + staff_id,
             type: 'GET',
             dataType: 'json',
-            success: (response) => {
-                console.log('Full response:', response);
-                for (let i = 0; i < response.length; i++) {
-                    if (staff_id === response[i].staff_id) {
-                        var staff = response[i];
-                        break;
+            success: (staffResponse) => {
+                console.log('staff data:', staffResponse);
+                $.ajax({
+                    url: `http://localhost:8081/greenShadow/api/v1/staffAndFieldsDetails?staff_id=` + staff_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(fieldStaffResponse) {
+                        console.log('details data',fieldStaffResponse);
+
+                        const combinedData = populateData(staffResponse, fieldStaffResponse);
+                        addSearchData(combinedData,staff_id);
+                    },
+                    error: function(err) {
+                        console.error(`Error loading field staff data for staff_id`, err);
                     }
-                }
-
-                if (staff) {
-                    console.log('Staff retrieved successfully:', staff);
-
-                    $('#txtMemberID').val(staff.staff_id);
-                    $('#txtFirstName').val(staff.first_name);
-                    $('#txtLastName').val(staff.last_name);
-                    $('#txtDesignation').val(staff.designation);
-                    $('#txtEmail').val(staff.email);
-                    $('#txtRole').val(staff.role);
-                    $('#txtGender').val(staff.gender);
-                    $('#txtJoinedDate').val(staff.joined_date);
-                    $('#txtDateOfBirth').val(staff.dob);
-                    $('#txtAddressLine1').val(staff.address_01);
-                    $('#txtAddressLine2').val(staff.address_02);
-                    $('#txtAddressLine3').val(staff.address_03);
-                    $('#txtAddressLine4').val(staff.address_04);
-                    $('#txtAddressLine5').val(staff.address_05);
-                    $('#txtPhoneNumber').val(staff.phone_no);
-                    $('#txtSearch-staff').val("");
-                } else {
-                    console.error('Staff not found');
-                }
+                });
             },
             error: function(error) {
                 console.error('Error searching field:', error);
                 loadStaffTable();
             }
         });
+    }
+
+    function addSearchData(response,staff_id) {
+        for (let i = 0; i < response.length; i++) {
+            if (staff_id === response[i].staff_id) {
+                var staff = response[i];
+                break;
+            }
+        }
+
+        if (staff) {
+            console.log('Staff retrieved successfully:', staff);
+
+            $('#txtMemberID').val(staff.staff_id);
+            $('#txtFirstName').val(staff.first_name);
+            $('#txtLastName').val(staff.last_name);
+            $('#txtDesignation').val(staff.designation);
+            $('#txtEmail').val(staff.email);
+            $('#txtRole').val(staff.role);
+            $('#txtGender').val(staff.gender);
+            $('#txtJoinedDate').val(staff.joined_date);
+            $('#txtDateOfBirth').val(staff.dob);
+            $('#txtAddressLine1').val(staff.address_01);
+            $('#txtAddressLine2').val(staff.address_02);
+            $('#txtAddressLine3').val(staff.address_03);
+            $('#txtAddressLine4').val(staff.address_04);
+            $('#txtAddressLine5').val(staff.address_05);
+            $('#txtPhoneNumber').val(staff.phone_no);
+            $('#txtFieldCode-staff').val(staff.field_code);
+            searchFieldsByID(staff.field_code);
+            $('#txtSearch-staff').val("");
+        } else {
+            console.error('Staff not found');
+        }
     }
 
     $('#clear-staff').on('click', () => {

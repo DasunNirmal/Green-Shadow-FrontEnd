@@ -416,7 +416,7 @@ $(document).ready(function () {
                 });
             },
             error: function(error) {
-                console.error('Error searching field:', error);
+                console.error('Error searching staff:', error);
                 loadStaffTable();
             }
         });

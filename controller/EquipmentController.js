@@ -75,4 +75,50 @@ $(document).ready(function(){
             }
         });
     }
+    $('#save-equipment').on('click', () => {
+        var eq_code = $('#txtEquipmentCode').val();
+        var name = $('#txtEquipmentName').val();
+        var type = $('#txtType').val();
+        var status = $('#txtEquipmentStatus').val();
+
+        var isAvailable = status === "Available";
+        var staff_id = isAvailable ? $('#txtMemberID-equipment').val() : null;
+        var first_name = isAvailable ? $('#txtFirstName-equipment').val() : "*--*";
+        var role = isAvailable ? $('#txtRole-equipment').val() : "*--*";
+        var phone_no = isAvailable ? $('#txtPhoneNumber-equipment').val() : "*--*";
+        var field_code = isAvailable ? $('#txtFieldCode').val() : null;
+        var field_name = isAvailable ? $('#txtFieldName-equipment').val() : "*--*";
+        var field_location = isAvailable ? $('#txtFieldLocation-equipment').val() : "*--*";
+
+        const equipmentData = {
+            eq_code:eq_code,
+            name:name,
+            type:type,
+            status:status,
+            first_name:first_name,
+            role:role,
+            phone_no:phone_no,
+            field_name:field_name,
+            field_location:field_location,
+            staff_id: staff_id,
+            field_code: field_code
+        }
+
+        const equipmentJson = JSON.stringify(equipmentData);
+        console.log(equipmentJson);
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/equipment',
+            type: 'POST',
+            data: equipmentJson,
+            contentType: 'application/json',
+            success: (response) => {
+                console.log(JSON.stringify(response));
+                console.log('Equipment saved successfully:', response);
+            },
+            error: (error) => {
+                console.error('Error saving equipment:', error);
+            }
+        });
+    });
 });

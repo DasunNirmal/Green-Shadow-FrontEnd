@@ -279,11 +279,12 @@ $(document).ready(function(){
                 }
                 if (vehicle) {
                     var isAvailable = vehicle.status === "Available";
+                    var staff_id = vehicle.staff_id == null ? "Not Available" : vehicle.staff_id;
                     $('#txtVehicleRole').prop('disabled', !isAvailable).val(vehicle.role);
                     $('#txtVehicleFirstName').prop('disabled', !isAvailable).val(vehicle.first_name);
                     $('#txtVehiclePhoneNumber').prop('disabled', !isAvailable).val(vehicle.phone_no);
                     $('#txtVehicleEmail').prop('disabled', !isAvailable).val(vehicle.email);
-                    $('#txtVehicleMemberID').prop('disabled', !isAvailable).val(vehicle.staff_id);
+                    $('#txtVehicleMemberID').prop('disabled', !isAvailable).val(staff_id);
                     $('#txtSearchEmploys').prop('disabled', !isAvailable);
                     $('#btnSearchEmploys').prop('disabled', !isAvailable);
                     $('#txtVehicleCode').val(vehicle.vehicle_code);

@@ -196,9 +196,38 @@ $(document).ready(function(){
             success: (response) => {
                 console.log(JSON.stringify(response));
                 console.log('Equipment saved successfully:', response);
+                loadEquipmentTable();
             },
             error: (error) => {
                 console.error('Error saving equipment:', error);
+            }
+        });
+    });
+
+    $('#delete-equipment').on('click',() => {
+        var eq_code = $('#txtEquipmentCode').val();
+        var name = $('#txtEquipmentName').val();
+        var type = $('#txtType').val();
+        var status = $('#txtEquipmentStatus').val();
+        var staff_id = $('#txtMemberID-equipment').val();
+        var first_name = $('#txtFirstName-equipment').val();
+        var role = $('#txtRole-equipment').val();
+        var phone_no = $('#txtPhoneNumber-equipment').val();
+        var field_code = $('#txtFieldCode').val();
+        var field_name = $('#txtFieldName-equipment').val();
+        var field_location = $('#txtFieldLocation-equipment').val();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/equipment/' + eq_code,
+            type: 'DELETE',
+            success: (res) => {
+                console.log(JSON.stringify(res));
+                console.log("Equipment Deleted");
+                loadEquipmentTable();
+            },
+            error: (res) => {
+                console.error(res);
+                console.log("Equipment Not Deleted");
             }
         });
     });

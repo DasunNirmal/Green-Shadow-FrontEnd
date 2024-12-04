@@ -1,5 +1,6 @@
 $(document).ready(function(){
-
+    loadEquipmentTable();
+    var recordIndexEquipment;
 
     $('#btnSearchEmployees').on('click', function() {
         const searchQuery = $('#txtSearchEmployees').val();
@@ -75,6 +76,86 @@ $(document).ready(function(){
             }
         });
     }
+
+    function loadEquipmentTable() {
+        $("#equipment-table-tb").empty();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/equipment',
+            type: 'GET',
+            dataType: 'json',
+            success: function(res) {
+                console.log(res);
+                if (Array.isArray(res)) {
+                    res.forEach(function(equipment) {
+                        var staff_id = equipment.staff_id == null ? "Not Available" : equipment.staff_id;
+                        var field_code = equipment.field_code == null ? "Not Available" : equipment.field_code;
+                        var vehicleRecord = `
+                        <tr>
+                            <td class="e-eq_code">${equipment.eq_code}</td>
+                            <td class="e-name">${equipment.name}</td>
+                            <td class="e-type">${equipment.type}</td>
+                            <td class="e-status">${equipment.status}</td>
+                            <td class="e-staff_id">${staff_id}</td>
+                            <td class="e-first_name">${equipment.first_name}</td>
+                            <td class="e-role">${equipment.role}</td>
+                            <td class="e-phone_no">${equipment.phone_no}</td>
+                            <td class="e-field_code">${field_code}</td>
+                            <td class="e-field_name">${equipment.field_name}</td>
+                            <td class="e-field_location">${equipment.field_location}</td>
+                        </tr>`;
+                        $('#equipment-table-tb').append(vehicleRecord);
+                    });
+                    let count = 0;
+                    for (let i = 0; i < res.length; i++) {
+                        if (res[i] != null) {
+                            count++;
+                        }
+                    }
+                } else {
+                    console.log('No equipment data found or incorrect response format.');
+                }
+            },
+            error: function(res) {
+                console.error('Error loading equipment data:', res);
+            }
+        });
+    }
+
+    $('#equipment-table-tb').on('click','tr',function () {
+        recordIndexEquipment = $(this).index();
+
+        var eq_code = $(this).find(".e-eq_code").text();
+        var name = $(this).find(".e-name").text();
+        var type = $(this).find(".e-type").text();
+        var status = $(this).find(".e-status").text();
+        var staff_id = $(this).find(".e-staff_id").text();
+        var first_name = $(this).find(".e-first_name").text();
+        var role = $(this).find(".e-role").text();
+        var phone_no = $(this).find(".e-phone_no").text();
+        var field_code = $(this).find(".e-field_code").text();
+        var field_name = $(this).find(".e-field_name").text();
+        var field_location = $(this).find(".e-field_location").text();
+
+        var isAvailable = status === "Available";
+
+        $('#txtMemberID-equipment').prop('disabled', !isAvailable).val(staff_id);
+        $('#txtFirstName-equipment').prop('disabled', !isAvailable).val(first_name);
+        $('#txtRole-equipment').prop('disabled', !isAvailable).val(role);
+        $('#txtPhoneNumber-equipment').prop('disabled', !isAvailable).val(phone_no);
+        $('#txtFieldCode').prop('disabled', !isAvailable).val(field_code);
+        $('#txtFieldName-equipment').prop('disabled', !isAvailable).val(field_name);
+        $('#txtFieldLocation-equipment').prop('disabled', !isAvailable).val(field_location);
+        $('#btnSearchFields-equipment').prop('disabled', !isAvailable);
+        $('#btnSearchEmployees').prop('disabled', !isAvailable);
+        $('#txtSearchEmployees').prop('disabled', !isAvailable);
+        $('#txtSearchFields-equipment').prop('disabled', !isAvailable);
+        $('#txtEquipmentCode').val(eq_code);
+        $('#txtEquipmentName').val(name);
+        $('#txtType').val(type);
+        $('#txtEquipmentStatus').val(status);
+    });
+
     $('#save-equipment').on('click', () => {
         var eq_code = $('#txtEquipmentCode').val();
         var name = $('#txtEquipmentName').val();

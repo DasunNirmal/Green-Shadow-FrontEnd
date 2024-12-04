@@ -1,5 +1,6 @@
 $(document).ready(function () {
     loadFieldLogsTable();
+    var recordIndexFieldsLogs;
 
     $('#btnSearchFieldsLogs').on('click', function() {
         const searchQuery = $('#txtSearchFieldsLogs').val();
@@ -93,18 +94,36 @@ $(document).ready(function () {
             data.forEach(function (fieldLogsData) {
                 const fieldLogRecord = `
                 <tr>
-                    <td class="s-staff-id">${fieldLogsData.log_code}</td>
-                    <td class="s-first-name">${fieldLogsData.field_code}</td>
-                    <td class="s-last-name">${fieldLogsData.field_name}</td>
-                    <td class="s-email">${fieldLogsData.field_location}</td>
-                    <td class="s-phone-no">${fieldLogsData.details}</td>
-                    <td class="s-designation">${fieldLogsData.log_date}</td>
-                    <td class="s-dob"><img src="data:image/png;base64,${fieldLogsData.img}" width="150px"></td>
+                    <td class="fl-log_code">${fieldLogsData.log_code}</td>
+                    <td class="fl-field_code">${fieldLogsData.field_code}</td>
+                    <td class="fl-field_name">${fieldLogsData.field_name}</td>
+                    <td class="fl-field_location">${fieldLogsData.field_location}</td>
+                    <td class="fl-details">${fieldLogsData.details}</td>
+                    <td class="fl-log_date">${fieldLogsData.log_date}</td>
+                    <td class="fl-img"><img src="data:image/png;base64,${fieldLogsData.img}" width="150px"></td>
                 </tr>`;
                 $('#field-logs-table-tb').append(fieldLogRecord);
             });
         }
     }
+
+    $('#field-logs-table-tb').on('click','tr',function () {
+        recordIndexFieldsLogs = $(this).index();
+
+        var log_code = $(this).find(".fl-log_code").text();
+        var field_code = $(this).find(".fl-field_code").text();
+        var field_name = $(this).find(".fl-field_name").text();
+        var field_location = $(this).find(".fl-field_location").text();
+        var details = $(this).find(".fl-details").text();
+        var log_date = $(this).find(".fl-log_date").text();
+
+        $('#txtLogCode').val(log_code);
+        $('#txtFieldDetails').val(details);
+        $('#txtLogDate').val(log_date);
+        $('#txtFieldCodeLogs').val(field_code);
+        $('#txtFieldNameLogs').val(field_name);
+        $('#txtFieldLocationLogs').val(field_location);
+    });
 
     $('#save-field-logs').on('click', () => {
         var log_code = $('#txtLogCode').val();

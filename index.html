@@ -597,8 +597,11 @@
 
             <!--Status-->
             <div id="equipment-status-div">
-                <label id="lblEquipmentStatus" for="txtEquipmentStatus">Status :</label>
-                <input id="txtEquipmentStatus" class="form-control" type="text" aria-label="default input example">
+                <label for="txtEquipmentStatus" id="lblEquipmentStatus">Status (Available/Not Available) :</label>
+                <select class="form-select" id="txtEquipmentStatus" required>
+                    <option>Available</option>
+                    <option>Not Available</option>
+                </select>
             </div>
 
             <!--Search Employees-->
@@ -995,11 +998,13 @@
     <script type="module" src="controller/CropController.js"></script>
     <script type="module" src="controller/StaffController.js"></script>
     <script type="module" src="controller/VehicleController.js"></script>
+    <script type="module" src="controller/EquipmentController.js"></script>
     <script type="module" src="assets/js/login-page.js"></script>
     <script type="module" src="assets/js/registration-page.js"></script>
     <script type="module" src="assets/js/navigation-bar.js"></script>
     <script type="module" src="assets/js/logs-page.js"></script>
     <script type="module" src="assets/js/vehicle-page.js"></script>
+    <script type="module" src="assets/js/equipment-page.js"></script>
     <script src="assets/lib/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

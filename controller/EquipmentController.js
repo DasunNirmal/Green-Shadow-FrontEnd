@@ -2,6 +2,23 @@ $(document).ready(function(){
     loadEquipmentTable();
     var recordIndexEquipment;
 
+    function clearFields() {
+        $('#txtMemberID-equipment').val("");
+        $('#txtFirstName-equipment').val("");
+        $('#txtRole-equipment').val("");
+        $('#txtPhoneNumber-equipment').val("");
+        $('#txtFieldCode').val("");
+        $('#txtFieldName-equipment').val("");
+        $('#txtFieldLocation-equipment').val("");
+        $('#txtSearchEmployees').val("")
+        $('#txtSearchFields-equipment').val("")
+        $('#txtEquipmentCode').val("");
+        $('#txtEquipmentName').val("");
+        $('#txtType').val("");
+        $('#txtEquipmentStatus').val("");
+        $('#txtSearch-equipment').val("");
+    }
+
     $('#btnSearchEmployees').on('click', function() {
         const searchQuery = $('#txtSearchEmployees').val();
         searchStaffByID(searchQuery);
@@ -278,5 +295,59 @@ $(document).ready(function(){
                 console.log("Equipment Not Deleted");
             }
         });
+    });
+
+    $('#search-equipment').on('click', function() {
+        const searchQuery = $('#txtSearch-equipment').val();
+        searchEquipmentByID(searchQuery);
+    });
+
+    function searchEquipmentByID(query) {
+        const eq_code = query.toLowerCase();
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/equipment?eq_code=' + eq_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (response) => {
+                console.log('Full response:', response);
+                for (let i = 0; i < response.length; i++) {
+                    if (eq_code === response[i].eq_code) {
+                        var equipment = response[i];
+                        break;
+                    }
+                }
+                if (equipment) {
+                    var isAvailable = equipment.status === "Available";
+                    var staff_id = equipment.staff_id == null ? "Not Available" : equipment.staff_id;
+                    var field_code = equipment.field_code == null ? "Not Available" : equipment.field_code;
+                    $('#txtMemberID-equipment').prop('disabled', !isAvailable).val(staff_id);
+                    $('#txtFirstName-equipment').prop('disabled', !isAvailable).val(equipment.first_name);
+                    $('#txtRole-equipment').prop('disabled', !isAvailable).val(equipment.role);
+                    $('#txtPhoneNumber-equipment').prop('disabled', !isAvailable).val(equipment.phone_no);
+                    $('#txtFieldCode').prop('disabled', !isAvailable).val(field_code);
+                    $('#txtFieldName-equipment').prop('disabled', !isAvailable).val(equipment.field_name);
+                    $('#txtFieldLocation-equipment').prop('disabled', !isAvailable).val(equipment.field_location);
+                    $('#btnSearchFields-equipment').prop('disabled', !isAvailable);
+                    $('#btnSearchEmployees').prop('disabled', !isAvailable);
+                    $('#txtSearchEmployees').prop('disabled', !isAvailable);
+                    $('#txtSearchFields-equipment').prop('disabled', !isAvailable);
+                    $('#txtEquipmentCode').val(equipment.eq_code);
+                    $('#txtEquipmentName').val(equipment.name);
+                    $('#txtType').val(equipment.type);
+                    $('#txtEquipmentStatus').val(equipment.status);
+                    $('#txtSearch-vehicles').val("");
+                } else {
+                    console.error('Equipment not found');
+                }
+            },
+            error: function(error) {
+                console.error('Error searching equipment:', error);
+                loadEquipmentTable();
+            }
+        });
+    }
+
+    $('#clear-equipment').on('click', () => {
+        clearFields();
     });
 });

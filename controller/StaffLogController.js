@@ -77,14 +77,14 @@ $(document).ready(function () {
 
         var log_code = $(this).find(".sl-log_code").text();
         var staff_id = $(this).find(".sl-staff_id").text();
-        var rst_name = $(this).find(".sl-first_name").text();
+        var first_name = $(this).find(".sl-first_name").text();
         var phone_no = $(this).find(".sl-phone_no").text();
         var details = $(this).find(".sl-details").text();
         var log_date = $(this).find(".sl-log_date").text();
 
         $('#txtLogCodeStaff').val(log_code);
         $('#txtMemberIDLogs').val(staff_id);
-        $('#txtFirstNameLogs').val(rst_name);
+        $('#txtFirstNameLogs').val(first_name);
         $('#txtPhoneNumberLogs').val(phone_no);
         $('#txtStaffDetails').val(details);
         $('#txtLogDateStaff').val(log_date);
@@ -261,4 +261,58 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#search-staff-logs').on('click', function() {
+        const searchQuery = $('#txtSearch-staff-logs').val();
+        searchStaffLogsByID(searchQuery);
+    });
+
+    function searchStaffLogsByID(query) {
+        const log_code = query.toUpperCase();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/logs?log_code=' + log_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (logResponse) => {
+                console.log('staff data:', logResponse);
+                $.ajax({
+                    url: `http://localhost:8081/greenShadow/api/v1/staffLogs?log_code=` + log_code,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(detailsResponse) {
+                        console.log('details data',detailsResponse);
+
+                        const combinedData = populateData(logResponse, detailsResponse);
+                        if (Array.isArray(combinedData)) {
+                            const log = combinedData.find(
+                                data => data.log_code === log_code && data.log_code.startsWith('SL')
+                            );
+
+                            if (log) {
+                                $('#txtLogCodeStaff').val(log.log_code);
+                                $('#txtMemberIDLogs').val(log.staff_id);
+                                $('#txtFirstNameLogs').val(log.first_name);
+                                $('#txtPhoneNumberLogs').val(log.phone_no);
+                                $('#txtStaffDetails').val(log.details);
+                                $('#txtLogDateStaff').val(log.log_date);
+                                $('#txtSearch-staff-logs').val("");
+                            } else {
+                                console.error('Log not found for the given log_code:', log_code);
+                            }
+                        } else {
+                            console.error('Invalid combinedData structure:', combinedData);
+                        }
+                    },
+                    error: function(err) {
+                        console.error(`Error loading details data for log_code`, err);
+                    }
+                });
+            },
+            error: function(error) {
+                console.error('Error searching logs:', error);
+                loadCropLogsTable();
+            }
+        });
+    }
 });

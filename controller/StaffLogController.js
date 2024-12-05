@@ -1,6 +1,6 @@
 $(document).ready(function () {
     loadCropLogsTable();
-    /*var recordIndexCropLogs;*/
+    var recordIndexStaffLogs;
 
     function loadCropLogsTable() {
         $("#staff-logs-table-tb").empty();
@@ -58,19 +58,37 @@ $(document).ready(function () {
                 if (staffLogsData.log_code.startsWith('SL')) {
                     const staffLogRecord = `
                 <tr>
-                    <td class="fl-log_code">${staffLogsData.log_code}</td>
-                    <td class="fl-field_code">${staffLogsData.staff_id}</td>
-                    <td class="fl-field_name">${staffLogsData.first_name}</td>
-                    <td class="fl-field_location">${staffLogsData.phone_no}</td>
-                    <td class="fl-details">${staffLogsData.details}</td>
-                    <td class="fl-log_date">${staffLogsData.log_date}</td>
-                    <td class="fl-img"><img src="data:image/png;base64,${staffLogsData.img}" width="150px"></td>
+                    <td class="sl-log_code">${staffLogsData.log_code}</td>
+                    <td class="sl-staff_id">${staffLogsData.staff_id}</td>
+                    <td class="sl-first_name">${staffLogsData.first_name}</td>
+                    <td class="sl-phone_no">${staffLogsData.phone_no}</td>
+                    <td class="sl-details">${staffLogsData.details}</td>
+                    <td class="sl-log_date">${staffLogsData.log_date}</td>
+                    <td class="sl-img"><img src="data:image/png;base64,${staffLogsData.img}" width="150px"></td>
                 </tr>`;
                     $('#staff-logs-table-tb').append(staffLogRecord);
                 }
             });
         }
     }
+
+    $('#staff-logs-table-tb').on('click','tr',function () {
+        recordIndexStaffLogs = $(this).index();
+
+        var log_code = $(this).find(".sl-log_code").text();
+        var staff_id = $(this).find(".sl-staff_id").text();
+        var rst_name = $(this).find(".sl-first_name").text();
+        var phone_no = $(this).find(".sl-phone_no").text();
+        var details = $(this).find(".sl-details").text();
+        var log_date = $(this).find(".sl-log_date").text();
+
+        $('#txtLogCodeStaff').val(log_code);
+        $('#txtMemberIDLogs').val(staff_id);
+        $('#txtFirstNameLogs').val(rst_name);
+        $('#txtPhoneNumberLogs').val(phone_no);
+        $('#txtStaffDetails').val(details);
+        $('#txtLogDateStaff').val(log_date);
+    });
 
     $('#btnSearchMembersLogs').on('click', function() {
         const searchQuery = $('#txtSearchMembersLogs').val();
@@ -162,4 +180,36 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('#delete-staff-logs').on('click', () => {
+        var log_code = $('#txtLogCodeStaff').val();
+        var img = $('#txtLogImageStaff').prop('files')[0];
+        var details = $('#txtStaffDetails').val();
+        var log_date = $('#txtLogDateStaff').val();
+        var staff_id = $('#txtMemberIDLogs').val();
+        var first_name = $('#txtFirstNameLogs').val();
+        var phone_no = $('#txtPhoneNumberLogs').val();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/staffLogs/' + log_code,
+            type: 'DELETE',
+            success: (response) => {
+                console.log('Log Deleted successfully:', response);
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
+                    type: 'DELETE',
+                    success: (response) => {
+                        console.log('Log Details Deleted successfully:', response);
+                        loadCropLogsTable();
+                    },
+                    error: (error) =>{
+                        console.error('Error deleting log:', error);
+                    }
+                });
+            },
+            error: (error) =>{
+                console.error('Log Not Deleted:', error);
+            }
+        });
+    });
 });

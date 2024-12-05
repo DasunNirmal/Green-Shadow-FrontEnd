@@ -281,7 +281,7 @@ $(document).ready(function () {
     });
 
     function searchFieldLogsByID(query) {
-        const log_code = query.toLowerCase();
+        const log_code = query.toUpperCase();
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/logs?log_code=' + log_code,
@@ -297,7 +297,25 @@ $(document).ready(function () {
                         console.log('details data',detailsResponse);
 
                         const combinedData = populateData(logResponse, detailsResponse);
-                        addSearchData(combinedData,log_code);
+                        if (Array.isArray(combinedData)) {
+                            const log = combinedData.find(
+                                data => data.log_code === log_code && data.log_code.startsWith('FL')
+                            );
+
+                            if (log) {
+                                $('#txtLogCode').val(log.log_code);
+                                $('#txtFieldDetails').val(log.details);
+                                $('#txtLogDate').val(log.log_date);
+                                $('#txtFieldCodeLogs').val(log.field_code);
+                                $('#txtFieldNameLogs').val(log.field_name);
+                                $('#txtFieldLocationLogs').val(log.field_location);
+                                $('#txtSearch-field-logs').val("");
+                            } else {
+                                console.error('Log not found for the given log_code:', log_code);
+                            }
+                        } else {
+                            console.error('Invalid combinedData structure:', combinedData);
+                        }
                     },
                     error: function(err) {
                         console.error(`Error loading details data for log_code`, err);
@@ -311,27 +329,6 @@ $(document).ready(function () {
         });
     }
 
-    function addSearchData(response,log_code) {
-        for (let i = 0; i < response.length; i++) {
-            if (log_code === response[i].log_code) {
-                var log = response[i];
-                break;
-            }
-        }
-
-        if (log) {
-            console.log('Logs retrieved successfully:', log);
-            $('#txtLogCode').val(log.log_code);
-            $('#txtFieldDetails').val(log.details);
-            $('#txtLogDate').val(log.log_date);
-            $('#txtFieldCodeLogs').val(log.field_code);
-            $('#txtFieldNameLogs').val(log.field_name);
-            $('#txtFieldLocationLogs').val(log.field_location);
-            $('#txtSearch-field-logs').val("");
-        } else {
-            console.error('Log not found');
-        }
-    }
     $('#clear-field-logs').on('click', () => {
         clearFields();
     });

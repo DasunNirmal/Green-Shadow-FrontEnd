@@ -1,6 +1,76 @@
 $(document).ready(function () {
-    /*loadCropLogsTable();
-    var recordIndexCropLogs;*/
+    loadCropLogsTable();
+    /*var recordIndexCropLogs;*/
+
+    function loadCropLogsTable() {
+        $("#staff-logs-table-tb").empty();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/logs',
+            type: 'GET',
+            dataType: 'json',
+            success: function(logsResponse) {
+                console.log('Staff data:', logsResponse);
+
+                $.ajax({
+                    url: `http://localhost:8081/greenShadow/api/v1/staffLogs`,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(staffResponse) {
+                        console.log('details data',staffResponse);
+
+                        const combinedData = populateData(logsResponse, staffResponse);
+                        populateStaffLogTable(combinedData);
+                    },
+                    error: function(err) {
+                        console.error(`Error loading staff data for staff_id`, err);
+                    }
+                });
+            },
+            error: function(err) {
+                console.error('Error loading logs data:', err);
+            }
+        });
+    }
+
+    function populateData(logsResponse, staffResponse) {
+        // Create a map of staffResponse by staff_id for easy merging
+        const logsMap = new Map(logsResponse.map(logs => [logs.log_code, logs]));
+
+        // Iterate through fieldStaffResponse to add or update entries in the map
+        staffResponse.forEach(staffLogs => {
+            if (logsMap.has(staffLogs.log_code)) {
+                // Merge additional fields into the existing staff entry
+                Object.assign(logsMap.get(staffLogs.log_code), staffLogs);
+            } else {
+                // Add new field staff entry if it doesn't already exist
+                logsMap.set(staffLogs.log_code, staffLogs);
+            }
+        });
+
+        // Convert the map back to an array
+        return Array.from(logsMap.values());
+    }
+
+    function populateStaffLogTable(data) {
+        if (Array.isArray(data)) {
+            data.forEach(function (staffLogsData) {
+                if (staffLogsData.log_code.startsWith('SL')) {
+                    const staffLogRecord = `
+                <tr>
+                    <td class="fl-log_code">${staffLogsData.log_code}</td>
+                    <td class="fl-field_code">${staffLogsData.staff_id}</td>
+                    <td class="fl-field_name">${staffLogsData.first_name}</td>
+                    <td class="fl-field_location">${staffLogsData.phone_no}</td>
+                    <td class="fl-details">${staffLogsData.details}</td>
+                    <td class="fl-log_date">${staffLogsData.log_date}</td>
+                    <td class="fl-img"><img src="data:image/png;base64,${staffLogsData.img}" width="150px"></td>
+                </tr>`;
+                    $('#staff-logs-table-tb').append(staffLogRecord);
+                }
+            });
+        }
+    }
 
     $('#btnSearchMembersLogs').on('click', function() {
         const searchQuery = $('#txtSearchMembersLogs').val();
@@ -85,7 +155,7 @@ $(document).ready(function () {
             processData: false,
             success: (response) => {
                 console.log('Log saved successfully:', response);
-                /*loadFieldLogsTable();*/
+                loadCropLogsTable();
             },
             error: function(error) {
                 console.error('Error saving log:', error);

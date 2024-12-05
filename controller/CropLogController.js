@@ -2,6 +2,16 @@ $(document).ready(function () {
     loadCropLogsTable();
     var recordIndexCropLogs;
 
+    function clearFields() {
+        $('#txtLogCodeCrop').val("");
+        $('#txtCropDetails').val("");
+        $('#txtLogDateCrop').val("");
+        $('#txtCropCodeLogs').val("");
+        $('#txtCropNameLogs').val("");
+        $('#txtLogImageCrop').val("");
+        $('#txtSearch-crop-logs').val("");
+    }
+
     function loadCropLogsTable() {
         $("#crop-logs-table-tb").empty();
 
@@ -252,5 +262,62 @@ $(document).ready(function () {
                 console.error('Log Not Deleted:', error);
             }
         });
+    });
+
+    $('#search-crop-logs').on('click', function() {
+        const searchQuery = $('#txtSearch-crop-logs').val();
+        searchCropLogsByID(searchQuery);
+    });
+
+    function searchCropLogsByID(query) {
+        const log_code = query.toUpperCase();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/logs?log_code=' + log_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (logResponse) => {
+                console.log('log data:', logResponse);
+                $.ajax({
+                    url: `http://localhost:8081/greenShadow/api/v1/cropLogs?log_code=` + log_code,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(detailsResponse) {
+                        console.log('details data',detailsResponse);
+
+                        const combinedData = populateData(logResponse, detailsResponse);
+                        if (Array.isArray(combinedData)) {
+                            const log = combinedData.find(
+                                data => data.log_code === log_code && data.log_code.startsWith('CL')
+                            );
+
+                            if (log) {
+                                $('#txtLogCodeCrop').val(log.log_code);
+                                $('#txtCropDetails').val(log.details);
+                                $('#txtLogDateCrop').val(log.log_date);
+                                $('#txtCropCodeLogs').val(log.crop_code);
+                                $('#txtCropNameLogs').val(log.crop_name);
+                                $('#txtSearch-crop-logs').val("");
+                            } else {
+                                console.error('Log not found for the given log_code:', log_code);
+                            }
+                        } else {
+                            console.error('Invalid combinedData structure:', combinedData);
+                        }
+                    },
+                    error: function(err) {
+                        console.error(`Error loading details data for log_code`, err);
+                    }
+                });
+            },
+            error: function(error) {
+                console.error('Error searching logs:', error);
+                loadCropLogsTable();
+            }
+        });
+    }
+
+    $('#clear-crop-logs').on('click', () => {
+        clearFields();
     });
 });

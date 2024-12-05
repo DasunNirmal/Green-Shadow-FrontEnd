@@ -181,6 +181,55 @@ $(document).ready(function () {
         });
     }
 
+    $('#update-staff-logs').on('click', () => {
+        var log_code = $('#txtLogCodeStaff').val();
+        var img = $('#txtLogImageStaff').prop('files')[0];
+        var details = $('#txtStaffDetails').val();
+        var log_date = $('#txtLogDateStaff').val();
+        var staff_id = $('#txtMemberIDLogs').val();
+        var first_name = $('#txtFirstNameLogs').val();
+        var phone_no = $('#txtPhoneNumberLogs').val();
+
+        var logData = new FormData();
+        logData.append('log_code', log_code);
+        logData.append('img', img);
+        logData.append('details', details);
+        logData.append('log_date', log_date);
+        logData.append('code', staff_id);
+        logData.append('name', first_name);
+        logData.append('additional', phone_no);
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/staffLogs/' + log_code,
+            type: 'PATCH',
+            data: logData,
+            mimeType: 'multipart/form-data',
+            contentType: false,
+            processData: false,
+            success: (response) => {
+                console.log('Log Details updated successfully:', response);
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
+                    type: 'PATCH',
+                    data: logData,
+                    mimeType: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,
+                    success: (response) => {
+                        console.log('Log updated successfully:', response);
+                        saveDetails(logData);
+                    },
+                    error: function(error) {
+                        console.error('Error updating log:', error);
+                    }
+                });
+            },
+            error: function(error) {
+                console.error('Error updating log details:', error);
+            }
+        });
+    });
+
     $('#delete-staff-logs').on('click', () => {
         var log_code = $('#txtLogCodeStaff').val();
         var img = $('#txtLogImageStaff').prop('files')[0];

@@ -58,18 +58,34 @@ $(document).ready(function () {
                 if (cropLogsData.log_code.startsWith('CL')) {
                     const fieldLogRecord = `
                 <tr>
-                    <td class="fl-log_code">${cropLogsData.log_code}</td>
-                    <td class="fl-field_code">${cropLogsData.crop_code}</td>
-                    <td class="fl-field_name">${cropLogsData.crop_name}</td>
-                    <td class="fl-details">${cropLogsData.details}</td>
-                    <td class="fl-log_date">${cropLogsData.log_date}</td>
-                    <td class="fl-img"><img src="data:image/png;base64,${cropLogsData.img}" width="150px"></td>
+                    <td class="cl-log_code">${cropLogsData.log_code}</td>
+                    <td class="cl-crop_code">${cropLogsData.crop_code}</td>
+                    <td class="cl-crop_name">${cropLogsData.crop_name}</td>
+                    <td class="cl-details">${cropLogsData.details}</td>
+                    <td class="cl-log_date">${cropLogsData.log_date}</td>
+                    <td class="cl-img"><img src="data:image/png;base64,${cropLogsData.img}" width="150px"></td>
                 </tr>`;
                     $('#crop-logs-table-tb').append(fieldLogRecord);
                 }
             });
         }
     }
+
+    $('#crop-logs-table-tb').on('click','tr',function () {
+        recordIndexCropLogs = $(this).index();
+
+        var log_code = $(this).find(".cl-log_code").text();
+        var crop_code = $(this).find(".cl-crop_code").text();
+        var crop_name = $(this).find(".cl-crop_name").text();
+        var details = $(this).find(".cl-details").text();
+        var log_date = $(this).find(".cl-log_date").text();
+
+        $('#txtLogCodeCrop').val(log_code);
+        $('#txtCropDetails').val(details);
+        $('#txtLogDateCrop').val(log_date);
+        $('#txtCropCodeLogs').val(crop_code);
+        $('#txtCropNameLogs').val(crop_name);
+    });
 
     $('#btnSearchCropsLogs').on('click', function() {
         const searchQuery = $('#txtSearchCropsLogs').val();

@@ -1,7 +1,75 @@
 $(document).ready(function () {
-    /*loadCropLogsTable();*/
+    loadCropLogsTable();
     var recordIndexCropLogs;
 
+    function loadCropLogsTable() {
+        $("#crop-logs-table-tb").empty();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/logs',
+            type: 'GET',
+            dataType: 'json',
+            success: function(logsResponse) {
+                console.log('Staff data:', logsResponse);
+
+                $.ajax({
+                    url: `http://localhost:8081/greenShadow/api/v1/cropLogs`,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(cropResponse) {
+                        console.log('details data',cropResponse);
+
+                        const combinedData = populateData(logsResponse, cropResponse);
+                        populateStaffTable(combinedData);
+                    },
+                    error: function(err) {
+                        console.error(`Error loading field data for staff_id`, err);
+                    }
+                });
+            },
+            error: function(err) {
+                console.error('Error loading logs data:', err);
+            }
+        });
+    }
+
+    function populateData(logsResponse, cropResponse) {
+        // Create a map of staffResponse by staff_id for easy merging
+        const logsMap = new Map(logsResponse.map(logs => [logs.log_code, logs]));
+
+        // Iterate through fieldStaffResponse to add or update entries in the map
+        cropResponse.forEach(cropLogs => {
+            if (logsMap.has(cropLogs.log_code)) {
+                // Merge additional fields into the existing staff entry
+                Object.assign(logsMap.get(cropLogs.log_code), cropLogs);
+            } else {
+                // Add new field staff entry if it doesn't already exist
+                logsMap.set(cropLogs.log_code, cropLogs);
+            }
+        });
+
+        // Convert the map back to an array
+        return Array.from(logsMap.values());
+    }
+
+    function populateStaffTable(data) {
+        if (Array.isArray(data)) {
+            data.forEach(function (cropLogsData) {
+                if (cropLogsData.log_code.startsWith('CL')) {
+                    const fieldLogRecord = `
+                <tr>
+                    <td class="fl-log_code">${cropLogsData.log_code}</td>
+                    <td class="fl-field_code">${cropLogsData.crop_code}</td>
+                    <td class="fl-field_name">${cropLogsData.crop_name}</td>
+                    <td class="fl-details">${cropLogsData.details}</td>
+                    <td class="fl-log_date">${cropLogsData.log_date}</td>
+                    <td class="fl-img"><img src="data:image/png;base64,${cropLogsData.img}" width="150px"></td>
+                </tr>`;
+                    $('#crop-logs-table-tb').append(fieldLogRecord);
+                }
+            });
+        }
+    }
 
     $('#btnSearchCropsLogs').on('click', function() {
         const searchQuery = $('#txtSearchCropsLogs').val();
@@ -83,10 +151,13 @@ $(document).ready(function () {
             processData: false,
             success: (response) => {
                 console.log('Log saved successfully:', response);
+                loadCropLogsTable();
             },
             error: function(error) {
                 console.error('Error saving crop log:', error);
             }
         });
     }
+
+
 });

@@ -2,6 +2,17 @@ $(document).ready(function () {
     loadFieldLogsTable();
     var recordIndexFieldsLogs;
 
+    function clearFields() {
+        $('#txtLogCode').val("");
+        $('#txtFieldDetails').val("");
+        $('#txtLogDate').val("");
+        $('#txtFieldCodeLogs').val("");
+        $('#txtFieldNameLogs').val("");
+        $('#txtFieldLocationLogs').val("");
+        $('#txtSearch-field-logs').val("");
+        $('#txtLogImage').val("");
+    }
+
     $('#btnSearchFieldsLogs').on('click', function() {
         const searchQuery = $('#txtSearchFieldsLogs').val();
         searchFieldsByID(searchQuery);
@@ -260,5 +271,66 @@ $(document).ready(function () {
                 console.error('Log Not Deleted:', error);
             }
         });
+    });
+
+    $('#search-field-logs').on('click', function() {
+        const searchQuery = $('#txtSearch-field-logs').val();
+        searchFieldLogsByID(searchQuery);
+    });
+
+    function searchFieldLogsByID(query) {
+        const log_code = query.toLowerCase();
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/logs?log_code=' + log_code,
+            type: 'GET',
+            dataType: 'json',
+            success: (logResponse) => {
+                console.log('staff data:', logResponse);
+                $.ajax({
+                    url: `http://localhost:8081/greenShadow/api/v1/fieldLogs?log_code=` + log_code,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(detailsResponse) {
+                        console.log('details data',detailsResponse);
+
+                        const combinedData = populateData(logResponse, detailsResponse);
+                        addSearchData(combinedData,log_code);
+                    },
+                    error: function(err) {
+                        console.error(`Error loading details data for log_code`, err);
+                    }
+                });
+            },
+            error: function(error) {
+                console.error('Error searching logs:', error);
+                loadFieldLogsTable();
+            }
+        });
+    }
+
+    function addSearchData(response,log_code) {
+        for (let i = 0; i < response.length; i++) {
+            if (log_code === response[i].log_code) {
+                var log = response[i];
+                break;
+            }
+        }
+
+        if (log) {
+            console.log('Logs retrieved successfully:', log);
+            $('#txtLogCode').val(log.log_code);
+            $('#txtFieldDetails').val(log.details);
+            $('#txtLogDate').val(log.log_date);
+            $('#txtFieldCodeLogs').val(log.field_code);
+            $('#txtFieldNameLogs').val(log.field_name);
+            $('#txtFieldLocationLogs').val(log.field_location);
+            $('#txtSearch-field-logs').val("");
+        } else {
+            console.error('Log not found');
+        }
+    }
+    $('#clear-field-logs').on('click', () => {
+        clearFields();
     });
 });

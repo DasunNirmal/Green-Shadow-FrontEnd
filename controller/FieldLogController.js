@@ -178,4 +178,37 @@ $(document).ready(function () {
             }
         });
     }
+
+    $('#delete-field-logs').on('click', () => {
+        var log_code = $('#txtLogCode').val();
+        var img = $('#txtLogImage').prop('files')[0];
+        var details = $('#txtFieldDetails').val();
+        var log_date = $('#txtLogDate').val();
+        var field_code = $('#txtFieldCodeLogs').val();
+        var field_name = $('#txtFieldNameLogs').val();
+        var field_location = $('#txtFieldLocationLogs').val();
+
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/fieldLogs/' + log_code,
+            type: 'DELETE',
+            success: (response) => {
+                console.log('Log Deleted successfully:', response);
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
+                    type: 'DELETE',
+                    success: (response) => {
+                        console.log('Log Details Deleted successfully:', response);
+                        loadFieldLogsTable();
+                    },
+                    error: (error) =>{
+                        console.error('Error deleting log:', error);
+                    }
+                });
+            },
+            error: (error) =>{
+                console.error('Log Not Deleted:', error);
+            }
+        });
+    });
 });

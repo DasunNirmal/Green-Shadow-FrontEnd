@@ -103,7 +103,8 @@ $(document).ready(function () {
     function populateStaffTable(data) {
         if (Array.isArray(data)) {
             data.forEach(function (fieldLogsData) {
-                const fieldLogRecord = `
+                if (fieldLogsData.log_code.startsWith('FL')) {
+                    const fieldLogRecord = `
                 <tr>
                     <td class="fl-log_code">${fieldLogsData.log_code}</td>
                     <td class="fl-field_code">${fieldLogsData.field_code}</td>
@@ -113,7 +114,8 @@ $(document).ready(function () {
                     <td class="fl-log_date">${fieldLogsData.log_date}</td>
                     <td class="fl-img"><img src="data:image/png;base64,${fieldLogsData.img}" width="150px"></td>
                 </tr>`;
-                $('#field-logs-table-tb').append(fieldLogRecord);
+                    $('#field-logs-table-tb').append(fieldLogRecord);
+                }
             });
         }
     }
@@ -151,9 +153,9 @@ $(document).ready(function () {
         logData.append('img', img);
         logData.append('details', details);
         logData.append('log_date', log_date);
-        logData.append('field_code', field_code);
-        logData.append('field_name', field_name);
-        logData.append('field_location', field_location);
+        logData.append('code', field_code);
+        logData.append('name', field_name);
+        logData.append('additional', field_location);
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/logs',

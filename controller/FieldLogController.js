@@ -179,6 +179,56 @@ $(document).ready(function () {
         });
     }
 
+    $('#update-field-logs').on('click', () => {
+        var log_code = $('#txtLogCode').val();
+        var img = $('#txtLogImage').prop('files')[0];
+        var details = $('#txtFieldDetails').val();
+        var log_date = $('#txtLogDate').val();
+
+        var field_code = $('#txtFieldCodeLogs').val();
+        var field_name = $('#txtFieldNameLogs').val();
+        var field_location = $('#txtFieldLocationLogs').val();
+
+        var logData = new FormData();
+        logData.append('log_code', log_code);
+        logData.append('img', img);
+        logData.append('details', details);
+        logData.append('log_date', log_date);
+        logData.append('field_code', field_code);
+        logData.append('field_name', field_name);
+        logData.append('field_location', field_location);
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/fieldLogs/' + log_code,
+            type: 'PATCH',
+            data: logData,
+            mimeType: 'multipart/form-data',
+            contentType: false,
+            processData: false,
+            success: (response) => {
+                console.log('Log Details updated successfully:', response);
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
+                    type: 'PATCH',
+                    data: logData,
+                    mimeType: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,
+                    success: (response) => {
+                        console.log('Log updated successfully:', response);
+                        saveDetails(logData);
+                    },
+                    error: function(error) {
+                        console.error('Error updating log:', error);
+                    }
+                });
+            },
+            error: function(error) {
+                console.error('Error updating log details:', error);
+            }
+        });
+    });
+
     $('#delete-field-logs').on('click', () => {
         var log_code = $('#txtLogCode').val();
         var img = $('#txtLogImage').prop('files')[0];

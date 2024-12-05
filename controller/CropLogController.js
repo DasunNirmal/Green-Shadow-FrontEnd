@@ -175,7 +175,7 @@ $(document).ready(function () {
         });
     }
 
-    $('#delete-crop-logs').on('click', () => {
+    $('#update-crop-logs').on('click', () => {
         var log_code = $('#txtLogCodeCrop').val();
         var img = $('#txtLogImageCrop').prop('files')[0];
         var details = $('#txtCropDetails').val();
@@ -183,6 +183,53 @@ $(document).ready(function () {
         var crop_code = $('#txtCropCodeLogs').val();
         var crop_name = $('#txtCropNameLogs').val();
 
+        var logData = new FormData();
+        logData.append('log_code', log_code);
+        logData.append('img', img);
+        logData.append('details', details);
+        logData.append('log_date', log_date);
+        logData.append('code', crop_code);
+        logData.append('name', crop_name);
+        logData.append('additional', crop_name);
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/cropLogs/' + log_code,
+            type: 'PATCH',
+            data: logData,
+            mimeType: 'multipart/form-data',
+            contentType: false,
+            processData: false,
+            success: (response) => {
+                console.log('Log Details updated successfully:', response);
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
+                    type: 'PATCH',
+                    data: logData,
+                    mimeType: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,
+                    success: (response) => {
+                        console.log('Log updated successfully:', response);
+                        saveDetails(logData);
+                    },
+                    error: function(error) {
+                        console.error('Error updating log:', error);
+                    }
+                });
+            },
+            error: function(error) {
+                console.error('Error updating log details:', error);
+            }
+        });
+    });
+
+    $('#delete-crop-logs').on('click', () => {
+        var log_code = $('#txtLogCodeCrop').val();
+        var img = $('#txtLogImageCrop').prop('files')[0];
+        var details = $('#txtCropDetails').val();
+        var log_date = $('#txtLogDateCrop').val();
+        var crop_code = $('#txtCropCodeLogs').val();
+        var crop_name = $('#txtCropNameLogs').val();
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/cropLogs/' + log_code,

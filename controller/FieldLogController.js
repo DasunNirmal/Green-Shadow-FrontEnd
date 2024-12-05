@@ -207,9 +207,9 @@ $(document).ready(function () {
         logData.append('img', img);
         logData.append('details', details);
         logData.append('log_date', log_date);
-        logData.append('field_code', field_code);
-        logData.append('field_name', field_name);
-        logData.append('field_location', field_location);
+        logData.append('code', field_code);
+        logData.append('name', field_name);
+        logData.append('additional', field_location);
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/fieldLogs/' + log_code,

@@ -175,5 +175,35 @@ $(document).ready(function () {
         });
     }
 
+    $('#delete-crop-logs').on('click', () => {
+        var log_code = $('#txtLogCodeCrop').val();
+        var img = $('#txtLogImageCrop').prop('files')[0];
+        var details = $('#txtCropDetails').val();
+        var log_date = $('#txtLogDateCrop').val();
+        var crop_code = $('#txtCropCodeLogs').val();
+        var crop_name = $('#txtCropNameLogs').val();
 
+
+        $.ajax({
+            url: 'http://localhost:8081/greenShadow/api/v1/cropLogs/' + log_code,
+            type: 'DELETE',
+            success: (response) => {
+                console.log('Log Deleted successfully:', response);
+                $.ajax({
+                    url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
+                    type: 'DELETE',
+                    success: (response) => {
+                        console.log('Log Details Deleted successfully:', response);
+                        loadCropLogsTable();
+                    },
+                    error: (error) =>{
+                        console.error('Error deleting log:', error);
+                    }
+                });
+            },
+            error: (error) =>{
+                console.error('Log Not Deleted:', error);
+            }
+        });
+    });
 });

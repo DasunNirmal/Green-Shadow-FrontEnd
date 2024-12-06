@@ -7,7 +7,7 @@ import { loadVehicleTable } from "./VehicleController.js";
 import { loadCropLogsTable } from "./CropLogController.js";
 import { loadStaffLogsTable } from "./StaffLogController.js";
 
-    $('#login-button-reg').on('click', () => {
+$('#login-button-reg').on('click', () => {
         const email = $('#email-input-reg').val();
         const password = $('#password-input-reg').val();
         const name = $('#name-input-reg').val();
@@ -105,7 +105,9 @@ import { loadStaffLogsTable } from "./StaffLogController.js";
         if (!email || !password) {
             return;
         }*/
-
+        $('#txtLogCodeCrop').val("CL");
+        $('#txtLogCode').val("FL");
+        $('#txtLogCodeStaff').val("SL");
         $('#login-section').hide();
         $('#registration-section').hide();
         $('#box-login').hide();

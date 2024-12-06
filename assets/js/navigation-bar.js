@@ -174,6 +174,9 @@ $(document).ready(function () {
         welcomeTextOne.html("Welcome Back !");
         welcomeTextTwo.html("Pickup Where Your Left Off");
         $('body').removeClass('color-dashboard');
+        $('body').css({
+            overflowY: 'hidden'
+        });
         $('#logs-section').hide();
         $('#equipment-section').hide();
         $('#vehicle-section').hide();

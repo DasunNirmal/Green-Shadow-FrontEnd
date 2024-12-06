@@ -12,8 +12,9 @@
 #field-content-card-left {
     width: 1230px;
     height: 300px;
-    border: 3px solid #B05200;
+    border: 2px solid #3E3C5C;
     border-radius: 30px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
     position: relative;
     display: flex;
     flex-wrap: wrap;

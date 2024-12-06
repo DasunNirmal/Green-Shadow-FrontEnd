@@ -1,8 +1,6 @@
-$(document).ready(function () {
-    loadCropLogsTable();
-    var recordIndexStaffLogs;
+var recordIndexStaffLogs;
 
-    function loadCropLogsTable() {
+    export function loadStaffLogsTable() {
         $("#staff-logs-table-tb").empty();
 
         $.ajax({
@@ -173,7 +171,7 @@ $(document).ready(function () {
             processData: false,
             success: (response) => {
                 console.log('Log saved successfully:', response);
-                loadCropLogsTable();
+                loadStaffLogsTable();
             },
             error: function(error) {
                 console.error('Error saving log:', error);
@@ -249,7 +247,7 @@ $(document).ready(function () {
                     type: 'DELETE',
                     success: (response) => {
                         console.log('Log Details Deleted successfully:', response);
-                        loadCropLogsTable();
+                        loadStaffLogsTable();
                     },
                     error: (error) =>{
                         console.error('Error deleting log:', error);
@@ -311,8 +309,7 @@ $(document).ready(function () {
             },
             error: function(error) {
                 console.error('Error searching logs:', error);
-                loadCropLogsTable();
+                loadStaffLogsTable();
             }
         });
     }
-});

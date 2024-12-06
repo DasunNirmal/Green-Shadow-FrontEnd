@@ -1,6 +1,4 @@
-$(document).ready(function () {
-    loadCropLogsTable();
-    var recordIndexCropLogs;
+var recordIndexCropLogs;
 
     function clearFields() {
         $('#txtLogCodeCrop').val("");
@@ -12,7 +10,7 @@ $(document).ready(function () {
         $('#txtSearch-crop-logs').val("");
     }
 
-    function loadCropLogsTable() {
+    export function loadCropLogsTable() {
         $("#crop-logs-table-tb").empty();
 
         $.ajax({
@@ -320,4 +318,3 @@ $(document).ready(function () {
     $('#clear-crop-logs').on('click', () => {
         clearFields();
     });
-});

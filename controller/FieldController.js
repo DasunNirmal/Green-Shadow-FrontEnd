@@ -1,6 +1,4 @@
-$(document).ready(function () {
-    var recordIndexFields;
-    loadFieldTable();
+ var recordIndexFields;
 
     function clearFields() {
         $('#txtFieldID').val("");
@@ -12,7 +10,7 @@ $(document).ready(function () {
         $('#txtSearch-fields').val("");
     }
 
-    function loadFieldTable() {
+    export function loadFieldTable() {
         $("#fields-table-tb").empty();
 
         $.ajax({
@@ -201,4 +199,3 @@ $(document).ready(function () {
     $('#clear-fields').on('click', () => {
         clearFields();
     });
-});

@@ -1,5 +1,21 @@
  var recordIndexCrops;
 
+ function getCookies(cookieName) {
+     let name = cookieName + "=";
+     let decodedCookie = decodeURIComponent(document.cookie);
+     let ca = decodedCookie.split(';');
+     for (let i = 0; i < ca.length; i++) {
+         let c = ca[i];
+         while (c.charAt(0) == ' ') {
+             c = c.substring(1);
+         }
+         if (c.indexOf(name) == 0) {
+             return c.substring(name.length, c.length);
+         }
+     }
+     return "";
+ }
+
 function clearFields() {
     $('#txtCropCode').val("");
     $('#txtCommonName').val("");
@@ -18,6 +34,9 @@ export function loadCropTable() {
         url: 'http://localhost:8081/greenShadow/api/v1/crop',
         type: 'GET',
         dataType: 'json',
+        headers: {
+            'Authorization': `Bearer ${getCookies("token")}`,
+        },
         success: function(res) {
             console.log(res);
             if (Array.isArray(res)) {
@@ -62,6 +81,9 @@ export function loadCropTable() {
             url: 'http://localhost:8081/greenShadow/api/v1/field?field_code=' + field_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Full response:', response);
                 for (let i = 0; i < response.length; i++) {
@@ -128,6 +150,9 @@ export function loadCropTable() {
             type: 'POST',
             data: cropData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (res) => {
@@ -165,6 +190,9 @@ export function loadCropTable() {
             type: 'PATCH',
             data: cropData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (res) => {
@@ -191,6 +219,9 @@ export function loadCropTable() {
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/crop/' + crop_code,
             type: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (res) => {
                 console.log(JSON.stringify(res));
                 loadCropTable();
@@ -216,6 +247,9 @@ export function loadCropTable() {
             url: 'http://localhost:8081/greenShadow/api/v1/crop?crop_code=' + crop_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Full response:', response);
                 for (let i = 0; i < response.length; i++) {

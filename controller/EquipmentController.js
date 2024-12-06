@@ -1,5 +1,22 @@
  var recordIndexEquipment;
 
+function getCookies(cookieName) {
+     let name = cookieName + "=";
+     let decodedCookie = decodeURIComponent(document.cookie);
+     let ca = decodedCookie.split(';');
+     for (let i = 0; i < ca.length; i++) {
+         let c = ca[i];
+         while (c.charAt(0) == ' ') {
+             c = c.substring(1);
+         }
+         if (c.indexOf(name) == 0) {
+             return c.substring(name.length, c.length);
+         }
+     }
+     return "";
+}
+
+
     function clearFields() {
         $('#txtMemberID-equipment').val("");
         $('#txtFirstName-equipment').val("");
@@ -29,6 +46,9 @@
             url: 'http://localhost:8081/greenShadow/api/v1/staff?staff_id=' + staff_id,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (staffResponse) => {
                 console.log('staff data:', staffResponse);
                 for (let i = 0; i < staffResponse.length; i++) {
@@ -67,6 +87,9 @@
             url: 'http://localhost:8081/greenShadow/api/v1/field?field_code=' + field_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Full response:', response);
                 for (let i = 0; i < response.length; i++) {
@@ -99,6 +122,9 @@
             url: 'http://localhost:8081/greenShadow/api/v1/equipment',
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: function(res) {
                 console.log(res);
                 if (Array.isArray(res)) {
@@ -207,6 +233,9 @@
             url: 'http://localhost:8081/greenShadow/api/v1/equipment',
             type: 'POST',
             data: equipmentJson,
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: 'application/json',
             success: (response) => {
                 console.log(JSON.stringify(response));
@@ -256,6 +285,9 @@
             type: 'PATCH',
             data: equipmentJson,
             contentType: 'application/json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log(JSON.stringify(response));
                 console.log('Equipment updated successfully:', response);
@@ -283,6 +315,9 @@
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/equipment/' + eq_code,
             type: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (res) => {
                 console.log(JSON.stringify(res));
                 console.log("Equipment Deleted");
@@ -306,6 +341,9 @@
             url: 'http://localhost:8081/greenShadow/api/v1/equipment?eq_code=' + eq_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Full response:', response);
                 for (let i = 0; i < response.length; i++) {

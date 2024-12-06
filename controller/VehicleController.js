@@ -1,5 +1,21 @@
 var recordIndexVehicle;
 
+function getCookies(cookieName) {
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
     function clearFields() {
         $('#txtVehicleCode').val("");
         $('#txtLicensePlate').val("");
@@ -21,6 +37,9 @@ var recordIndexVehicle;
             url: 'http://localhost:8081/greenShadow/api/v1/vehicle',
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: function(res) {
                 console.log(res);
                 if (Array.isArray(res)) {
@@ -102,6 +121,9 @@ var recordIndexVehicle;
             url: 'http://localhost:8081/greenShadow/api/v1/staff?staff_id=' + staff_id,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (staffResponse) => {
                 console.log('staff data:', staffResponse);
                 for (let i = 0; i < staffResponse.length; i++) {
@@ -166,6 +188,9 @@ var recordIndexVehicle;
             type: 'POST',
             data: vehicleJSON,
             contentType: 'application/json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (res) => {
                 console.log(JSON.stringify(res));
                 console.log("Vehicle saved successfully.");
@@ -215,6 +240,9 @@ var recordIndexVehicle;
             type: 'PATCH',
             data: vehicleJSON,
             contentType: 'application/json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (res) => {
                 console.log(JSON.stringify(res));
                 console.log("Vehicle updated successfully.");
@@ -243,6 +271,9 @@ var recordIndexVehicle;
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/vehicle/' + vehicle_code,
             type: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (res) => {
                 console.log(JSON.stringify(res));
                 console.log("Vehicle Deleted");
@@ -267,6 +298,9 @@ var recordIndexVehicle;
             url: 'http://localhost:8081/greenShadow/api/v1/vehicle?vehicle_code=' + vehicle_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Full response:', response);
                 for (let i = 0; i < response.length; i++) {

@@ -1,5 +1,21 @@
 var recordIndexCropLogs;
 
+function getCookies(cookieName) {
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
     function clearFields() {
         $('#txtLogCodeCrop').val("");
         $('#txtCropDetails').val("");
@@ -17,6 +33,9 @@ var recordIndexCropLogs;
             url: 'http://localhost:8081/greenShadow/api/v1/logs',
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: function(logsResponse) {
                 console.log('Staff data:', logsResponse);
 
@@ -24,6 +43,9 @@ var recordIndexCropLogs;
                     url: `http://localhost:8081/greenShadow/api/v1/cropLogs`,
                     type: 'GET',
                     dataType: 'json',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     success: function(cropResponse) {
                         console.log('details data',cropResponse);
 
@@ -107,6 +129,9 @@ var recordIndexCropLogs;
             url: 'http://localhost:8081/greenShadow/api/v1/crop?crop_code=' + crop_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Full response:', response);
                 for (let i = 0; i < response.length; i++) {
@@ -153,6 +178,9 @@ var recordIndexCropLogs;
             type: 'POST',
             data: logData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (response) => {
@@ -171,6 +199,9 @@ var recordIndexCropLogs;
             type: 'POST',
             data: logData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (response) => {
@@ -205,6 +236,9 @@ var recordIndexCropLogs;
             type: 'PATCH',
             data: logData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (response) => {
@@ -214,6 +248,9 @@ var recordIndexCropLogs;
                     type: 'PATCH',
                     data: logData,
                     mimeType: 'multipart/form-data',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     contentType: false,
                     processData: false,
                     success: (response) => {
@@ -242,11 +279,17 @@ var recordIndexCropLogs;
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/cropLogs/' + log_code,
             type: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Log Deleted successfully:', response);
                 $.ajax({
                     url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
                     type: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     success: (response) => {
                         console.log('Log Details Deleted successfully:', response);
                         loadCropLogsTable();
@@ -274,12 +317,18 @@ var recordIndexCropLogs;
             url: 'http://localhost:8081/greenShadow/api/v1/logs?log_code=' + log_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (logResponse) => {
                 console.log('log data:', logResponse);
                 $.ajax({
                     url: `http://localhost:8081/greenShadow/api/v1/cropLogs?log_code=` + log_code,
                     type: 'GET',
                     dataType: 'json',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     success: function(detailsResponse) {
                         console.log('details data',detailsResponse);
 

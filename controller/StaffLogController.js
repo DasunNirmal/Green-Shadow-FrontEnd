@@ -1,5 +1,21 @@
 var recordIndexStaffLogs;
 
+function getCookies(cookieName) {
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
     export function loadStaffLogsTable() {
         $("#staff-logs-table-tb").empty();
 
@@ -7,6 +23,9 @@ var recordIndexStaffLogs;
             url: 'http://localhost:8081/greenShadow/api/v1/logs',
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: function(logsResponse) {
                 console.log('Staff data:', logsResponse);
 
@@ -14,6 +33,9 @@ var recordIndexStaffLogs;
                     url: `http://localhost:8081/greenShadow/api/v1/staffLogs`,
                     type: 'GET',
                     dataType: 'json',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     success: function(staffResponse) {
                         console.log('details data',staffResponse);
 
@@ -100,6 +122,9 @@ var recordIndexStaffLogs;
             url: 'http://localhost:8081/greenShadow/api/v1/staff?staff_id=' + staff_id,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (staffResponse) => {
                 console.log('staff data:', staffResponse);
                 for (let i = 0; i < staffResponse.length; i++) {
@@ -149,6 +174,9 @@ var recordIndexStaffLogs;
             type: 'POST',
             data: logData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (response) => {
@@ -167,6 +195,9 @@ var recordIndexStaffLogs;
             type: 'POST',
             data: logData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (response) => {
@@ -202,6 +233,9 @@ var recordIndexStaffLogs;
             type: 'PATCH',
             data: logData,
             mimeType: 'multipart/form-data',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             contentType: false,
             processData: false,
             success: (response) => {
@@ -211,6 +245,9 @@ var recordIndexStaffLogs;
                     type: 'PATCH',
                     data: logData,
                     mimeType: 'multipart/form-data',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     contentType: false,
                     processData: false,
                     success: (response) => {
@@ -240,11 +277,17 @@ var recordIndexStaffLogs;
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/staffLogs/' + log_code,
             type: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (response) => {
                 console.log('Log Deleted successfully:', response);
                 $.ajax({
                     url: 'http://localhost:8081/greenShadow/api/v1/logs/' + log_code,
                     type: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     success: (response) => {
                         console.log('Log Details Deleted successfully:', response);
                         loadStaffLogsTable();
@@ -272,12 +315,18 @@ var recordIndexStaffLogs;
             url: 'http://localhost:8081/greenShadow/api/v1/logs?log_code=' + log_code,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': `Bearer ${getCookies("token")}`,
+            },
             success: (logResponse) => {
                 console.log('staff data:', logResponse);
                 $.ajax({
                     url: `http://localhost:8081/greenShadow/api/v1/staffLogs?log_code=` + log_code,
                     type: 'GET',
                     dataType: 'json',
+                    headers: {
+                        'Authorization': `Bearer ${getCookies("token")}`,
+                    },
                     success: function(detailsResponse) {
                         console.log('details data',detailsResponse);
 

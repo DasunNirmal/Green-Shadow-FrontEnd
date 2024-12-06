@@ -17,17 +17,76 @@ function getCookies(cookieName) {
 }
 
     function clearFields() {
-        $('#txtLogCode').val("");
-        $('#txtFieldDetails').val("");
-        $('#txtLogDate').val("");
-        $('#txtFieldCodeLogs').val("");
-        $('#txtFieldNameLogs').val("");
-        $('#txtFieldLocationLogs').val("");
-        $('#txtSearch-field-logs').val("");
-        $('#txtLogImage').val("");
+        $('#txtLogCode').val("FL").attr("placeholder","");
+        $('#txtFieldDetails').val("").attr("placeholder","");
+        $('#txtLogDate').val("").attr("placeholder","");
+        $('#txtFieldCodeLogs').val("").attr("placeholder","");
+        $('#txtFieldNameLogs').val("").attr("placeholder","");
+        $('#txtFieldLocationLogs').val("").attr("placeholder","");
+        $('#txtSearch-field-logs').val("").attr("placeholder","");
+        $('#txtLogImage').val("").attr("placeholder","");
     }
 
-    $('#btnSearchFieldsLogs').on('click', function() {
+    function validateFields() {
+        var log_code = $('#txtLogCode').val();
+        var img = $('#txtLogImage').prop('files')[0];
+        var details = $('#txtFieldDetails').val();
+        var log_date = $('#txtLogDate').val();
+
+        var field_code = $('#txtFieldCodeLogs').val();
+        var field_name = $('#txtFieldNameLogs').val();
+        var field_location = $('#txtFieldLocationLogs').val();
+
+        var isLogCodeValid = log_code.startsWith("FL") && /^\d+$/.test(log_code.substring(2));
+
+        if (!isLogCodeValid || !img || details === "" || log_date === "" || field_code === "" || field_name === "" || field_location === "") {
+            if (!isLogCodeValid) {
+                $('#txtLogCode').addClass('inValidData-input red').attr("placeholder", "must start with FL");
+                alert("Log Code must start with FL followed by numbers");
+            }
+            if (!img) {
+                $('#txtLogImage').addClass('inValidData-input red').attr("placeholder", "Log Image is required");
+            }
+            if (details === "") {
+                $('#txtFieldDetails').addClass('inValidData-input red').attr("placeholder", "Field Details are required");
+            }
+            if (log_date === "") {
+                $('#txtLogDate').addClass('inValidData-input red').attr("placeholder", "Log Date is required");
+            }
+            if (field_code === "") {
+                $('#txtFieldCodeLogs').addClass('inValidData-input red').attr("placeholder", "Field Code is required");
+            }
+            if (field_name === "") {
+                $('#txtFieldNameLogs').addClass('inValidData-input red').attr("placeholder", "Field Name is required");
+            }
+            if (field_location === "") {
+                $('#txtFieldLocationLogs').addClass('inValidData-input red').attr("placeholder", "Field Location is required");
+            }
+        }
+    }
+
+$('#txtLogCode, #txtLogImage, #txtFieldDetails, #txtLogDate, #txtFieldCodeLogs, #txtFieldNameLogs, #txtFieldLocationLogs').on('input', function () {
+    $(this).removeClass('inValidData-input red');
+
+    if ($(this).attr('id') === 'txtLogCode') {
+        $('#txtLogCode').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLogImage') {
+        $('#txtLogImage').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFieldDetails') {
+        $('#txtFieldDetails').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLogDate') {
+        $('#txtLogDate').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFieldCodeLogs') {
+        $('#txtFieldCodeLogs').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFieldNameLogs') {
+        $('#txtFieldNameLogs').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFieldLocationLogs') {
+        $('#txtFieldLocationLogs').removeClass('inValidData-input red');
+    }
+});
+
+
+$('#btnSearchFieldsLogs').on('click', function() {
         const searchQuery = $('#txtSearchFieldsLogs').val();
         searchFieldsByID(searchQuery);
     });
@@ -180,6 +239,11 @@ function getCookies(cookieName) {
         logData.append('name', field_name);
         logData.append('additional', field_location);
 
+        if (log_code === "" || !img || details === "" || log_date === "" || field_code === "" || field_name === "" || field_location === "") {
+            validateFields();
+            return;
+        }
+
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/logs',
             type: 'POST',
@@ -230,6 +294,11 @@ function getCookies(cookieName) {
         var field_code = $('#txtFieldCodeLogs').val();
         var field_name = $('#txtFieldNameLogs').val();
         var field_location = $('#txtFieldLocationLogs').val();
+
+        if (log_code === "" || !img || details === "" || log_date === "" || field_code === "" || field_name === "" || field_location === "") {
+            validateFields();
+            return;
+        }
 
         var logData = new FormData();
         logData.append('log_code', log_code);
@@ -286,6 +355,10 @@ function getCookies(cookieName) {
         var field_name = $('#txtFieldNameLogs').val();
         var field_location = $('#txtFieldLocationLogs').val();
 
+        if (log_code === "" || !img || details === "" || log_date === "" || field_code === "" || field_name === "" || field_location === "") {
+            validateFields();
+            return;
+        }
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/fieldLogs/' + log_code,

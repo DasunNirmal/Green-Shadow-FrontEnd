@@ -17,15 +17,71 @@
  }
 
 function clearFields() {
-    $('#txtCropCode').val("");
-    $('#txtCommonName').val("");
-    $('#txtScientificName').val("");
-    $('#txtCategory').val("");
-    $('#txtCropImage').val("");
-    $('#txtSeason').val("");
-    $('#txtSearchField').val("");
-    $('#txtCropFieldName').val("");
+    $('#txtCropCode').val("").attr("placeholder","");
+    $('#txtCommonName').val("").attr("placeholder","");
+    $('#txtScientificName').val("").attr("placeholder","");
+    $('#txtCategory').val("").attr("placeholder","");
+    $('#txtCropImage').val("").attr("placeholder","");
+    $('#txtSeason').val("").attr("placeholder","");
+    $('#txtSearchField').val("").attr("placeholder","");
+    $('#txtCropFieldName').val("").attr("placeholder","");
 }
+
+function validateFields() {
+    var crop_code = $('#txtCropCode').val();
+    var common_name = $('#txtCommonName').val();
+    var scientific_name = $('#txtScientificName').val();
+    var category = $('#txtCategory').val();
+    var img = $('#txtCropImage').prop('files')[0];
+    var season = $('#txtSeason').val();
+    var field_code = $('#txtSearchField').val();
+    var name = $('#txtCropFieldName').val();
+
+    if (crop_code === "" || common_name === "" || scientific_name === "" || category === "" || img === "" || season === "" || field_code === "" || name === "") {
+        if (crop_code === "") {
+            $('#txtCropCode').addClass('inValidData-input red').attr("placeholder","Crop Code is required");
+        }
+        if (common_name === "") {
+            $('#txtCommonName').addClass('inValidData-input red').attr("placeholder","Common Name is required");
+        }
+        if (scientific_name === "") {
+            $('#txtScientificName').addClass('inValidData-input red').attr("placeholder","Scientific Name is required");
+        }
+        if (category === "") {
+            $('#txtCategory').addClass('inValidData-input red').attr("placeholder","Category is required");
+        }
+        if (!img) {
+            // Add error class to file input or its label
+            $('#txtCropImage').addClass('inValidData-input .inputRed');
+        }
+        if (season === "") {
+            $('#txtSeason').addClass('inValidData-input red').attr("placeholder","Season is required");
+        }
+        if (name === "") {
+            $('#txtCropFieldName').addClass('inValidData-input red').attr("placeholder","Field Name is required");
+        }
+    }
+}
+
+ $('#txtCropCode, #txtCommonName, #txtScientificName, #txtCategory, #txtCropImage, #txtSeason,#txtCropFieldName').on('input', function () {
+     $(this).removeClass('inValidData-input red');
+
+     if ($(this).attr('id') === 'txtCropCode') {
+         $('#txtCropCode').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtCommonName') {
+         $('#txtCommonName').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtScientificName') {
+         $('#txtScientificName').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtCategory') {
+         $('#txtCategory').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtCropImage') {
+         $('#txtCropImage').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtSeason') {
+         $('#txtSeason').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtCropFieldName') {
+         $('#txtCropFieldName').removeClass('inValidData-input red');
+     }
+ });
 
 export function loadCropTable() {
     $("#crops-table-tb").empty();
@@ -135,6 +191,12 @@ export function loadCropTable() {
         var img = $('#txtCropImage').prop('files')[0];
         var season = $('#txtSeason').val();
         var field_code = $('#txtSearchField').val();
+        var name = $('#txtCropFieldName').val();
+
+        if (crop_code === "" || common_name === "" || scientific_name === "" || category === "" || img === "" || season === "" || field_code === "" || name === "") {
+            validateFields();
+            return;
+        }
 
         var cropData = new FormData();
         cropData.append('crop_code', crop_code);
@@ -176,6 +238,11 @@ export function loadCropTable() {
         var season = $('#txtSeason').val();
         var field_code = $('#txtSearchField').val();
 
+        if (crop_code === "" || common_name === "" || scientific_name === "" || category === "" || img === "" || season === "" || field_code === "" || name === "") {
+            validateFields();
+            return;
+        }
+
         var cropData = new FormData();
         cropData.append('crop_code', crop_code);
         cropData.append('common_name', common_name);
@@ -215,6 +282,11 @@ export function loadCropTable() {
         var img = $('#txtCropImage').prop('files')[0];
         var season = $('#txtSeason').val();
         var field_code = $('#txtSearchField').val();
+
+        if (crop_code === "" || common_name === "" || scientific_name === "" || category === "" || img === "" || season === "" || field_code === "" || name === "") {
+            validateFields();
+            return;
+        }
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/crop/' + crop_code,

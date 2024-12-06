@@ -50,6 +50,15 @@ body {
     border-bottom: 2px solid #3E3C5C;
     background-color: rgba(237, 218, 184, 0.11);
 }
+.inputRed::-webkit-file-upload-button {
+    color: red !important;
+}
+.red::placeholder {
+    color: red !important;
+}
+.inValidData-input {
+    border: 2px solid red !important;
+}
 .inValidData{
     border-bottom: 2px solid red !important;
 }

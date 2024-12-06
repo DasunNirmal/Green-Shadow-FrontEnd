@@ -319,6 +319,7 @@ function getCookies(cookieName) {
                 console.log(JSON.stringify(response));
                 console.log('Equipment saved successfully:', response);
                 loadEquipmentTable();
+                clearFields();
             },
             error: (error) => {
                 console.error('Error saving equipment:', error);
@@ -375,6 +376,7 @@ function getCookies(cookieName) {
                 console.log(JSON.stringify(response));
                 console.log('Equipment updated successfully:', response);
                 loadEquipmentTable();
+                clearFields();
             },
             error: (error) => {
                 console.error('Error updating equipment:', error);
@@ -410,6 +412,7 @@ function getCookies(cookieName) {
                 console.log(JSON.stringify(res));
                 console.log("Equipment Deleted");
                 loadEquipmentTable();
+                clearFields();
             },
             error: (res) => {
                 console.error(res);

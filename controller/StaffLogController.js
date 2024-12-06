@@ -255,6 +255,7 @@ export function loadStaffLogsTable() {
             success: (response) => {
                 console.log('Log saved successfully:', response);
                 saveDetails(logData);
+                clearFields();
             },
             error: function(error) {
                 console.error('Error saving log:', error);
@@ -276,6 +277,7 @@ export function loadStaffLogsTable() {
             success: (response) => {
                 console.log('Log saved successfully:', response);
                 loadStaffLogsTable();
+                clearFields();
             },
             error: function(error) {
                 console.error('Error saving log:', error);
@@ -331,6 +333,7 @@ export function loadStaffLogsTable() {
                     success: (response) => {
                         console.log('Log updated successfully:', response);
                         saveDetails(logData);
+                        clearFields();
                     },
                     error: function(error) {
                         console.error('Error updating log:', error);
@@ -373,6 +376,7 @@ export function loadStaffLogsTable() {
                     success: (response) => {
                         console.log('Log Details Deleted successfully:', response);
                         loadStaffLogsTable();
+                        clearFields();
                     },
                     error: (error) =>{
                         console.error('Error deleting log:', error);

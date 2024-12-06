@@ -278,6 +278,7 @@ $('#btnSearchFieldsLogs').on('click', function() {
             success: (response) => {
                 console.log('Log saved successfully:', response);
                 loadFieldLogsTable();
+                clearFields();
             },
             error: function(error) {
                 console.error('Error saving log:', error);
@@ -334,6 +335,7 @@ $('#btnSearchFieldsLogs').on('click', function() {
                     success: (response) => {
                         console.log('Log updated successfully:', response);
                         saveDetails(logData);
+                        clearFields();
                     },
                     error: function(error) {
                         console.error('Error updating log:', error);
@@ -376,6 +378,7 @@ $('#btnSearchFieldsLogs').on('click', function() {
                     success: (response) => {
                         console.log('Log Details Deleted successfully:', response);
                         loadFieldLogsTable();
+                        clearFields();
                     },
                     error: (error) =>{
                         console.error('Error deleting log:', error);

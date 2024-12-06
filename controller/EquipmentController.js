@@ -18,23 +18,102 @@ function getCookies(cookieName) {
 
 
     function clearFields() {
-        $('#txtMemberID-equipment').val("");
-        $('#txtFirstName-equipment').val("");
-        $('#txtRole-equipment').val("");
-        $('#txtPhoneNumber-equipment').val("");
-        $('#txtFieldCode').val("");
-        $('#txtFieldName-equipment').val("");
-        $('#txtFieldLocation-equipment').val("");
-        $('#txtSearchEmployees').val("")
-        $('#txtSearchFields-equipment').val("")
-        $('#txtEquipmentCode').val("");
-        $('#txtEquipmentName').val("");
-        $('#txtType').val("");
-        $('#txtEquipmentStatus').val("");
+        $('#txtMemberID-equipment').val("").attr("placeholder","");
+        $('#txtFirstName-equipment').val("").attr("placeholder","");
+        $('#txtRole-equipment').val("").attr("placeholder","");
+        $('#txtPhoneNumber-equipment').val("").attr("placeholder","");
+        $('#txtFieldCode').val("").attr("placeholder","");
+        $('#txtFieldName-equipment').val("").attr("placeholder","");
+        $('#txtFieldLocation-equipment').val("").attr("placeholder","");
+        $('#txtSearchEmployees').val("").attr("placeholder","");
+        $('#txtSearchFields-equipment').val("").attr("placeholder","");
+        $('#txtEquipmentCode').val("").attr("placeholder","");
+        $('#txtEquipmentName').val("").attr("placeholder","");
+        $('#txtType').val("").attr("placeholder","");
+        $('#txtEquipmentStatus').val("").attr("placeholder","");
         $('#txtSearch-equipment').val("");
     }
 
-    $('#btnSearchEmployees').on('click', function() {
+    function validateFields() {
+        var eq_code = $('#txtEquipmentCode').val();
+        var name = $('#txtEquipmentName').val();
+        var type = $('#txtType').val();
+        var status = $('#txtEquipmentStatus').val();
+        var staff_id = $('#txtMemberID-equipment').val();
+        var first_name = $('#txtFirstName-equipment').val();
+        var role = $('#txtRole-equipment').val();
+        var phone_no = $('#txtPhoneNumber-equipment').val();
+        var field_code = $('#txtFieldCode').val();
+        var field_name = $('#txtFieldName-equipment').val();
+        var field_location = $('#txtFieldLocation-equipment').val();
+
+        if (eq_code === "" || name === "" || type === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || field_code === "" || field_name === "" || field_location === "") {
+            if (eq_code === "") {
+                $('#txtEquipmentCode').addClass('inValidData-input red').attr("placeholder", "Equipment Code is required");
+            }
+            if (name === "") {
+                $('#txtEquipmentName').addClass('inValidData-input red').attr("placeholder", "Equipment Name is required");
+            }
+            if (type === "") {
+                $('#txtType').addClass('inValidData-input red').attr("placeholder", "Type is required");
+            }
+            if (status === "") {
+                $('#txtEquipmentStatus').addClass('inValidData-input red').attr("placeholder", "Status is required");
+            }
+            if (staff_id === "") {
+                $('#txtMemberID-equipment').addClass('inValidData-input red').attr("placeholder", "Staff ID is required");
+            }
+            if (first_name === "") {
+                $('#txtFirstName-equipment').addClass('inValidData-input red').attr("placeholder", "First Name is required");
+            }
+            if (role === "") {
+                $('#txtRole-equipment').addClass('inValidData-input red').attr("placeholder", "Role is required");
+            }
+            if (phone_no === "") {
+                $('#txtPhoneNumber-equipment').addClass('inValidData-input red').attr("placeholder", "Phone Number is required");
+            }
+            if (field_code === "") {
+                $('#txtFieldCode').addClass('inValidData-input red').attr("placeholder", "Field Code is required");
+            }
+            if (field_name === "") {
+                $('#txtFieldName-equipment').addClass('inValidData-input red').attr("placeholder", "Field Name is required");
+            }
+            if (field_location === "") {
+                $('#txtFieldLocation-equipment').addClass('inValidData-input red').attr("placeholder", "Field Location is required");
+            }
+        }
+    }
+
+ $('#txtEquipmentCode, #txtEquipmentName, #txtType, #txtEquipmentStatus, #txtMemberID-equipment, #txtFirstName-equipment, #txtRole-equipment, #txtPhoneNumber-equipment, #txtFieldCode, #txtFieldName-equipment, #txtFieldLocation-equipment').on('input', function () {
+     $(this).removeClass('inValidData-input red');
+
+     if ($(this).attr('id') === 'txtEquipmentCode') {
+         $('#txtEquipmentCode').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtEquipmentName') {
+         $('#txtEquipmentName').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtType') {
+         $('#txtType').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtEquipmentStatus') {
+         $('#txtEquipmentStatus').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtMemberID-equipment') {
+         $('#txtMemberID-equipment').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtFirstName-equipment') {
+         $('#txtFirstName-equipment').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtRole-equipment') {
+         $('#txtRole-equipment').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtPhoneNumber-equipment') {
+         $('#txtPhoneNumber-equipment').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtFieldCode') {
+         $('#txtFieldCode').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtFieldName-equipment') {
+         $('#txtFieldName-equipment').removeClass('inValidData-input red');
+     } else if ($(this).attr('id') === 'txtFieldLocation-equipment') {
+         $('#txtFieldLocation-equipment').removeClass('inValidData-input red');
+     }
+ });
+
+
+ $('#btnSearchEmployees').on('click', function() {
         const searchQuery = $('#txtSearchEmployees').val();
         searchStaffByID(searchQuery);
     });
@@ -212,6 +291,11 @@ function getCookies(cookieName) {
         var field_name = isAvailable ? $('#txtFieldName-equipment').val() : "*--*";
         var field_location = isAvailable ? $('#txtFieldLocation-equipment').val() : "*--*";
 
+        if (eq_code === "" || name === "" || type === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || field_code === "" || field_name === "" || field_location === "") {
+            validateFields();
+            return;
+        }
+
         const equipmentData = {
             eq_code:eq_code,
             name:name,
@@ -263,6 +347,11 @@ function getCookies(cookieName) {
         var field_name = isAvailable ? $('#txtFieldName-equipment').val() : "*--*";
         var field_location = isAvailable ? $('#txtFieldLocation-equipment').val() : "*--*";
 
+        if (eq_code === "" || name === "" || type === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || field_code === "" || field_name === "" || field_location === "") {
+            validateFields();
+            return;
+        }
+
         const equipmentData = {
             eq_code:eq_code,
             name:name,
@@ -311,6 +400,11 @@ function getCookies(cookieName) {
         var field_code = $('#txtFieldCode').val();
         var field_name = $('#txtFieldName-equipment').val();
         var field_location = $('#txtFieldLocation-equipment').val();
+
+        if (eq_code === "" || name === "" || type === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || field_code === "" || field_name === "" || field_location === "") {
+            validateFields();
+            return;
+        }
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/equipment/' + eq_code,

@@ -1,6 +1,4 @@
-$(document).ready(function () {
-    loadFieldLogsTable();
-    var recordIndexFieldsLogs;
+ var recordIndexFieldsLogs;
 
     function clearFields() {
         $('#txtLogCode').val("");
@@ -50,7 +48,7 @@ $(document).ready(function () {
         });
     }
 
-    function loadFieldLogsTable() {
+    export function loadFieldLogsTable() {
         $("#field-logs-table-tb").empty();
 
         $.ajax({
@@ -332,4 +330,3 @@ $(document).ready(function () {
     $('#clear-field-logs').on('click', () => {
         clearFields();
     });
-});

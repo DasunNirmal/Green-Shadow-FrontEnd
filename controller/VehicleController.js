@@ -1,6 +1,4 @@
-$(document).ready(function(){
-    loadVehicleTable();
-    var recordIndexVehicle;
+var recordIndexVehicle;
 
     function clearFields() {
         $('#txtVehicleCode').val("");
@@ -16,7 +14,7 @@ $(document).ready(function(){
         $('#txtVehicleEmail').val("");
     }
 
-    function loadVehicleTable() {
+    export function loadVehicleTable() {
         $("#vehicles-table-tb").empty();
 
         $.ajax({
@@ -308,4 +306,3 @@ $(document).ready(function(){
     $('#clear-vehicles').on('click', () => {
         clearFields();
     });
-});

@@ -78,6 +78,7 @@ body.color {
 }
 #login-button-reg {
     font-family: "Poppins", sans-serif;
+    color: white;
     font-weight: 500;
     background-color: rgba(80, 77, 117, 0.75);
     border-color: rgba(80, 77, 117, 0.75);

@@ -1,6 +1,4 @@
-$(document).ready(function () {
-    var recordIndexStaff;
-    loadStaffTable();
+ var recordIndexStaff;
 
     function clearFields() {
         $('#txtMemberID').val("");
@@ -60,7 +58,7 @@ $(document).ready(function () {
         });
     }
 
-    function loadStaffTable() {
+    export function loadStaffTable() {
         $("#staff-table-tb").empty();
 
         $.ajax({
@@ -459,4 +457,3 @@ $(document).ready(function () {
     $('#clear-staff').on('click', () => {
         clearFields();
     });
-});

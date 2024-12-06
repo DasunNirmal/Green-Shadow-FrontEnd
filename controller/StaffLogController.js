@@ -16,7 +16,75 @@ function getCookies(cookieName) {
     return "";
 }
 
-    export function loadStaffLogsTable() {
+    function clearFields() {
+        $('#txtLogCodeStaff').val("SL").attr("placeholder","");
+        $('#txtMemberIDLogs').val("").attr("placeholder","");
+        $('#txtFirstNameLogs').val("").attr("placeholder","");
+        $('#txtPhoneNumberLogs').val("").attr("placeholder","");
+        $('#txtStaffDetails').val("").attr("placeholder","");
+        $('#txtLogDateStaff').val("").attr("placeholder","");
+        $('#txtSearch-staff-logs').val("");
+    }
+
+    function validateFields() {
+        var log_code = $('#txtLogCodeStaff').val();
+        var img = $('#txtLogImageStaff').prop('files')[0];
+        var details = $('#txtStaffDetails').val();
+        var log_date = $('#txtLogDateStaff').val();
+        var staff_id = $('#txtMemberIDLogs').val();
+        var first_name = $('#txtFirstNameLogs').val();
+        var phone_no = $('#txtPhoneNumberLogs').val();
+
+        var isLogCodeValid = log_code.startsWith("SL") && /^\d+$/.test(log_code.substring(2));
+
+        if (!isLogCodeValid || !img || details === "" || log_date === "" || staff_id === "" || first_name === "" || phone_no === "") {
+            if (!isLogCodeValid) {
+                $('#txtLogCodeStaff').addClass('inValidData-input red').attr("placeholder", "Must start with SL followed by numbers");
+                alert("Log Code must start with SL followed by numbers");
+            }
+            if (!img) {
+                $('#txtLogImageStaff').addClass('inValidData-input red').attr("placeholder", "Log Image is required");
+            }
+            if (details === "") {
+                $('#txtStaffDetails').addClass('inValidData-input red').attr("placeholder", "Staff Details are required");
+            }
+            if (log_date === "") {
+                $('#txtLogDateStaff').addClass('inValidData-input red').attr("placeholder", "Log Date is required");
+            }
+            if (staff_id === "") {
+                $('#txtMemberIDLogs').addClass('inValidData-input red').attr("placeholder", "Staff ID is required");
+            }
+            if (first_name === "") {
+                $('#txtFirstNameLogs').addClass('inValidData-input red').attr("placeholder", "First Name is required");
+            }
+            if (phone_no === "") {
+                $('#txtPhoneNumberLogs').addClass('inValidData-input red').attr("placeholder", "Phone Number is required");
+            }
+        }
+    }
+
+$('#txtLogCodeStaff, #txtLogImageStaff, #txtStaffDetails, #txtLogDateStaff, #txtMemberIDLogs, #txtFirstNameLogs, #txtPhoneNumberLogs').on('input', function () {
+    $(this).removeClass('inValidData-input red');
+
+    if ($(this).attr('id') === 'txtLogCodeStaff') {
+        $('#txtLogCodeStaff').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLogImageStaff') {
+        $('#txtLogImageStaff').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtStaffDetails') {
+        $('#txtStaffDetails').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLogDateStaff') {
+        $('#txtLogDateStaff').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtMemberIDLogs') {
+        $('#txtMemberIDLogs').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFirstNameLogs') {
+        $('#txtFirstNameLogs').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtPhoneNumberLogs') {
+        $('#txtPhoneNumberLogs').removeClass('inValidData-input red');
+    }
+});
+
+
+export function loadStaffLogsTable() {
         $("#staff-logs-table-tb").empty();
 
         $.ajax({
@@ -160,6 +228,11 @@ function getCookies(cookieName) {
         var first_name = $('#txtFirstNameLogs').val();
         var phone_no = $('#txtPhoneNumberLogs').val();
 
+        if (log_code === "" || img === undefined || details === "" || log_date === "" || staff_id === "" || first_name === "" || phone_no === "") {
+            validateFields();
+            return;
+        }
+
         var logData = new FormData();
         logData.append('log_code', log_code);
         logData.append('img', img);
@@ -219,6 +292,11 @@ function getCookies(cookieName) {
         var first_name = $('#txtFirstNameLogs').val();
         var phone_no = $('#txtPhoneNumberLogs').val();
 
+        if (log_code === "" || img === undefined || details === "" || log_date === "" || staff_id === "" || first_name === "" || phone_no === "") {
+            validateFields();
+            return;
+        }
+
         var logData = new FormData();
         logData.append('log_code', log_code);
         logData.append('img', img);
@@ -274,6 +352,11 @@ function getCookies(cookieName) {
         var first_name = $('#txtFirstNameLogs').val();
         var phone_no = $('#txtPhoneNumberLogs').val();
 
+        if (log_code === "" || img === undefined || details === "" || log_date === "" || staff_id === "" || first_name === "" || phone_no === "") {
+            validateFields();
+            return;
+        }
+
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/staffLogs/' + log_code,
             type: 'DELETE',
@@ -308,7 +391,7 @@ function getCookies(cookieName) {
         searchStaffLogsByID(searchQuery);
     });
 
-    function searchStaffLogsByID(query) {
+function searchStaffLogsByID(query) {
         const log_code = query.toUpperCase();
 
         $.ajax({
@@ -362,3 +445,6 @@ function getCookies(cookieName) {
             }
         });
     }
+$('#clear-staff-logs').on('click', () => {
+    clearFields();
+});

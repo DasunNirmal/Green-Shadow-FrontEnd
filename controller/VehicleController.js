@@ -17,18 +17,96 @@ function getCookies(cookieName) {
 }
 
     function clearFields() {
-        $('#txtVehicleCode').val("");
-        $('#txtLicensePlate').val("");
-        $('#txtFuelType').val("");
-        $('#txtVehicleCategory').val("");
-        $('#txtRemarks').val("");
-        $('#txtStatus').val("");
-        $('#txtVehicleMemberID').val("");
-        $('#txtVehicleFirstName').val("");
-        $('#txtVehicleRole').val("");
-        $('#txtVehiclePhoneNumber').val("");
-        $('#txtVehicleEmail').val("");
+        $('#txtVehicleCode').val("").attr("placeholder","");
+        $('#txtLicensePlate').val("").attr("placeholder","");
+        $('#txtFuelType').val("").attr("placeholder","");
+        $('#txtVehicleCategory').val("").attr("placeholder","");
+        $('#txtRemarks').val("").attr("placeholder","");
+        $('#txtStatus').val("").attr("placeholder","");
+        $('#txtVehicleMemberID').val("").attr("placeholder","");
+        $('#txtVehicleFirstName').val("").attr("placeholder","");
+        $('#txtVehicleRole').val("").attr("placeholder","");
+        $('#txtVehiclePhoneNumber').val("").attr("placeholder","");
+        $('#txtVehicleEmail').val("").attr("placeholder","");
     }
+
+    function validateField() {
+        var vehicle_code = $('#txtVehicleCode').val();
+        var license_plate = $('#txtLicensePlate').val();
+        var fuel_type = $('#txtFuelType').val();
+        var vehicle_category = $('#txtVehicleCategory').val();
+        var remarks = $('#txtRemarks').val();
+        var status = $('#txtStatus').val();
+        var staff_id = $('#txtVehicleMemberID').val();
+        var first_name = $('#txtVehicleFirstName').val();
+        var role = $('#txtVehicleRole').val();
+        var phone_no = $('#txtVehiclePhoneNumber').val();
+        var email = $('#txtVehicleEmail').val();
+
+        if (vehicle_code === "" || license_plate === "" || fuel_type === "" || vehicle_category === "" || remarks === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || email === "") {
+            if (vehicle_code === "") {
+                $('#txtVehicleCode').addClass('inValidData-input red').attr("placeholder", "Vehicle Code is required");
+            }
+            if (license_plate === "") {
+                $('#txtLicensePlate').addClass('inValidData-input red').attr("placeholder", "License Plate is required");
+            }
+            if (fuel_type === "") {
+                $('#txtFuelType').addClass('inValidData-input red').attr("placeholder", "Fuel Type is required");
+            }
+            if (vehicle_category === "") {
+                $('#txtVehicleCategory').addClass('inValidData-input red').attr("placeholder", "Vehicle Category is required");
+            }
+            if (remarks === "") {
+                $('#txtRemarks').addClass('inValidData-input red').attr("placeholder", "Remarks are required");
+            }
+            if (status === "") {
+                $('#txtStatus').addClass('inValidData-input red').attr("placeholder", "Status is required");
+            }
+            if (staff_id === "") {
+                $('#txtVehicleMemberID').addClass('inValidData-input red').attr("placeholder", "Staff ID is required");
+            }
+            if (first_name === "") {
+                $('#txtVehicleFirstName').addClass('inValidData-input red').attr("placeholder", "First Name is required");
+            }
+            if (role === "") {
+                $('#txtVehicleRole').addClass('inValidData-input red').attr("placeholder", "Role is required");
+            }
+            if (phone_no === "") {
+                $('#txtVehiclePhoneNumber').addClass('inValidData-input red').attr("placeholder", "Phone Number is required");
+            }
+            if (email === "") {
+                $('#txtVehicleEmail').addClass('inValidData-input red').attr("placeholder", "Email is required");
+            }
+        }
+    }
+
+$('#txtVehicleCode, #txtLicensePlate, #txtFuelType, #txtVehicleCategory, #txtRemarks, #txtStatus, #txtVehicleMemberID, #txtVehicleFirstName, #txtVehicleRole, #txtVehiclePhoneNumber, #txtVehicleEmail').on('input', function () {
+    $(this).removeClass('inValidData-input red');
+
+    if ($(this).attr('id') === 'txtVehicleCode') {
+        $('#txtVehicleCode').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLicensePlate') {
+        $('#txtLicensePlate').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFuelType') {
+        $('#txtFuelType').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtVehicleCategory') {
+        $('#txtVehicleCategory').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtRemarks') {
+        $('#txtRemarks').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtStatus') {
+        $('#txtStatus').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtVehicleMemberID') {
+        $('#txtVehicleMemberID').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtVehicleFirstName') {
+        $('#txtVehicleFirstName').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtVehicleRole') {
+        $('#txtVehicleRole').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtVehiclePhoneNumber') {
+        $('#txtVehiclePhoneNumber').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtVehicleEmail') {
+        $('#txtVehicleEmail').removeClass('inValidData-input red');
+    }
+});
 
     export function loadVehicleTable() {
         $("#vehicles-table-tb").empty();
@@ -166,6 +244,11 @@ function getCookies(cookieName) {
         var phone_no = isAvailable ? $('#txtVehiclePhoneNumber').val() : "*--*";
         var email = isAvailable ? $('#txtVehicleEmail').val() : "*--*";
 
+        if (vehicle_code === "" || license_plate === "" || fuel_type === "" || vehicle_category === "" || remarks === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || email === "") {
+            validateField();
+            return;
+        }
+
         const vehicleData = {
             vehicle_code:vehicle_code,
             license_plate:license_plate,
@@ -218,6 +301,11 @@ function getCookies(cookieName) {
         var phone_no = isAvailable ? $('#txtVehiclePhoneNumber').val() : "*--*";
         var email = isAvailable ? $('#txtVehicleEmail').val() : "*--*";
 
+        if (vehicle_code === "" || license_plate === "" || fuel_type === "" || vehicle_category === "" || remarks === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || email === "") {
+            validateField();
+            return;
+        }
+
         const vehicleData = {
             vehicle_code:vehicle_code,
             license_plate:license_plate,
@@ -267,6 +355,11 @@ function getCookies(cookieName) {
         var role = $('#txtVehicleRole').val();
         var phone_no = $('#txtVehiclePhoneNumber').val();
         var email = $('#txtVehicleEmail').val();
+
+        if (vehicle_code === "" || license_plate === "" || fuel_type === "" || vehicle_category === "" || remarks === "" || status === "" || staff_id === "" || first_name === "" || role === "" || phone_no === "" || email === "") {
+            validateField();
+            return;
+        }
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/vehicle/' + vehicle_code,

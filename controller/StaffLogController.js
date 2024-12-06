@@ -345,14 +345,13 @@ export function loadStaffLogsTable() {
 
     $('#delete-staff-logs').on('click', () => {
         var log_code = $('#txtLogCodeStaff').val();
-        var img = $('#txtLogImageStaff').prop('files')[0];
         var details = $('#txtStaffDetails').val();
         var log_date = $('#txtLogDateStaff').val();
         var staff_id = $('#txtMemberIDLogs').val();
         var first_name = $('#txtFirstNameLogs').val();
         var phone_no = $('#txtPhoneNumberLogs').val();
 
-        if (log_code === "" || img === undefined || details === "" || log_date === "" || staff_id === "" || first_name === "" || phone_no === "") {
+        if (log_code === "" || details === "" || log_date === "" || staff_id === "" || first_name === "" || phone_no === "") {
             validateFields();
             return;
         }

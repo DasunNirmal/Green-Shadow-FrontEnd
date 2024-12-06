@@ -202,8 +202,7 @@ $('#btnSearchFields-staff').on('click', function() {
                 'Authorization': `Bearer ${getCookies("token")}`,
             },
             success: function(staffResponse) {
-                console.log('Staff data:', staffResponse);
-
+                $('#staff-total').text(staffResponse.length);
                 $.ajax({
                     url: `http://localhost:8081/greenShadow/api/v1/staffAndFieldsDetails`,
                     type: 'GET',

@@ -90,8 +90,7 @@ function clearFields() {
                 'Authorization': `Bearer ${getCookies("token")}`,
             },
             success: function(logsResponse) {
-                console.log('Staff data:', logsResponse);
-
+                $('#log-total').text(logsResponse.length);
                 $.ajax({
                     url: `http://localhost:8081/greenShadow/api/v1/cropLogs`,
                     type: 'GET',
@@ -335,14 +334,13 @@ function clearFields() {
 
     $('#delete-crop-logs').on('click', () => {
         var log_code = $('#txtLogCodeCrop').val();
-        var img = $('#txtLogImageCrop').prop('files')[0];
         var details = $('#txtCropDetails').val();
         var log_date = $('#txtLogDateCrop').val();
         var crop_code = $('#txtCropCodeLogs').val();
         var crop_name = $('#txtCropNameLogs').val();
 
         var isLogCodeValid = log_code.startsWith("CL") && /^\d+$/.test(log_code.substring(2));
-        if (!isLogCodeValid || !img || details === "" || log_date === "" || crop_code === "" || crop_name === "") {
+        if (!isLogCodeValid  || details === "" || log_date === "" || crop_code === "" || crop_name === "") {
             validateFields();
             return;
         }
@@ -362,7 +360,7 @@ function clearFields() {
                         'Authorization': `Bearer ${getCookies("token")}`,
                     },
                     success: (response) => {
-                        console.log('Log Details Deleted successfully:', response);
+                        clearFields();
                         loadCropLogsTable();
                     },
                     error: (error) =>{

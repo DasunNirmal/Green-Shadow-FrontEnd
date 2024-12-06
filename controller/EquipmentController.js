@@ -205,7 +205,7 @@ function getCookies(cookieName) {
                 'Authorization': `Bearer ${getCookies("token")}`,
             },
             success: function(res) {
-                console.log(res);
+                $('#equipment-total').text(res.length);
                 if (Array.isArray(res)) {
                     res.forEach(function(equipment) {
                         var staff_id = equipment.staff_id == null ? "Not Available" : equipment.staff_id;
@@ -226,12 +226,6 @@ function getCookies(cookieName) {
                         </tr>`;
                         $('#equipment-table-tb').append(vehicleRecord);
                     });
-                    let count = 0;
-                    for (let i = 0; i < res.length; i++) {
-                        if (res[i] != null) {
-                            count++;
-                        }
-                    }
                 } else {
                     console.log('No equipment data found or incorrect response format.');
                 }

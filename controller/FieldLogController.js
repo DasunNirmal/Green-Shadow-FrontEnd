@@ -348,14 +348,13 @@ $('#btnSearchFieldsLogs').on('click', function() {
 
     $('#delete-field-logs').on('click', () => {
         var log_code = $('#txtLogCode').val();
-        var img = $('#txtLogImage').prop('files')[0];
         var details = $('#txtFieldDetails').val();
         var log_date = $('#txtLogDate').val();
         var field_code = $('#txtFieldCodeLogs').val();
         var field_name = $('#txtFieldNameLogs').val();
         var field_location = $('#txtFieldLocationLogs').val();
 
-        if (log_code === "" || !img || details === "" || log_date === "" || field_code === "" || field_name === "" || field_location === "") {
+        if (log_code === ""|| details === "" || log_date === "" || field_code === "" || field_name === "" || field_location === "") {
             validateFields();
             return;
         }

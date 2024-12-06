@@ -86,7 +86,7 @@ $('#login-button-reg').on('click', () => {
         const email = $('#email-input').val();
         const password = $('#password-input').val();
 
-        /*if (!email) {
+        if (!email) {
             $('#email-input').addClass('inValidData');
             $('#email-label').addClass('label-color-red');
         } else {
@@ -104,26 +104,7 @@ $('#login-button-reg').on('click', () => {
 
         if (!email || !password) {
             return;
-        }*/
-        $('#txtLogCodeCrop').val("CL");
-        $('#txtLogCode').val("FL");
-        $('#txtLogCodeStaff').val("SL");
-        $('#login-section').hide();
-        $('#registration-section').hide();
-        $('#box-login').hide();
-        $('#image-login').hide();
-        $('#welcome-text').hide();
-        $('#welcome-text-2').hide();
-        $('#dashboard-section').show();
-        $('#navigation-bar').show().addClass('animate__animated animate__slideInDown');
-        $('body').addClass('color-dashboard').addClass('allowOverFlow-y');
-        $('#home').addClass('active-page');
-        $('#field').removeClass('active-page');
-        $('#crop').removeClass('active-page');
-        $('#staff').removeClass('active-page');
-        $('#vehicle').removeClass('active-page');
-        $('#logs').removeClass('active-page');
-        $('#equipment').removeClass('active-page');
+        }
 
         const userData = {
             email: email,
@@ -149,6 +130,25 @@ $('#login-button-reg').on('click', () => {
                     loadVehicleTable();
                     loadCropLogsTable();
                     loadStaffLogsTable();
+                    $('#txtLogCodeCrop').val("CL");
+                    $('#txtLogCode').val("FL");
+                    $('#txtLogCodeStaff').val("SL");
+                    $('#login-section').hide();
+                    $('#registration-section').hide();
+                    $('#box-login').hide();
+                    $('#image-login').hide();
+                    $('#welcome-text').hide();
+                    $('#welcome-text-2').hide();
+                    $('#dashboard-section').show();
+                    $('#navigation-bar').show().addClass('animate__animated animate__slideInDown');
+                    $('body').addClass('color-dashboard').addClass('allowOverFlow-y');
+                    $('#home').addClass('active-page');
+                    $('#field').removeClass('active-page');
+                    $('#crop').removeClass('active-page');
+                    $('#staff').removeClass('active-page');
+                    $('#vehicle').removeClass('active-page');
+                    $('#logs').removeClass('active-page');
+                    $('#equipment').removeClass('active-page');
                 } else {
                     alert("Login successful, token not recieved.");
                 }

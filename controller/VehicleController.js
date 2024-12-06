@@ -119,7 +119,7 @@ $('#txtVehicleCode, #txtLicensePlate, #txtFuelType, #txtVehicleCategory, #txtRem
                 'Authorization': `Bearer ${getCookies("token")}`,
             },
             success: function(res) {
-                console.log(res);
+                $('#vehicle-total').text(res.length);
                 if (Array.isArray(res)) {
                     res.forEach(function(vehicle) {
                         var staff_id = vehicle.staff_id == null ? "Not Available" : vehicle.staff_id;

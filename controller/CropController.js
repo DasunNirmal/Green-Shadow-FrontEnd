@@ -109,12 +109,7 @@ export function loadCropTable() {
                         </tr>`;
                     $('#crops-table-tb').append(cropRecord);
                 });
-                let count = 0;
-                for (let i = 0; i < res.length; i++) {
-                    if (res[i] != null) {
-                        count++;
-                    }
-                }
+                $('#crop-total').text(res.length);
             } else {
                 console.log('No crop data found or incorrect response format.');
             }
@@ -279,11 +274,10 @@ export function loadCropTable() {
         var common_name = $('#txtCommonName').val();
         var scientific_name = $('#txtScientificName').val();
         var category = $('#txtCategory').val();
-        var img = $('#txtCropImage').prop('files')[0];
         var season = $('#txtSeason').val();
         var field_code = $('#txtSearchField').val();
 
-        if (crop_code === "" || common_name === "" || scientific_name === "" || category === "" || img === "" || season === "" || field_code === "" || name === "") {
+        if (crop_code === "" || common_name === "" || scientific_name === "" || category === "" || season === "" || field_code === "") {
             validateFields();
             return;
         }

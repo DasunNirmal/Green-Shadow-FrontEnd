@@ -86,7 +86,7 @@
               'Authorization': `Bearer ${getCookies("token")}`,
             },
             success: function(res) {
-                console.log(res);
+                $('#field-total').text(res.length);
                 if (Array.isArray(res)) {
                     res.forEach(function(field) {
                         var fieldRecord = `
@@ -100,12 +100,6 @@
                         </tr>`;
                         $('#fields-table-tb').append(fieldRecord);
                     });
-                    let count = 0;
-                    for (let i = 0; i < res.length; i++) {
-                        if (res[i] != null) {
-                            count++;
-                        }
-                    }
                 } else {
                     console.log('No field data found or incorrect response format.');
                 }
@@ -178,10 +172,8 @@
         var fieldName = $('#txtFieldName').val();
         var fieldLocation = $('#txtFieldLocation').val();
         var fieldSize = $('#txtFieldSize').val();
-        var image_01 = $('#txtFieldImage1').prop('files')[0];
-        var image_02 = $('#txtFieldImage2').prop('files')[0];
 
-        if (!field_code || !fieldName || !fieldLocation || !fieldSize || !image_01 || !image_02) {
+        if (!field_code || !fieldName || !fieldLocation || !fieldSize) {
             validateField();
             return;
         }

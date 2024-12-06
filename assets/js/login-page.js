@@ -40,23 +40,4 @@ $(document).ready(function(){
             passwordField.attr('type', 'password');
         }
     });
-
-    $('#login-button').on('click', () => {
-        $('#login-section').hide();
-        $('#registration-section').hide();
-        $('#box-login').hide();
-        $('#image-login').hide();
-        $('#welcome-text').hide();
-        $('#welcome-text-2').hide();
-        $('#dashboard-section').show();
-        $('#navigation-bar').show().addClass('animate__animated animate__slideInDown');
-        $('body').addClass('color-dashboard').addClass('allowOverFlow-y');
-        $('#home').addClass('active-page');
-        $('#field').removeClass('active-page');
-        $('#crop').removeClass('active-page');
-        $('#staff').removeClass('active-page');
-        $('#vehicle').removeClass('active-page');
-        $('#logs').removeClass('active-page');
-        $('#equipment').removeClass('active-page');
-    });
 });

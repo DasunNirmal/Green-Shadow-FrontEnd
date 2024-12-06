@@ -107,19 +107,16 @@ $(document).ready(function () {
     });
     $('#password-input-reg').keypress((e) => {
         if (e.which === 13) {
-            $('#confirm-password-input').focus();
+            $('#role-input-reg').focus();
         }
     });
 
     $('#check-box-reg').on('click', () => {
         const passwordField = $('#password-input-reg');
-        const confirmPasswordField = $('#confirm-password-input');
-        if (passwordField.attr('type') === 'password' && confirmPasswordField.attr('type') === 'password') {
+        if (passwordField.attr('type') === 'password') {
             passwordField.attr('type', 'text');
-            confirmPasswordField.attr('type', 'text');
         } else {
             passwordField.attr('type', 'password');
-            confirmPasswordField.attr('type', 'password');
         }
     });
 });

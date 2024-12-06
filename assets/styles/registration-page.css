@@ -28,7 +28,7 @@ body.color {
     margin: 0;
     animation-duration: 1s;
 }
-#email-reg,#password-reg,#name-reg,#confirm-password {
+#email-reg,#password-reg,#name-reg,#role-reg {
     width: 25dvw;
     height: 100px;
     position: relative;
@@ -50,11 +50,7 @@ body.color {
     position: absolute;
     top: 420px;
 }
-#confirm-password {
-    position: absolute;
-    top: 520px;
-}
-#email-input-reg,#password-input-reg,#name-input-reg,#confirm-password-input {
+#email-input-reg,#password-input-reg,#name-input-reg,#role-input-reg {
     border-top: none;
     border-right: none;
     border-left: none;
@@ -62,10 +58,10 @@ body.color {
     border-bottom: 2px solid #3E3C5C;
     background-color: rgba(237, 218, 184, 0.11);
 }
-.form-floating > input + label:after {
+.form-floating > input + label:after,#role-label-reg:after {
     background-color: rgba(233, 208, 169, 0.45) !important;
 }
-#email-input-reg:focus,#password-input-reg:focus,#name-input-reg:focus,#confirm-password-input:focus {
+#email-input-reg:focus,#password-input-reg:focus,#name-input-reg:focus,#role-input-reg:focus {
     border-bottom: 3px solid #3E3C5C;
     border-top: none;
     border-radius: 10px;
@@ -242,8 +238,11 @@ body.color {
     color: #3E3C5C;
     font-weight: 480;
     font-size: 14px;
-    top: 595px;
+    top: 489px;
     left: 47px;
     align-items: center;
     justify-items: center;
+}
+#role-reg {
+    top: 545px;
 }

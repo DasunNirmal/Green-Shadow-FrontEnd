@@ -16,13 +16,66 @@ function getCookies(cookieName) {
     return "";
 }
 
-    function clearFields() {
-        $('#txtLogCodeCrop').val("");
-        $('#txtCropDetails').val("");
-        $('#txtLogDateCrop').val("");
-        $('#txtCropCodeLogs').val("");
-        $('#txtCropNameLogs').val("");
-        $('#txtLogImageCrop').val("");
+    function validateFields() {
+        var log_code = $('#txtLogCodeCrop').val();
+        var img = $('#txtLogImageCrop').prop('files')[0];
+        var details = $('#txtCropDetails').val();
+        var log_date = $('#txtLogDateCrop').val();
+
+        var crop_code = $('#txtCropCodeLogs').val();
+        var crop_name = $('#txtCropNameLogs').val();
+
+        var isLogCodeValid = log_code.startsWith("CL") && /^\d+$/.test(log_code.substring(2));
+
+        if (!isLogCodeValid || !img || details === "" || log_date === "" || crop_code === "" || crop_name === "") {
+            if (!isLogCodeValid) {
+                $('#txtLogCodeCrop').addClass('inValidData-input red').attr("placeholder", "Must start with CL followed by numbers");
+                alert("Log Code must start with CL followed by numbers");
+            }
+            if (!img) {
+                $('#txtLogImageCrop').addClass('inValidData-input red').attr("placeholder", "Log Image is required");
+            }
+            if (details === "") {
+                $('#txtCropDetails').addClass('inValidData-input red').attr("placeholder", "Crop Details are required");
+            }
+            if (log_date === "") {
+                $('#txtLogDateCrop').addClass('inValidData-input red').attr("placeholder", "Log Date is required");
+            }
+            if (crop_code === "") {
+                $('#txtCropCodeLogs').addClass('inValidData-input red').attr("placeholder", "Crop Code is required");
+            }
+            if (crop_name === "") {
+                $('#txtCropNameLogs').addClass('inValidData-input red').attr("placeholder", "Crop Name is required");
+            }
+        }
+    }
+
+$('#txtLogCodeCrop, #txtLogImageCrop, #txtCropDetails, #txtLogDateCrop, #txtCropCodeLogs, #txtCropNameLogs').on('input change', function () {
+    $(this).removeClass('inValidData-input red');
+
+    if ($(this).attr('id') === 'txtLogCodeCrop') {
+        $('#txtLogCodeCrop').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLogImageCrop') {
+        $('#txtLogImageCrop').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtCropDetails') {
+        $('#txtCropDetails').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLogDateCrop') {
+        $('#txtLogDateCrop').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtCropCodeLogs') {
+        $('#txtCropCodeLogs').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtCropNameLogs') {
+        $('#txtCropNameLogs').removeClass('inValidData-input red');
+    }
+});
+
+
+function clearFields() {
+        $('#txtLogCodeCrop').val("CL").attr("placeholder","");
+        $('#txtCropDetails').val("").attr("placeholder","");
+        $('#txtLogDateCrop').val("").attr("placeholder","");
+        $('#txtCropCodeLogs').val("").attr("placeholder","");
+        $('#txtCropNameLogs').val("").attr("placeholder","");
+        $('#txtLogImageCrop').val("").attr("placeholder","");
         $('#txtSearch-crop-logs').val("");
     }
 
@@ -164,6 +217,12 @@ function getCookies(cookieName) {
         var crop_code = $('#txtCropCodeLogs').val();
         var crop_name = $('#txtCropNameLogs').val();
 
+        var isLogCodeValid = log_code.startsWith("CL") && /^\d+$/.test(log_code.substring(2));
+        if (!isLogCodeValid || !img || details === "" || log_date === "" || crop_code === "" || crop_name === "") {
+            validateFields();
+            return;
+        }
+
         var logData = new FormData();
         logData.append('log_code', log_code);
         logData.append('img', img);
@@ -222,6 +281,12 @@ function getCookies(cookieName) {
         var crop_code = $('#txtCropCodeLogs').val();
         var crop_name = $('#txtCropNameLogs').val();
 
+        var isLogCodeValid = log_code.startsWith("CL") && /^\d+$/.test(log_code.substring(2));
+        if (!isLogCodeValid || !img || details === "" || log_date === "" || crop_code === "" || crop_name === "") {
+            validateFields();
+            return;
+        }
+
         var logData = new FormData();
         logData.append('log_code', log_code);
         logData.append('img', img);
@@ -275,6 +340,12 @@ function getCookies(cookieName) {
         var log_date = $('#txtLogDateCrop').val();
         var crop_code = $('#txtCropCodeLogs').val();
         var crop_name = $('#txtCropNameLogs').val();
+
+        var isLogCodeValid = log_code.startsWith("CL") && /^\d+$/.test(log_code.substring(2));
+        if (!isLogCodeValid || !img || details === "" || log_date === "" || crop_code === "" || crop_name === "") {
+            validateFields();
+            return;
+        }
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/cropLogs/' + log_code,

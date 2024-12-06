@@ -1,6 +1,4 @@
-$(document).ready(function(){
-    loadEquipmentTable();
-    var recordIndexEquipment;
+ var recordIndexEquipment;
 
     function clearFields() {
         $('#txtMemberID-equipment').val("");
@@ -94,7 +92,7 @@ $(document).ready(function(){
         });
     }
 
-    function loadEquipmentTable() {
+    export function loadEquipmentTable() {
         $("#equipment-table-tb").empty();
 
         $.ajax({
@@ -350,4 +348,3 @@ $(document).ready(function(){
     $('#clear-equipment').on('click', () => {
         clearFields();
     });
-});

@@ -16,14 +16,63 @@
         return "";
     }
 
-    function clearFields() {
-        $('#txtFieldID').val("");
-        $('#txtFieldName').val("");
-        $('#txtFieldLocation').val("");
-        $('#txtFieldSize').val("");
-        $('#txtFieldImage1').val("");
-        $('#txtFieldImage2').val("");
-        $('#txtSearch-fields').val("");
+    function validateField() {
+        var fieldID = $('#txtFieldID').val();
+        var fieldName = $('#txtFieldName').val();
+        var fieldLocation = $('#txtFieldLocation').val();
+        var fieldSize = $('#txtFieldSize').val();
+        var image_01 = $('#txtFieldImage1').prop('files')[0];
+        var image_02 = $('#txtFieldImage2').prop('files')[0];
+
+        if (fieldID === "" || fieldName === "" || fieldLocation === "" || fieldSize === "" || !image_01 || !image_02) {
+            if (fieldID === "") {
+                $('#txtFieldID').addClass('inValidData-input red').attr("placeholder", "Field ID is required");
+            }
+            if (fieldName === "") {
+                $('#txtFieldName').addClass('inValidData-input red').attr("placeholder", "Field Name is required");
+            }
+            if (fieldLocation === "") {
+                $('#txtFieldLocation').addClass('inValidData-input red').attr("placeholder", "Field Location is required");
+            }
+            if (fieldSize === "") {
+                $('#txtFieldSize').addClass('inValidData-input red').attr("placeholder", "Field Size is required");
+            }
+            if (!image_01) {
+                $('#txtFieldImage1').addClass('inValidData-input red');
+            }
+            if (!image_02) {
+                $('#txtFieldImage2').addClass('inValidData-input red');
+            }
+        }
+    }
+
+     $('#txtFieldID, #txtFieldName, #txtFieldLocation, #txtFieldSize, #txtFieldImage1, #txtFieldImage2').on('input', function () {
+         $(this).removeClass('inValidData-input red');
+
+         if ($(this).attr('id') === 'fieldID') {
+             $('#txtFieldID').removeClass('inValidData-input red');
+         } else if ($(this).attr('id') === 'fieldName') {
+             $('#txtFieldName').removeClass('inValidData-input red');
+         } else if ($(this).attr('id') === 'fieldLocation') {
+             $('#txtFieldLocation').removeClass('inValidData-input red');
+         } else if ($(this).attr('id') === 'fieldSize') {
+             $('#txtFieldSize').removeClass('inValidData-input red');
+         } else if ($(this).attr('id') === 'txtFieldImage1') {
+             $('#txtFieldImage1').text("").removeClass('inValidData-input red');
+         } else if ($(this).attr('id') === 'txtFieldImage2') {
+             $('#txtFieldImage2').text("").removeClass('inValidData-input red');
+         }
+     });
+
+
+ function clearFields() {
+        $('#txtFieldID').val("").attr("placeholder","");
+        $('#txtFieldName').val("").attr("placeholder","");
+        $('#txtFieldLocation').val("").attr("placeholder","");
+        $('#txtFieldSize').val("").attr("placeholder","");
+        $('#txtFieldImage1').val("").attr("placeholder","");
+        $('#txtFieldImage2').val("").attr("placeholder","");
+        $('#txtSearch-fields').val("").attr("placeholder","");
     }
 
     export function loadFieldTable() {
@@ -89,6 +138,11 @@
         var image_01 = $('#txtFieldImage1').prop('files')[0];
         var image_02 = $('#txtFieldImage2').prop('files')[0];
 
+        if (!fieldID || !fieldName || !fieldLocation || !fieldSize || !image_01 || !image_02) {
+            validateField();
+            return;
+        }
+
         var fieldData = new FormData();
         fieldData.append('fieldID', fieldID);
         fieldData.append('fieldName', fieldName);
@@ -127,6 +181,11 @@
         var image_01 = $('#txtFieldImage1').prop('files')[0];
         var image_02 = $('#txtFieldImage2').prop('files')[0];
 
+        if (!field_code || !fieldName || !fieldLocation || !fieldSize || !image_01 || !image_02) {
+            validateField();
+            return;
+        }
+
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/field/' + field_code,
             type: 'DELETE',
@@ -153,6 +212,11 @@
         var fieldSize = $('#txtFieldSize').val();
         var image_01 = $('#txtFieldImage1').prop('files')[0];
         var image_02 = $('#txtFieldImage2').prop('files')[0];
+
+        if (!field_code || !fieldName || !fieldLocation || !fieldSize || !image_01 || !image_02) {
+            validateField();
+            return;
+        }
 
         var fieldData = new FormData();
         fieldData.append('fieldID', field_code);

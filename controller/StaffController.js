@@ -17,28 +17,142 @@ function getCookies(cookieName) {
 }
 
     function clearFields() {
-        $('#txtMemberID').val("");
-        $('#txtFirstName').val("");
-        $('#txtLastName').val("");
-        $('#txtDesignation').val("");
-        $('#txtEmail').val("");
-        $('#txtRole').val("");
-        $('#txtGender').val("");
-        $('#txtJoinedDate').val("");
-        $('#txtDateOfBirth').val("");
-        $('#txtAddressLine1').val("");
-        $('#txtAddressLine2').val("");
-        $('#txtAddressLine3').val("");
-        $('#txtAddressLine4').val("");
-        $('#txtAddressLine5').val("");
-        $('#txtPhoneNumber').val("");
-        $('#txtSearch-staff').val("");
-        $('#txtSearchFields-staff').val("");
-        $('#txtFieldCode-staff').val("");
-        $('#txtFieldName-staff').val("");
+        $('#txtMemberID').val("").attr("placeholder","");
+        $('#txtFirstName').val("").attr("placeholder","");
+        $('#txtLastName').val("").attr("placeholder","");
+        $('#txtDesignation').val("").attr("placeholder","");
+        $('#txtEmail').val("").attr("placeholder","");
+        $('#txtRole').val("").attr("placeholder","");
+        $('#txtGender').val("").attr("placeholder","");
+        $('#txtJoinedDate').val("").attr("placeholder","");
+        $('#txtDateOfBirth').val("").attr("placeholder","");
+        $('#txtAddressLine1').val("").attr("placeholder","");
+        $('#txtAddressLine2').val("").attr("placeholder","");
+        $('#txtAddressLine3').val("").attr("placeholder","");
+        $('#txtAddressLine4').val("").attr("placeholder","");
+        $('#txtAddressLine5').val("").attr("placeholder","");
+        $('#txtPhoneNumber').val("").attr("placeholder","");
+        $('#txtSearch-staff').val("").attr("placeholder","");
+        $('#txtSearchFields-staff').val("").attr("placeholder","");
+        $('#txtFieldCode-staff').val("").attr("placeholder","");
+        $('#txtFieldName-staff').val("").attr("placeholder","");
     }
 
-    $('#btnSearchFields-staff').on('click', function() {
+    function validateFields() {
+        var staff_id = $('#txtMemberID').val();
+        var field_code = $('#txtFieldCode-staff').val();
+        var first_name = $('#txtFirstName').val();
+        var last_name = $('#txtLastName').val();
+        var designation = $('#txtDesignation').val();
+        var email = $('#txtEmail').val();
+        var role = $('#txtRole').val();
+        var gender = $('#txtGender').val();
+        var joined_date = $('#txtJoinedDate').val();
+        var dob = $('#txtDateOfBirth').val();
+        var address_01 = $('#txtAddressLine1').val();
+        var address_02 = $('#txtAddressLine2').val();
+        var address_03 = $('#txtAddressLine3').val();
+        var address_04 = $('#txtAddressLine4').val();
+        var address_05 = $('#txtAddressLine5').val();
+        var phone_no = $('#txtPhoneNumber').val();
+        var fieldName = $('#txtFieldName-staff').val();
+
+        if (staff_id === "" || field_code === "" || first_name === "" || last_name === "" || designation === "" || email === "" || role === "" || gender === "" || joined_date === "" || dob === "" || address_01 === "" || address_02 === "" || address_03 === "" || address_04 === "" || address_05 === "" || phone_no === "" || fieldName === "") {
+            if (staff_id === "") {
+                $('#txtMemberID').addClass('inValidData-input red').attr("placeholder","Staff ID is required");
+            }
+            if (field_code === "") {
+                $('#txtFieldCode-staff').addClass('inValidData-input red').attr("placeholder","Field Code is required");
+            }
+            if (first_name === "") {
+                $('#txtFirstName').addClass('inValidData-input red').attr("placeholder","First Name is required");
+            }
+            if (last_name === "") {
+                $('#txtLastName').addClass('inValidData-input red').attr("placeholder","Last Name is required");
+            }
+            if (designation === "") {
+                $('#txtDesignation').addClass('inValidData-input red').attr("placeholder","Designation is required");
+            }
+            if (email === "") {
+                $('#txtEmail').addClass('inValidData-input red').attr("placeholder","Email is required");
+            }
+            if (role === "") {
+                $('#txtRole').addClass('inValidData-input red').attr("placeholder","Role is required");
+            }
+            if (gender === "") {
+                $('#txtGender').addClass('inValidData-input red').attr("placeholder","Gender is required");
+            }
+            if (joined_date === "") {
+                $('#txtJoinedDate').addClass('inValidData-input red').attr("placeholder","Joined Date is required");
+            }
+            if (dob === "") {
+                $('#txtDateOfBirth').addClass('inValidData-input red').attr("placeholder","Date of Birth is required");
+            }
+            if (address_01 === "") {
+                $('#txtAddressLine1').addClass('inValidData-input red').attr("placeholder","Address Line 1 is required");
+            }
+            if (address_02 === "") {
+                $('#txtAddressLine2').addClass('inValidData-input red').attr("placeholder","Address Line 2 is required");
+            }
+            if (address_03 === "") {
+                $('#txtAddressLine3').addClass('inValidData-input red').attr("placeholder","Address Line 3 is required");
+            }
+            if (address_04 === "") {
+                $('#txtAddressLine4').addClass('inValidData-input red').attr("placeholder","Address Line 4 is required");
+            }
+            if (address_05 === "") {
+                $('#txtAddressLine5').addClass('inValidData-input red').attr("placeholder","Address Line 5 is required");
+            }
+            if (phone_no === "") {
+                $('#txtPhoneNumber').addClass('inValidData-input red').attr("placeholder","Phone Number is required");
+            }
+            if (fieldName === "") {
+                $('#txtFieldName-staff').addClass('inValidData-input red').attr("placeholder","Field Name is required");
+            }
+        }
+    }
+
+$('#txtMemberID, #txtFieldCode-staff, #txtFirstName, #txtLastName, #txtDesignation, #txtEmail, #txtRole, #txtGender, #txtJoinedDate, #txtDateOfBirth, #txtAddressLine1, #txtAddressLine2, #txtAddressLine3, #txtAddressLine4, #txtAddressLine5, #txtPhoneNumber, #txtFieldName-staff').on('input', function () {
+    $(this).removeClass('inValidData-input red');
+
+    if ($(this).attr('id') === 'txtMemberID') {
+        $('#txtMemberID').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFieldCode-staff') {
+        $('#txtFieldCode-staff').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFirstName') {
+        $('#txtFirstName').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtLastName') {
+        $('#txtLastName').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtDesignation') {
+        $('#txtDesignation').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtEmail') {
+        $('#txtEmail').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtRole') {
+        $('#txtRole').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtGender') {
+        $('#txtGender').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtJoinedDate') {
+        $('#txtJoinedDate').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtDateOfBirth') {
+        $('#txtDateOfBirth').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtAddressLine1') {
+        $('#txtAddressLine1').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtAddressLine2') {
+        $('#txtAddressLine2').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtAddressLine3') {
+        $('#txtAddressLine3').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtAddressLine4') {
+        $('#txtAddressLine4').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtAddressLine5') {
+        $('#txtAddressLine5').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtPhoneNumber') {
+        $('#txtPhoneNumber').removeClass('inValidData-input red');
+    } else if ($(this).attr('id') === 'txtFieldName-staff') {
+        $('#txtFieldName-staff').removeClass('inValidData-input red');
+    }
+});
+
+$('#btnSearchFields-staff').on('click', function() {
         const searchQuery = $('#txtSearchFields-staff').val();
         searchFieldsByID(searchQuery);
     });
@@ -217,6 +331,11 @@ function getCookies(cookieName) {
         var phone_no = $('#txtPhoneNumber').val();
         var field_code = $('#txtFieldCode-staff').val();
 
+        if (staff_id === "" || field_code === "" || first_name === "" || last_name === "" || designation === "" || email === "" || role === "" || gender === "" || joined_date === "" || dob === "" || address_01 === "" || address_02 === "" || address_03 === "" || address_04 === "" || address_05 === "" || phone_no === "") {
+            validateFields();
+            return;
+        }
+
         const staffData = {
            staff_id: staff_id,
            first_name: first_name,
@@ -305,6 +424,11 @@ function getCookies(cookieName) {
         var phone_no = $('#txtPhoneNumber').val();
         var field_code = $('#txtFieldCode-staff').val();
 
+        if (staff_id === "" || field_code === "" || first_name === "" || last_name === "" || designation === "" || email === "" || role === "" || gender === "" || joined_date === "" || dob === "" || address_01 === "" || address_02 === "" || address_03 === "" || address_04 === "" || address_05 === "" || phone_no === "") {
+            validateFields();
+            return;
+        }
+
         const staffData = {
             staff_id: staff_id,
             first_name: first_name,
@@ -391,6 +515,11 @@ function getCookies(cookieName) {
         var address_04 = $('#txtAddressLine4').val();
         var address_05 = $('#txtAddressLine5').val();
         var phone_no = $('#txtPhoneNumber').val();
+
+        if (staff_id === "" || field_code === "" || first_name === "" || last_name === "" || designation === "" || email === "" || role === "" || gender === "" || joined_date === "" || dob === "" || address_01 === "" || address_02 === "" || address_03 === "" || address_04 === "" || address_05 === "" || phone_no === "") {
+            validateFields();
+            return;
+        }
 
         $.ajax({
             url: 'http://localhost:8081/greenShadow/api/v1/staffAndFieldsDetails/' + staff_id,

@@ -86,7 +86,7 @@ import { loadStaffLogsTable } from "./StaffLogController.js";
         const email = $('#email-input').val();
         const password = $('#password-input').val();
 
-        if (!email) {
+        /*if (!email) {
             $('#email-input').addClass('inValidData');
             $('#email-label').addClass('label-color-red');
         } else {
@@ -104,7 +104,24 @@ import { loadStaffLogsTable } from "./StaffLogController.js";
 
         if (!email || !password) {
             return;
-        }
+        }*/
+
+        $('#login-section').hide();
+        $('#registration-section').hide();
+        $('#box-login').hide();
+        $('#image-login').hide();
+        $('#welcome-text').hide();
+        $('#welcome-text-2').hide();
+        $('#dashboard-section').show();
+        $('#navigation-bar').show().addClass('animate__animated animate__slideInDown');
+        $('body').addClass('color-dashboard').addClass('allowOverFlow-y');
+        $('#home').addClass('active-page');
+        $('#field').removeClass('active-page');
+        $('#crop').removeClass('active-page');
+        $('#staff').removeClass('active-page');
+        $('#vehicle').removeClass('active-page');
+        $('#logs').removeClass('active-page');
+        $('#equipment').removeClass('active-page');
 
         const userData = {
             email: email,
@@ -118,22 +135,6 @@ import { loadStaffLogsTable } from "./StaffLogController.js";
             data: userJSON,
             contentType: 'application/json',
             success: (res) => {
-                $('#login-section').hide();
-                $('#registration-section').hide();
-                $('#box-login').hide();
-                $('#image-login').hide();
-                $('#welcome-text').hide();
-                $('#welcome-text-2').hide();
-                $('#dashboard-section').show();
-                $('#navigation-bar').show().addClass('animate__animated animate__slideInDown');
-                $('body').addClass('color-dashboard').addClass('allowOverFlow-y');
-                $('#home').addClass('active-page');
-                $('#field').removeClass('active-page');
-                $('#crop').removeClass('active-page');
-                $('#staff').removeClass('active-page');
-                $('#vehicle').removeClass('active-page');
-                $('#logs').removeClass('active-page');
-                $('#equipment').removeClass('active-page');
                 const token = res.token;
                 if (token) {
                     document.cookie = "token= "+token;
